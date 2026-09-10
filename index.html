@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LESICHI — International Speaking Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#fffaf5;
+color:#111827;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:white;
+box-shadow:0 2px 15px rgba(0,0,0,.05);
+z-index:1000;
+}
+
+.nav-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 0;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:#ff7a00;
+}
+
+.menu{
+display:flex;
+gap:30px;
+}
+
+.menu a{
+text-decoration:none;
+color:#111827;
+font-weight:500;
+}
+
+.btn{
+display:inline-block;
+padding:15px 30px;
+background:#ff7a00;
+color:white;
+border-radius:15px;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+background:#ff6600;
+}
+
+/* HERO */
+
+.hero{
+padding-top:180px;
+padding-bottom:120px;
+}
+
+.hero-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.hero h1{
+font-size:64px;
+font-weight:800;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+color:#6b7280;
+margin-bottom:40px;
+}
+
+.hero-buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.hero-image{
+display:flex;
+justify-content:center;
+}
+
+.fox{
+font-size:220px;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+}
+
+/* STATS */
+
+.stats{
+padding:80px 0;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.stat{
+background:white;
+padding:35px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.stat h2{
+font-size:42px;
+color:#ff7a00;
+}
+
+/* SECTION */
+
+section{
+padding:100px 0;
+}
+
+.section-title{
+text-align:center;
+font-size:48px;
+font-weight:800;
+margin-bottom:60px;
+}
+
+/* FEATURES */
+
+.features-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card{
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
+
+.card-icon{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.card h3{
+margin-bottom:15px;
+}
+
+/* EVENTS */
+
+.events{
+background:white;
+}
+
+.event{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px;
+margin-bottom:20px;
+border-radius:20px;
+background:#fff8f0;
+}
+
+.event-left h3{
+margin-bottom:5px;
+}
+
+.event-btn{
+padding:12px 25px;
+background:#ff7a00;
+border:none;
+color:white;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* COMMUNITY */
+
+.community-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.community{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+font-size:22px;
+font-weight:600;
+}
+
+/* PRICING */
+
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+}
+
+.price-card{
+background:white;
+padding:50px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 15px 30px rgba(0,0,0,.06);
+}
+
+.price{
+font-size:64px;
+font-weight:800;
+color:#ff7a00;
+margin:20px 0;
+}
+
+.highlight{
+border:3px solid #ff7a00;
+}
+
+/* CTA */
+
+.cta{
+background:#ff7a00;
+color:white;
+text-align:center;
+padding:120px 20px;
+}
+
+.cta h2{
+font-size:56px;
+margin-bottom:20px;
+}
+
+.cta p{
+font-size:22px;
+margin-bottom:35px;
+}
+
+.cta .btn{
+background:white;
+color:#ff7a00;
+}
+
+/* FOOTER */
+
+footer{
+background:#111827;
+color:white;
+padding:60px 0;
+text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-content,
+.features-grid,
+.stats-grid,
+.community-grid,
+.pricing-grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.section-title{
+font-size:36px;
+}
+
+.hero{
+text-align:center;
+}
+
+.hero-buttons{
+justify-content:center;
+}
+
+.event{
+flex-direction:column;
+gap:15px;
+text-align:center;
+}
+
+.menu{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container nav-content">
+
+<div class="logo">🦊 LESICHI</div>
+
+<div class="menu">
+<a href="#about">Как это работает</a>
+<a href="#events">Встречи</a>
+<a href="#community">Сообщество</a>
+<a href="#pricing">Цены</a>
+</div>
+
+<a href="#" class="btn">Присоединиться</a>
+
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<div>
+
+<h1>
+Speak English.<br>
+Meet People.<br>
+Have Fun.
+</h1>
+
+<p>
+Разговорный клуб с иностранцами.
+До 6 человек в группе.
+Без скучных уроков и учебников.
+</p>
+
+<div class="hero-buttons">
+<a href="#" class="btn">🦊 Join Next Meeting</a>
+<a href="#" class="btn" style="background:#111827;">▶ Смотреть демо</a>
+</div>
+
+</div>
+
+<div class="hero-image">
+<div class="fox">🦊</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="stat">
+<h2>150+</h2>
+<p>Участников</p>
+</div>
+
+<div class="stat">
+<h2>17</h2>
+<p>Стран</p>
+</div>
+
+<div class="stat">
+<h2>94%</h2>
+<p>Возвращаются снова</p>
+</div>
+
+<div class="stat">
+<h2>4.9</h2>
+<p>Средняя оценка</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<div class="container">
+
+<h2 class="section-title">
+Как это работает
+</h2>
+
+<div class="features-grid">
+
+<div class="card">
+<div class="card-icon">🌍</div>
+<h3>Иностранные спикеры</h3>
+<p>Общение с людьми из разных стран в реальном времени.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">👥</div>
+<h3>Маленькие группы</h3>
+<p>До 6 участников. Каждый получает время на разговор.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🎯</div>
+<h3>Интересные темы</h3>
+<p>Путешествия, технологии, культура, бизнес и многое другое.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="events" class="events">
+
+<div class="container">
+
+<h2 class="section-title">
+Ближайшие встречи
+</h2>
+
+<div class="event">
+<div class="event-left">
+<h3>🌍 Travel Stories</h3>
+<p>Пятница • 19:00 • Осталось 2 места</p>
+</div>
+<button class="event-btn">Записаться</button>
+</div>
+
+<div class="event">
+<div class="event-left">
+<h3>🤖 Future Technologies</h3>
+<p>Суббота • 18:00 • Осталось 4 места</p>
+</div>
+<button class="event-btn">Записаться</button>
+</div>
+
+<div class="event">
+<div class="event-left">
+<h3>🎬 Best Movies Ever</h3>
+<p>Воскресенье • 17:00 • Осталось 3 места</p>
+</div>
+<button class="event-btn">Записаться</button>
+</div>
+
+</div>
+
+</section>
+
+<section id="community">
+
+<div class="container">
+
+<h2 class="section-title">
+Сообщество LESICHI
+</h2>
+
+<div class="community-grid">
+
+<div class="community">📸 Фото встреч</div>
+<div class="community">💬 Отзывы</div>
+<div class="community">🌎 Новые друзья</div>
+<div class="community">🎉 Онлайн мероприятия</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="pricing">
+
+<div class="container">
+
+<h2 class="section-title">
+Стоимость
+</h2>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+<h3>Разовая встреча</h3>
+<div class="price">15 BYN</div>
+<p>Идеально для знакомства с клубом</p>
+</div>
+
+<div class="price-card highlight">
+<h3>4 встречи</h3>
+<div class="price">50 BYN</div>
+<p>Самый популярный вариант</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>Готов начать говорить?</h2>
+
+<p>
+Присоединяйся к международному сообществу LESICHI уже сегодня.
+</p>
+
+<a href="#" class="btn">
+🦊 Присоединиться
+</a>
+
+</section>
+
+<footer>
+
+<h2>🦊 LESICHI</h2>
+<br>
+<p>International Speaking Club</p>
+<br>
+<p>Speak. Meet. Enjoy.</p>
+
+</footer>
+
+</body>
+</html>
