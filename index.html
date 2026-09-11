@@ -37,40 +37,48 @@ body {
 }
 .paw {
   position: absolute;
-  font-size: 22px;
+  font-size: 28px;
   opacity: 0;
   user-select: none;
   will-change: transform, opacity;
+  color: #FF6B00;
+  filter: drop-shadow(0 0 1px rgba(255,107,0,0.3));
 }
 @keyframes pawDrift1 {
-  0%   { transform: translate(0, 0) rotate(0deg) scale(0.8); opacity: 0; }
-  8%   { opacity: 0.14; }
-  50%  { opacity: 0.1; }
-  100% { transform: translate(40px, -110vh) rotate(320deg) scale(1.1); opacity: 0; }
+  0%   { transform: translate(0, 0) rotate(0deg) scale(0.85); opacity: 0; }
+  6%   { opacity: 0.22; }
+  50%  { opacity: 0.16; }
+  100% { transform: translate(50px, -110vh) rotate(340deg) scale(1.15); opacity: 0; }
 }
 @keyframes pawDrift2 {
-  0%   { transform: translate(0, 0) rotate(20deg) scale(1); opacity: 0; }
-  10%  { opacity: 0.12; }
-  60%  { opacity: 0.08; }
-  100% { transform: translate(-50px, -105vh) rotate(-200deg) scale(0.7); opacity: 0; }
+  0%   { transform: translate(0, 0) rotate(25deg) scale(1); opacity: 0; }
+  8%   { opacity: 0.2; }
+  55%  { opacity: 0.14; }
+  100% { transform: translate(-60px, -108vh) rotate(-220deg) scale(0.75); opacity: 0; }
 }
 @keyframes pawDrift3 {
-  0%   { transform: translate(0, 0) rotate(-15deg) scale(0.9); opacity: 0; }
-  12%  { opacity: 0.15; }
-  55%  { opacity: 0.09; }
-  100% { transform: translate(70px, -115vh) rotate(180deg) scale(1.2); opacity: 0; }
+  0%   { transform: translate(0, 0) rotate(-20deg) scale(0.95); opacity: 0; }
+  10%  { opacity: 0.24; }
+  50%  { opacity: 0.15; }
+  100% { transform: translate(80px, -115vh) rotate(200deg) scale(1.25); opacity: 0; }
 }
 @keyframes pawDrift4 {
-  0%   { transform: translate(0, 0) rotate(40deg) scale(0.7); opacity: 0; }
-  15%  { opacity: 0.11; }
-  70%  { opacity: 0.07; }
-  100% { transform: translate(-30px, -100vh) rotate(-90deg) scale(1); opacity: 0; }
+  0%   { transform: translate(0, 0) rotate(45deg) scale(0.7); opacity: 0; }
+  12%  { opacity: 0.18; }
+  65%  { opacity: 0.12; }
+  100% { transform: translate(-40px, -102vh) rotate(-100deg) scale(1.05); opacity: 0; }
 }
 @keyframes pawDrift5 {
-  0%   { transform: translate(0, 0) rotate(-30deg) scale(1.1); opacity: 0; }
-  8%   { opacity: 0.13; }
-  45%  { opacity: 0.1; }
-  100% { transform: translate(20px, -120vh) rotate(250deg) scale(0.6); opacity: 0; }
+  0%   { transform: translate(0, 0) rotate(-35deg) scale(1.15); opacity: 0; }
+  7%   { opacity: 0.21; }
+  45%  { opacity: 0.15; }
+  100% { transform: translate(30px, -120vh) rotate(270deg) scale(0.65); opacity: 0; }
+}
+@keyframes pawDrift6 {
+  0%   { transform: translate(0, 0) rotate(10deg) scale(0.9); opacity: 0; }
+  9%   { opacity: 0.19; }
+  60%  { opacity: 0.13; }
+  100% { transform: translate(-70px, -112vh) rotate(-160deg) scale(1.1); opacity: 0; }
 }
 .container { width: 92%; max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
 
@@ -581,19 +589,20 @@ footer {
 <script>
 (function(){
   const el = document.getElementById('paws');
-  const anims = ['pawDrift1','pawDrift2','pawDrift3','pawDrift4','pawDrift5'];
-  const count = 28;
+  const anims = ['pawDrift1','pawDrift2','pawDrift3','pawDrift4','pawDrift5','pawDrift6'];
+  const count = 55;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     p.className = 'paw';
     p.textContent = '🐾';
     p.style.left = (Math.random() * 100) + '%';
-    p.style.bottom = (-5 - Math.random() * 30) + '%';
-    p.style.fontSize = (14 + Math.random() * 26) + 'px';
+    p.style.bottom = (-8 - Math.random() * 40) + '%';
+    p.style.fontSize = (18 + Math.random() * 36) + 'px';
     const anim = anims[Math.floor(Math.random() * anims.length)];
-    const dur = 14 + Math.random() * 22;
-    const delay = Math.random() * 18;
+    const dur = 12 + Math.random() * 20;
+    const delay = Math.random() * 16;
     p.style.animation = anim + ' ' + dur + 's linear ' + delay + 's infinite';
+    p.style.color = 'rgba(255, 107, 0, ' + (0.55 + Math.random() * 0.35) + ')';
     el.appendChild(p);
   }
 })();
