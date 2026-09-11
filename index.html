@@ -4,528 +4,358 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LESICHI — Перехитри языковой барьер</title>
-<meta name="description" content="Онлайн speaking club в группах до 6 человек с иностранцами. Живое общение, комфорт и Лесик — твой проводник.">
+<meta name="description" content="Speaking club в группах до 6 человек с иностранцами. Живой английский без скуки.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
+  --bg: #0F0E0C;
+  --bg-soft: #1A1814;
+  --card: #221F1A;
   --orange: #FF6B00;
-  --orange-dark: #E55A00;
-  --orange-light: #FF9A3C;
-  --cream: #FFF8F0;
-  --cream-dark: #FFE8D6;
-  --brown: #3D2B1F;
-  --dark: #1A120B;
-  --text: #2C2118;
-  --muted: #7A6A5A;
-  --white: #FFFFFF;
-  --card-shadow: 0 18px 45px rgba(255, 107, 0, 0.11);
+  --orange-soft: #FF8C33;
+  --text: #F5F0E8;
+  --muted: #A89B8C;
+  --line: rgba(255,107,0,0.15);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--cream);
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.55;
   overflow-x: hidden;
-  position: relative;
 }
-.bg-video-wrap {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  overflow: hidden;
-  background: linear-gradient(160deg, #FFF5EB 0%, #FFE8D0 40%, #FFF0E0 100%);
-}
-.bg-video-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(255,107,0,0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(255,154,60,0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,200,120,0.08) 0%, transparent 60%);
-  animation: bgShift 18s ease-in-out infinite alternate;
-}
-@keyframes bgShift {
-  0% { transform: scale(1) translate(0,0); }
-  100% { transform: scale(1.08) translate(-2%, 2%); }
-}
-.paws-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
+.paws {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
 }
 .paw {
-  position: absolute;
-  font-size: 26px;
-  opacity: 0.07;
-  animation: pawFloat linear infinite;
-  user-select: none;
+  position: absolute; font-size: 22px; opacity: 0.04;
+  animation: floatUp linear infinite;
 }
-@keyframes pawFloat {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.04; }
-  40% { opacity: 0.1; }
-  100% { transform: translateY(-110vh) rotate(320deg); opacity: 0.02; }
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0); opacity: 0.03; }
+  50% { opacity: 0.07; }
+  100% { transform: translateY(-100vh) rotate(280deg); opacity: 0.02; }
 }
-.container { width: 92%; max-width: 1140px; margin: 0 auto; }
+.container { width: 92%; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
 nav {
-  position: fixed; top: 0; left: 0; width: 100%;
-  background: rgba(255, 248, 240, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 107, 0, 0.1);
-  z-index: 1000;
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(15,14,12,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
 }
 .nav-inner {
   display: flex; justify-content: space-between; align-items: center;
   padding: 14px 0;
 }
 .logo {
-  display: flex; align-items: center; gap: 9px;
-  text-decoration: none; font-weight: 900; font-size: 25px;
-  color: var(--orange);
+  font-weight: 900; font-size: 22px; color: var(--orange);
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
 }
-.logo-icon { font-size: 30px; animation: logoWiggle 3.2s ease-in-out infinite; }
-@keyframes logoWiggle {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links { display: flex; gap: 22px; }
 .nav-links a {
-  text-decoration: none; color: var(--text); font-weight: 700; font-size: 14.5px;
+  color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px;
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--orange); }
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-  padding: 13px 26px;
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: white; border: none; border-radius: 50px;
-  font-weight: 800; font-size: 14.5px; text-decoration: none; cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 7px 22px rgba(255, 107, 0, 0.32);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 12px 22px; border-radius: 12px;
+  background: var(--orange); color: #111; font-weight: 800; font-size: 14px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.2s;
 }
-.btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(255, 107, 0, 0.42); }
-.btn-dark { background: linear-gradient(135deg, var(--brown), var(--dark)); box-shadow: 0 7px 22px rgba(0,0,0,0.22); }
-.btn-outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); box-shadow: none; }
-.btn-outline:hover { background: var(--orange); color: white; }
-.btn-white { background: white; color: var(--orange); box-shadow: 0 7px 22px rgba(0,0,0,0.1); }
-.btn-white:hover { transform: translateY(-3px) scale(1.03); }
-.hero { padding: 145px 0 60px; position: relative; }
-.hero-grid {
-  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px; align-items: center;
+.btn:hover { background: var(--orange-soft); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: var(--text);
+  border: 1px solid rgba(255,255,255,0.15);
 }
-.badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: linear-gradient(135deg, #FFF0E0, #FFE0C0);
-  color: var(--orange-dark); padding: 7px 16px; border-radius: 50px;
-  font-weight: 800; font-size: 12.5px; margin-bottom: 18px;
-  border: 1px solid rgba(255,107,0,0.18);
-  animation: badgePulse 2.6s ease-in-out infinite;
+.btn-ghost:hover { border-color: var(--orange); color: var(--orange); background: transparent; }
+
+.hero {
+  padding: 140px 0 80px;
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
 }
-@keyframes badgePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+.tag {
+  display: inline-block;
+  background: rgba(255,107,0,0.12);
+  color: var(--orange);
+  font-size: 12px; font-weight: 700;
+  padding: 6px 12px; border-radius: 8px;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
 }
 .hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 5.2vw, 54px); font-weight: 800; line-height: 1.14;
-  color: var(--dark); margin-bottom: 14px;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
 }
-.hero h1 span {
-  background: linear-gradient(135deg, var(--orange), #FF9A3C);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+.hero h1 span { color: var(--orange); }
+.hero p {
+  font-size: 17px; color: var(--muted); max-width: 460px; margin-bottom: 28px;
 }
-.hero-sub { font-size: 17.5px; color: var(--muted); margin-bottom: 8px; max-width: 480px; }
-.hero-slogan {
-  font-size: 17px; font-weight: 800; color: var(--orange);
-  margin-bottom: 24px; display: flex; align-items: center; gap: 7px;
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.fox-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
 }
-.hero-btns { display: flex; flex-wrap: wrap; gap: 11px; margin-bottom: 22px; }
-.hero-note { font-size: 13.5px; color: var(--muted); font-weight: 600; }
-.fox-stage { position: relative; display: flex; justify-content: center; align-items: center; }
-.fox-circle {
-  width: 270px; height: 270px;
-  background: linear-gradient(145deg, #FFE8D6, #FFD4B0);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  position: relative; box-shadow: 0 22px 45px rgba(255, 107, 0, 0.2);
-  animation: float 4.4s ease-in-out infinite;
+.fox-big { font-size: 120px; line-height: 1; margin-bottom: 12px; }
+.fox-quote {
+  font-size: 15px; font-weight: 700; color: var(--muted);
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-13px); }
-}
-.fox-emoji { font-size: 135px; filter: drop-shadow(0 11px 18px rgba(0,0,0,0.14)); z-index: 2; }
-.fox-bubble {
-  position: absolute; top: 8px; right: -18px;
-  background: white; padding: 10px 15px;
-  border-radius: 16px 16px 16px 4px; font-weight: 800; font-size: 13px;
-  box-shadow: 0 9px 22px rgba(0,0,0,0.11);
-  animation: bubblePop 3.4s ease-in-out infinite; z-index: 3;
-}
-@keyframes bubblePop {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+
 section { padding: 70px 0; }
-.section-header { text-align: center; margin-bottom: 36px; }
-.section-header .eyebrow {
-  display: inline-block; background: rgba(255,107,0,0.1); color: var(--orange);
-  padding: 5px 13px; border-radius: 50px; font-weight: 800; font-size: 12px; margin-bottom: 11px;
+.section-title {
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
 }
-.section-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(25px, 3.8vw, 38px); font-weight: 800; color: var(--dark); margin-bottom: 9px;
+.section-sub {
+  color: var(--muted); font-size: 15px; margin-bottom: 36px; max-width: 480px;
 }
-.section-header p { font-size: 15.5px; color: var(--muted); max-width: 500px; margin: 0 auto; }
-.guide-banner {
-  background: linear-gradient(135deg, #FFF0E5, #FFE8D6);
-  border-radius: 18px; padding: 20px 24px;
-  display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
-  border: 1px solid rgba(255,107,0,0.14);
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.guide-banner .fox-mini { font-size: 40px; flex-shrink: 0; }
-.guide-banner p { font-size: 14.5px; font-weight: 700; color: var(--dark); margin: 0; }
-.guide-banner span { color: var(--orange); }
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.why-card {
-  background: white; border-radius: 20px; padding: 24px 20px;
-  box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
-  transition: all 0.3s;
+.card:hover { border-color: rgba(255,107,0,0.35); transform: translateY(-3px); }
+.card .ico { font-size: 28px; margin-bottom: 12px; }
+.card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.card p { font-size: 13.5px; color: var(--muted); }
+
+.rooms .card { position: relative; }
+.room-tag {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 11px; font-weight: 700; color: var(--orange);
+  background: rgba(255,107,0,0.12); padding: 3px 8px; border-radius: 6px;
 }
-.why-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(255,107,0,0.14); }
-.why-card .icon { font-size: 32px; margin-bottom: 12px; }
-.why-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--dark); }
-.why-card p { font-size: 13.5px; color: var(--muted); }
-.rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.room-card {
-  background: white; border-radius: 20px; padding: 24px 18px;
-  box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
-  transition: all 0.3s; position: relative;
+
+.speakers-section { background: var(--bg-soft); }
+.speaker {
+  text-align: center;
 }
-.room-card:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(255,107,0,0.15); }
-.room-num {
-  position: absolute; top: 12px; right: 12px;
-  font-size: 11.5px; font-weight: 800; color: var(--orange);
-  background: rgba(255,107,0,0.1); padding: 3px 9px; border-radius: 50px;
-}
-.room-icon {
-  width: 48px; height: 48px; background: linear-gradient(135deg, #FFE8D6, #FFD4B0);
-  border-radius: 13px; display: flex; align-items: center; justify-content: center;
-  font-size: 24px; margin-bottom: 12px;
-}
-.room-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 7px; color: var(--dark); }
-.room-card p { color: var(--muted); font-size: 13px; }
-.speakers-section { background: white; }
-.speakers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.speaker-card {
-  background: var(--cream); border-radius: 20px; padding: 22px 16px;
-  text-align: center; border: 1px solid rgba(255,107,0,0.09);
-  transition: all 0.3s;
-}
-.speaker-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--orange);
-  box-shadow: 0 12px 26px rgba(255,107,0,0.12);
-}
-.speaker-avatar {
-  width: 76px; height: 76px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--orange-light), var(--orange));
+.speaker-av {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, #FF8C33, #FF6B00);
   display: flex; align-items: center; justify-content: center;
-  font-size: 34px; margin: 0 auto 11px;
-  border: 3px solid white; box-shadow: 0 7px 15px rgba(255,107,0,0.18);
+  font-size: 32px; margin: 0 auto 12px;
 }
-.speaker-card h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 2px; color: var(--dark); }
-.speaker-from { font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 9px; }
-.speaker-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-.speaker-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 11px; }
-.speaker-tags span {
-  background: white; padding: 3px 8px; border-radius: 50px;
-  font-size: 11px; font-weight: 700; color: var(--text);
+.speaker h3 { font-size: 15px; font-weight: 800; }
+.speaker .from { font-size: 12px; color: var(--orange); font-weight: 600; margin: 4px 0 8px; }
+.speaker p { font-size: 13px; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 10px; }
+.tags span {
+  background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; color: var(--muted);
 }
-.lesik-section { background: linear-gradient(180deg, #FFF0E5 0%, var(--cream) 100%); }
-.lesik-grid {
-  display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 32px; align-items: center;
+
+.lesik-block {
+  display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 30px; align-items: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px;
 }
-.lesik-fox {
-  font-size: 160px; text-align: center;
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 14px 24px rgba(255,107,0,0.22));
+.lesik-emoji { font-size: 100px; text-align: center; }
+.lesik-block h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
+.lesik-block p { color: var(--muted); font-size: 14.5px; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip {
+  background: rgba(255,107,0,0.12); color: var(--orange);
+  padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
 }
-.lesik-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px; font-weight: 800; margin-bottom: 11px; color: var(--dark);
-}
-.lesik-content p { font-size: 15px; color: var(--muted); margin-bottom: 11px; }
-.lesik-traits { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-.trait {
-  background: white; padding: 6px 12px; border-radius: 50px;
-  font-weight: 700; font-size: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-  border: 1px solid rgba(255,107,0,0.09);
-}
-.comfort-block {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px;
-}
-.comfort-item {
-  background: white; border-radius: 16px; padding: 18px 16px;
-  border: 1px solid rgba(255,107,0,0.07);
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.comfort-item .ci { font-size: 24px; }
-.comfort-item h4 { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
-.comfort-item p { font-size: 12.5px; color: var(--muted); }
-.events-list { display: flex; flex-direction: column; gap: 11px; }
-.event-card {
+
+.event {
   display: flex; justify-content: space-between; align-items: center;
-  background: var(--cream); border-radius: 16px; padding: 18px 20px;
-  border: 1px solid rgba(255,107,0,0.09); transition: all 0.3s; gap: 12px; flex-wrap: wrap;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; margin-bottom: 10px; gap: 14px; flex-wrap: wrap;
+  transition: border-color 0.2s;
 }
-.event-card:hover {
-  border-color: var(--orange);
-  box-shadow: 0 9px 22px rgba(255,107,0,0.11);
-  transform: translateX(3px);
+.event:hover { border-color: rgba(255,107,0,0.4); }
+.event h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.event-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); font-weight: 500; }
+.spot {
+  background: rgba(255,107,0,0.15); color: var(--orange);
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px;
 }
-.event-info h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 4px; color: var(--dark); }
-.event-meta { display: flex; flex-wrap: wrap; gap: 9px; font-size: 12px; color: var(--muted); font-weight: 600; }
-.spots {
-  background: #FEF3C7; color: #B45309; padding: 2px 9px; border-radius: 50px;
-  font-weight: 800; font-size: 11px;
-}
-.spots.hot { background: #FEE2E2; color: #DC2626; animation: pulse 1.4s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.spot.hot { background: rgba(220,38,38,0.2); color: #F87171; }
+
+.prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .price-card {
-  background: white; border-radius: 20px; padding: 28px 16px; text-align: center;
-  box-shadow: var(--card-shadow); border: 2px solid transparent; position: relative;
-  transition: all 0.3s;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 26px 18px; text-align: center; position: relative;
 }
-.price-card:hover { transform: translateY(-5px); }
-.price-card.popular {
-  border-color: var(--orange); transform: scale(1.03);
-  box-shadow: 0 18px 38px rgba(255,107,0,0.18);
+.price-card.hot {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
 }
-.price-card.popular:hover { transform: scale(1.05) translateY(-2px); }
-.popular-badge {
-  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: white; padding: 4px 13px; border-radius: 50px;
-  font-weight: 800; font-size: 11px; white-space: nowrap;
+.price-card .badge {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--orange); color: #111; font-size: 11px; font-weight: 800;
+  padding: 4px 12px; border-radius: 8px; white-space: nowrap;
 }
-.price-card h3 { font-size: 14.5px; font-weight: 800; margin-bottom: 3px; color: var(--dark); }
-.price { font-size: 40px; font-weight: 900; color: var(--orange); line-height: 1; margin: 9px 0 3px; }
-.price span { font-size: 15px; font-weight: 700; }
-.price-desc { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
-.price-features { list-style: none; text-align: left; margin-bottom: 16px; }
-.price-features li {
-  padding: 4px 0; font-size: 12.5px; font-weight: 600; color: var(--text);
+.price-card h3 { font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+.price-num { font-size: 36px; font-weight: 900; color: var(--orange); margin-bottom: 4px; }
+.price-num span { font-size: 14px; font-weight: 600; }
+.price-desc { font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
+.price-list { list-style: none; text-align: left; margin-bottom: 18px; }
+.price-list li {
+  font-size: 13px; color: var(--muted); padding: 4px 0;
   display: flex; align-items: center; gap: 6px;
 }
-.price-features li::before { content: '\1F43E'; font-size: 11px; }
+.price-list li::before { content: '→'; color: var(--orange); font-weight: 700; }
+
 .promo {
-  background: linear-gradient(135deg, #FF6B00, #FF9A3C);
-  border-radius: 20px; padding: 26px; display: flex; justify-content: space-between;
-  align-items: center; gap: 18px; flex-wrap: wrap; color: white; margin-top: 32px;
-  position: relative; overflow: hidden;
+  margin-top: 24px;
+  background: linear-gradient(135deg, #FF6B00, #E55A00);
+  border-radius: 16px; padding: 24px 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  color: #111;
 }
-.promo::before {
-  content: '\1F43E'; position: absolute; font-size: 130px; opacity: 0.11;
-  right: -12px; bottom: -24px; transform: rotate(-18deg);
-}
-.promo h3 { font-size: 20px; font-weight: 900; margin-bottom: 3px; }
-.promo p { font-size: 13.5px; opacity: 0.95; }
+.promo h3 { font-size: 18px; font-weight: 900; margin-bottom: 2px; }
+.promo p { font-size: 13.5px; opacity: 0.85; }
+.promo .btn { background: #111; color: #fff; }
+.promo .btn:hover { background: #222; }
+
 .cta {
-  background: linear-gradient(135deg, var(--brown), var(--dark));
-  color: white; text-align: center; padding: 75px 20px; position: relative; overflow: hidden;
+  text-align: center; padding: 80px 0;
+  border-top: 1px solid var(--line);
 }
-.cta::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='16' r='4.5'/%3E%3Ccircle cx='34' cy='11' r='3.5'/%3E%3Ccircle cx='46' cy='16' r='4.5'/%3E%3Ccircle cx='28' cy='25' r='6'/%3E%3Ccircle cx='39' cy='27' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-.cta h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(24px, 4.2vw, 38px); font-weight: 800; margin-bottom: 10px; position: relative;
-}
-.cta p { font-size: 15.5px; opacity: 0.9; margin-bottom: 24px; position: relative; }
-.cta .btn { position: relative; }
+.cta h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
+.cta p { color: var(--muted); margin-bottom: 24px; font-size: 15px; }
+
 footer {
-  background: var(--dark); color: white; padding: 44px 0 22px; text-align: center;
+  border-top: 1px solid var(--line);
+  padding: 32px 0; text-align: center;
 }
-.footer-logo { font-size: 24px; font-weight: 900; color: var(--orange); margin-bottom: 7px; }
-.footer-tag { color: rgba(255,255,255,0.55); margin-bottom: 16px; font-size: 13.5px; }
-.footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
-.footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.footer-logo { font-weight: 900; font-size: 18px; color: var(--orange); margin-bottom: 6px; }
+.footer-tag { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+.footer-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
 .footer-links a:hover { color: var(--orange); }
-.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.35); margin-top: 12px; }
-@media (max-width: 960px) {
-  .hero-grid, .lesik-grid, .rooms-grid, .speakers-grid,
-  .why-grid, .pricing-grid, .comfort-block { grid-template-columns: 1fr; }
-  .hero { padding-top: 115px; text-align: center; }
-  .hero-sub, .hero-slogan { margin-left: auto; margin-right: auto; }
+.footer-copy { font-size: 11px; color: #5A5248; }
+
+@media (max-width: 900px) {
+  .hero, .lesik-block, .grid-3, .grid-2, .prices { grid-template-columns: 1fr; }
+  .hero { padding-top: 120px; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
   .hero-btns { justify-content: center; }
-  .fox-circle { width: 220px; height: 220px; }
-  .fox-emoji { font-size: 105px; }
   .nav-links { display: none; }
-  .price-card.popular { transform: none; }
-  .price-card.popular:hover { transform: translateY(-5px); }
-  .event-card { flex-direction: column; text-align: center; }
+  .event { flex-direction: column; text-align: center; }
   .event-meta { justify-content: center; }
   .promo { text-align: center; justify-content: center; }
-  .guide-banner { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="bg-video-wrap"></div>
-<div class="paws-bg" id="pawsBg"></div>
+<div class="paws" id="paws"></div>
 
 <nav>
   <div class="container nav-inner">
-    <a href="#" class="logo">
-      <span class="logo-icon">\ud83e\udd8a</span>
-      <span>LESICHI</span>
-    </a>
+    <a href="#" class="logo">🦊 LESICHI</a>
     <div class="nav-links">
-      <a href="#why">\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u044b</a>
-      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
-      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
-      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
-      <a href="#meets">\u0421\u043e\u0437\u0432\u043e\u043d\u044b</a>
-      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
+      <a href="#why">Зачем</a>
+      <a href="#rooms">Комнаты</a>
+      <a href="#speakers">Спикеры</a>
+      <a href="#lesik">Лесик</a>
+      <a href="#meets">Созвоны</a>
+      <a href="#pricing">Цены</a>
     </div>
-    <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
+    <a href="#meets" class="btn">Записаться</a>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="badge">\ud83c\udf0d \u0413\u043e\u0432\u043e\u0440\u0438 \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438 \u0443\u0436\u0435 \u0441\u0435\u0433\u043e\u0434\u043d\u044f</div>
-      <h1>\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438<br><span>\u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440</span></h1>
-      <p class="hero-sub">\u041e\u043d\u043b\u0430\u0439\u043d speaking club \u0432 \u0433\u0440\u0443\u043f\u043f\u0430\u0445 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a. \u0416\u0438\u0432\u043e\u0435 \u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438 \u2014 \u0431\u0435\u0437 \u0443\u0447\u0435\u0431\u043d\u0438\u043a\u043e\u0432 \u0438 \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f.</p>
-      <div class="hero-slogan">\ud83e\udd8a \u041b\u0435\u0441\u0438\u043a \u043f\u0440\u043e\u0432\u043e\u0434\u0438\u0442 \u0442\u0435\u0431\u044f \u043d\u0430 \u043a\u0430\u0436\u0434\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d</div>
-      <div class="hero-btns">
-        <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d</a>
-        <a href="#speakers" class="btn btn-dark">\u041f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u0438\u0442\u044c\u0441\u044f \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438</a>
-      </div>
-      <div class="hero-note">\u041f\u0435\u0440\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d \u043c\u043e\u0436\u043d\u043e \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e</div>
+<section class="hero container">
+  <div>
+    <div class="tag">SPEAKING CLUB · GROUPS OF 6</div>
+    <h1>Перехитри<br><span>языковой барьер</span></h1>
+    <p>Говори с иностранцами в маленьких группах. Без учебников, без «исправьте меня, пожалуйста» и без скуки.</p>
+    <div class="hero-btns">
+      <a href="#meets" class="btn">Записаться на созвон</a>
+      <a href="#speakers" class="btn btn-ghost">Смотреть спикеров</a>
     </div>
-    <div class="fox-stage">
-      <div class="fox-circle">
-        <div class="fox-emoji">\ud83e\udd8a</div>
-        <div class="fox-bubble">Let's speak!</div>
-      </div>
-    </div>
+  </div>
+  <div class="fox-box">
+    <div class="fox-big">🦊</div>
+    <div class="fox-quote">«Skill issue? Мы фиксим.»</div>
   </div>
 </section>
 
 <section id="why">
   <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">\ud83d\udc3e \u041f\u043e\u0447\u0435\u043c\u0443 speaking club</div>
-      <h2>\u041f\u043e\u0447\u0435\u043c\u0443 \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442</h2>
-      <p>\u041a\u043e\u0440\u043e\u0442\u043a\u043e \u0438 \u0447\u0435\u0441\u0442\u043d\u043e \u2014 \u0437\u0430\u0447\u0435\u043c \u043f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u044c \u0438\u043c\u0435\u043d\u043d\u043e \u043a \u043d\u0430\u043c</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="icon">\ud83d\udc65</div>
-        <h3>\u041c\u0430\u043b\u0435\u043d\u044c\u043a\u0438\u0435 \u0433\u0440\u0443\u043f\u043f\u044b \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</h3>
-        <p>\u041a\u0430\u0436\u0434\u044b\u0439 \u0443\u0441\u043f\u0435\u0432\u0430\u0435\u0442 \u043f\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c. \u041d\u0435\u0442 \u00ab\u0442\u0438\u0445\u043e\u043d\u044c \u0432 \u0443\u0433\u043b\u0443\u00bb. \u0422\u044b \u0442\u043e\u0447\u043d\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u0448\u044c \u0441\u0432\u043e\u0451 \u0432\u0440\u0435\u043c\u044f \u043d\u0430 \u0440\u0430\u0437\u0433\u043e\u0432\u043e\u0440.</p>
+    <h2 class="section-title">Зачем это нужно</h2>
+    <p class="section-sub">Не мотивационные лозунги. Реальные причины, почему speaking club работает.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ico">👥</div>
+        <h3>Группы до 6 человек</h3>
+        <p>Каждый реально говорит. Не 30 человек и «следующий, пожалуйста». Ты в игре всё время.</p>
       </div>
-      <div class="why-card">
-        <div class="icon">\ud83c\udf0d</div>
-        <h3>\u0416\u0438\u0432\u044b\u0435 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u044b</h3>
-        <p>\u0421\u043f\u0438\u043a\u0435\u0440\u044b \u0438\u0437 \u0421\u0428\u0410, \u0411\u0440\u0438\u0442\u0430\u043d\u0438\u0438, \u041c\u0435\u043a\u0441\u0438\u043a\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0442\u0440\u0430\u043d. \u0422\u044b \u0441\u043b\u044b\u0448\u0438\u0448\u044c \u043d\u0430\u0441\u0442\u043e\u044f\u0449\u0438\u0439 \u0430\u043a\u0446\u0435\u043d\u0442 \u0438 \u0436\u0438\u0432\u044b\u0435 \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u044f.</p>
+      <div class="card">
+        <div class="ico">🌍</div>
+        <h3>Иностранцы, а не «носители из учебника»</h3>
+        <p>Люди из США, Британии, Мексики. Настоящий акцент, живые реакции, мемы, которые не переводятся.</p>
       </div>
-      <div class="why-card">
-        <div class="icon">\ud83d\udcac</div>
-        <h3>Speaking \u2014 \u044d\u0442\u043e \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0430</h3>
-        <p>\u042f\u0437\u044b\u043a \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0442\u043e\u043b\u044c\u043a\u043e \u043a\u043e\u0433\u0434\u0430 \u0442\u044b \u0433\u043e\u0432\u043e\u0440\u0438\u0448\u044c. \u041c\u044b \u0441\u043e\u0437\u0434\u0430\u0451\u043c \u043f\u0440\u043e\u0441\u0442\u0440\u0430\u043d\u0441\u0442\u0432\u043e, \u0433\u0434\u0435 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u043b\u0435\u0433\u043a\u043e \u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e.</p>
+      <div class="card">
+        <div class="ico">💬</div>
+        <h3>Speaking > теория</h3>
+        <p>Можно знать 5000 слов и молчать. Здесь ты просто начинаешь говорить. Мозг перестраивается сам.</p>
       </div>
-      <div class="why-card">
-        <div class="icon">\ud83d\ude0a</div>
-        <h3>\u0412\u0435\u0441\u0435\u043b\u043e \u0438 \u043a\u043e\u043c\u0444\u043e\u0440\u0442\u043d\u043e</h3>
-        <p>\u041d\u0438\u043a\u0430\u043a\u043e\u0433\u043e \u0434\u0430\u0432\u043b\u0435\u043d\u0438\u044f. \u0410\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0430 \u0442\u0451\u043f\u043b\u0430\u044f, \u043b\u044e\u0434\u0438 \u0434\u043e\u0431\u0440\u044b\u0435, \u0442\u0435\u043c\u044b \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435. \u041f\u043e\u0441\u043b\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u0430 \u0445\u043e\u0447\u0435\u0442\u0441\u044f \u0432\u0435\u0440\u043d\u0443\u0442\u044c\u0441\u044f.</p>
+      <div class="card">
+        <div class="ico">🔥</div>
+        <h3>Без cringe-атмосферы</h3>
+        <p>Никто не будет публично разбирать твои ошибки. Можно шутить, ошибаться и двигаться дальше.</p>
       </div>
-      <div class="why-card">
-        <div class="icon">\ud83e\udde0</div>
-        <h3>\u041f\u043e\u0437\u043d\u0430\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e</h3>
-        <p>\u041f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438, \u0444\u0438\u043b\u044c\u043c\u044b, \u0436\u0438\u0437\u043d\u044c \u0432 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0442\u0440\u0430\u043d\u0430\u0445. \u0422\u044b \u043d\u0435 \u0442\u043e\u043b\u044c\u043a\u043e \u0433\u043e\u0432\u043e\u0440\u0438\u0448\u044c \u2014 \u0442\u044b \u0443\u0437\u043d\u0430\u0451\u0448\u044c \u043d\u043e\u0432\u043e\u0435.</p>
+      <div class="card">
+        <div class="ico">🧠</div>
+        <h3>Темы, которые не бесят</h3>
+        <p>Travel, tech, фильмы, мемы, жизнь. Не «расскажите о своём хобби» в стиле 2008.</p>
       </div>
-      <div class="why-card">
-        <div class="icon">\u26a1</div>
-        <h3>\u0423\u0434\u043e\u0431\u043d\u043e \u0438 \u043f\u0440\u043e\u0441\u0442\u043e</h3>
-        <p>\u0412\u0441\u0451 \u0447\u0435\u0440\u0435\u0437 Zoom. \u0417\u0430\u0448\u0451\u043b \u043f\u043e \u0441\u0441\u044b\u043b\u043a\u0435 \u2014 \u0438 \u0442\u044b \u0443\u0436\u0435 \u0432 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0435. \u0411\u0435\u0437 \u043b\u0438\u0448\u043d\u0438\u0445 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0439.</p>
-      </div>
-    </div>
-    <div class="comfort-block">
-      <div class="comfort-item">
-        <div class="ci">\ud83d\udd50</div>
-        <div>
-          <h4>\u0413\u0438\u0431\u043a\u043e\u0435 \u0432\u0440\u0435\u043c\u044f</h4>
-          <p>\u0421\u043e\u0437\u0432\u043e\u043d\u044b \u0432 \u0431\u0443\u0434\u043d\u0438 \u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u044b\u0435 \u2014 \u0432\u044b\u0431\u0438\u0440\u0430\u0439, \u043a\u043e\u0433\u0434\u0430 \u0443\u0434\u043e\u0431\u043d\u043e.</p>
-        </div>
-      </div>
-      <div class="comfort-item">
-        <div class="ci">\ud83d\udee1\ufe0f</div>
-        <div>
-          <h4>\u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u0430\u044f \u0441\u0440\u0435\u0434\u0430</h4>
-          <p>\u041c\u043e\u0436\u043d\u043e \u043e\u0448\u0438\u0431\u0430\u0442\u044c\u0441\u044f. \u0417\u0434\u0435\u0441\u044c \u044d\u0442\u043e \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u043e \u0438 \u043f\u043e\u043b\u0435\u0437\u043d\u043e.</p>
-        </div>
-      </div>
-      <div class="comfort-item">
-        <div class="ci">\ud83c\udfaf</div>
-        <div>
-          <h4>\u0420\u0430\u0437\u043d\u044b\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</h4>
-          <p>Travel, Tech, Movies \u2014 \u0432\u044b\u0431\u0438\u0440\u0430\u0439 \u0442\u0435\u043c\u0443, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0437\u0430\u0436\u0438\u0433\u0430\u0435\u0442.</p>
-        </div>
-      </div>
-      <div class="comfort-item">
-        <div class="ci">\ud83e\udd8a</div>
-        <div>
-          <h4>\u041b\u0435\u0441\u0438\u043a \u0440\u044f\u0434\u043e\u043c</h4>
-          <p>\u041f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0441\u043d\u0438\u043c\u0430\u0435\u0442 \u0441\u0442\u0440\u0430\u0445 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442.</p>
-        </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h3>Просто зашёл и говоришь</h3>
+        <p>Zoom-ссылка → speaking комната. Без приложений, без квестов «где мой пароль».</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="rooms">
+<section id="rooms" class="rooms">
   <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">\ud83c\udfe0 Speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</div>
-      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u044e \u043a\u043e\u043c\u043d\u0430\u0442\u0443</h2>
-      <p>\u041a\u0430\u0436\u0434\u0430\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430 \u2014 \u0441\u0432\u043e\u044f \u0430\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0430 \u0438 \u0441\u0432\u043e\u0438 \u0442\u0435\u043c\u044b</p>
-    </div>
-    <div class="guide-banner">
-      <div class="fox-mini">\ud83e\udd8a</div>
-      <p>\u042f \u043f\u0440\u043e\u0432\u043e\u0436\u0443 \u0442\u0435\u0431\u044f \u043f\u043e speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0430\u043c. \u0412\u044b\u0431\u0438\u0440\u0430\u0439, \u043a\u0443\u0434\u0430 \u0437\u0430\u0439\u0442\u0438 <span>\u0441\u0435\u0433\u043e\u0434\u043d\u044f</span> \u2014 \u044f \u0431\u0443\u0434\u0443 \u0440\u044f\u0434\u043e\u043c \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d\u0435.</p>
-    </div>
-    <div class="rooms-grid">
-      <div class="room-card">
-        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 01</div>
-        <div class="room-icon">\ud83c\udf0d</div>
+    <h2 class="section-title">Speaking комнаты</h2>
+    <p class="section-sub">Выбирай вайб. Лесик проводит по всем.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="room-tag">01</div>
+        <div class="ico">🌍</div>
         <h3>Travel & Stories</h3>
-        <p>\u0418\u0441\u0442\u043e\u0440\u0438\u0438, \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u043c\u0435\u0447\u0442\u044b. \u0417\u0434\u0435\u0441\u044c \u043b\u0435\u0433\u043a\u043e \u0437\u0430\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0434\u0430\u0436\u0435 \u0442\u0435\u043c, \u043a\u0442\u043e \u043e\u0431\u044b\u0447\u043d\u043e \u043c\u043e\u043b\u0447\u0438\u0442.</p>
+        <p>Истории, поездки, «а вот однажды в…». Легко заговорить, даже если обычно молчишь.</p>
       </div>
-      <div class="room-card">
-        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 02</div>
-        <div class="room-icon">\ud83e\udd16</div>
+      <div class="card">
+        <div class="room-tag">02</div>
+        <div class="ico">🤖</div>
         <h3>Tech & Future</h3>
-        <p>\u0418\u0418, \u0433\u0430\u0434\u0436\u0435\u0442\u044b, \u0431\u0443\u0434\u0443\u0449\u0435\u0435. \u0414\u043b\u044f \u0442\u0435\u0445, \u043a\u0442\u043e \u043b\u044e\u0431\u0438\u0442 \u0441\u043f\u043e\u0440\u0438\u0442\u044c \u0438 \u0444\u0430\u043d\u0442\u0430\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432\u0441\u043b\u0443\u0445.</p>
+        <p>ИИ, гаджеты, «а что если». Для тех, кто любит спорить и фантазировать.</p>
       </div>
-      <div class="room-card">
-        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 03</div>
-        <div class="room-icon">\ud83c\udfac</div>
+      <div class="card">
+        <div class="room-tag">03</div>
+        <div class="ico">🎬</div>
         <h3>Movies, Memes & Life</h3>
-        <p>\u0424\u0438\u043b\u044c\u043c\u044b, \u043c\u0435\u043c\u044b \u0438 \u0436\u0438\u0437\u043d\u044c. \u0421\u0430\u043c\u0430\u044f \u0440\u0430\u0441\u0441\u043b\u0430\u0431\u043b\u0435\u043d\u043d\u0430\u044f speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0430 \u2014 \u0437\u0434\u0435\u0441\u044c \u0432\u0441\u0435\u0433\u0434\u0430 \u0441\u043c\u0435\u044e\u0442\u0441\u044f.</p>
+        <p>Фильмы, мемы, быт. Самая расслабленная комната. Здесь можно просто прикалываться.</p>
       </div>
     </div>
   </div>
@@ -533,54 +363,48 @@ footer {
 
 <section id="speakers" class="speakers-section">
   <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">\ud83c\udf0d \u0418\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u044b\u0435 \u0441\u043f\u0438\u043a\u0435\u0440\u044b</div>
-      <h2>\u0421 \u043a\u0435\u043c \u0442\u044b \u0431\u0443\u0434\u0435\u0448\u044c \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c</h2>
-      <p>\u041d\u0430\u0441\u0442\u043e\u044f\u0449\u0438\u0435 \u043b\u044e\u0434\u0438 \u0438\u0437 \u0440\u0430\u0437\u043d\u044b\u0445 \u0441\u0442\u0440\u0430\u043d</p>
-    </div>
-    <div class="guide-banner" style="margin-bottom:28px;">
-      <div class="fox-mini">\ud83e\udd8a</div>
-      <p>\u042d\u0442\u043e \u043c\u043e\u0438 \u0434\u0440\u0443\u0437\u044c\u044f-\u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u044b. \u041e\u043d\u0438 <span>\u0441\u043b\u0443\u0448\u0430\u044e\u0442 \u0438 \u043e\u0442\u0432\u0435\u0447\u0430\u044e\u0442</span>, \u0430 \u043d\u0435 \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0442 \u043a\u0430\u0436\u0434\u043e\u0435 \u0441\u043b\u043e\u0432\u043e.</p>
-    </div>
-    <div class="speakers-grid">
-      <div class="speaker-card">
-        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udfab</div>
+    <h2 class="section-title">Спикеры</h2>
+    <p class="section-sub">Люди, с которыми ты будешь говорить. Не роботы.</p>
+    <div class="grid-3">
+      <div class="card speaker">
+        <div class="speaker-av">👨‍🎤</div>
         <h3>Alex</h3>
-        <div class="speaker-from">\ud83c\uddfa\ud83c\uddf8 California, USA</div>
-        <p>\u0421\u043f\u043e\u043a\u043e\u0439\u043d\u044b\u0439, \u0441 \u044e\u043c\u043e\u0440\u043e\u043c \u0438 \u043a\u0443\u0447\u0435\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0439. \u0418\u0434\u0435\u0430\u043b\u0435\u043d \u0434\u043b\u044f \u043f\u0435\u0440\u0432\u043e\u0433\u043e \u0441\u043e\u0437\u0432\u043e\u043d\u0430.</p>
-        <div class="speaker-tags"><span>Travel</span><span>Stories</span><span>Chill</span></div>
+        <div class="from">🇺🇸 California</div>
+        <p>Спокойный, с юмором. Куча историй. Хороший вариант для старта.</p>
+        <div class="tags"><span>Travel</span><span>Stories</span><span>Chill</span></div>
       </div>
-      <div class="speaker-card">
-        <div class="speaker-avatar">\ud83d\udc69\u200d\ud83d\udcbb</div>
+      <div class="card speaker">
+        <div class="speaker-av">👩‍💻</div>
         <h3>Emma</h3>
-        <div class="speaker-from">\ud83c\uddec\ud83c\udde7 London, UK</div>
-        <p>\u0423\u043c\u043d\u0430\u044f \u0438 \u0442\u0451\u043f\u043b\u0430\u044f. \u041b\u044e\u0431\u0438\u0442 \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438, \u0441\u0435\u0440\u0438\u0430\u043b\u044b \u0438 \u0431\u0440\u0438\u0442\u0430\u043d\u0441\u043a\u0438\u0439 \u0441\u0430\u0440\u043a\u0430\u0437\u043c.</p>
-        <div class="speaker-tags"><span>Tech</span><span>Series</span><span>British</span></div>
+        <div class="from">🇬🇧 London</div>
+        <p>Быстрая, умная, с британским сарказмом. Tech и сериалы — её зона.</p>
+        <div class="tags"><span>Tech</span><span>Series</span><span>British</span></div>
       </div>
-      <div class="speaker-card">
-        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udf73</div>
+      <div class="card speaker">
+        <div class="speaker-av">👨‍🍳</div>
         <h3>Carlos</h3>
-        <div class="speaker-from">\ud83c\uddf2\ud83c\uddfd Mexico City</div>
-        <p>\u042d\u043d\u0435\u0440\u0433\u0438\u044f, \u0435\u0434\u0430 \u0438 \u00ab\u0434\u0430\u0432\u0430\u0439 \u0435\u0449\u0451!\u00bb. \u0421 \u043d\u0438\u043c \u043d\u0435\u0432\u043e\u0437\u043c\u043e\u0436\u043d\u043e \u043e\u0441\u0442\u0430\u0442\u044c\u0441\u044f \u043c\u043e\u043b\u0447\u0430\u043b\u0438\u0432\u044b\u043c.</p>
-        <div class="speaker-tags"><span>Food</span><span>Life</span><span>Energy</span></div>
+        <div class="from">🇲🇽 Mexico City</div>
+        <p>Энергия 200%. Еда, жизнь, «давай ещё». С ним молчать сложно.</p>
+        <div class="tags"><span>Food</span><span>Life</span><span>Energy</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="lesik" class="lesik-section">
-  <div class="container lesik-grid">
-    <div class="lesik-fox">\ud83e\udd8a</div>
-    <div class="lesik-content">
-      <div class="eyebrow" style="background:rgba(255,107,0,0.15);color:var(--orange);display:inline-block;padding:5px 13px;border-radius:50px;font-weight:800;font-size:12px;margin-bottom:11px;">\u0422\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
-      <h2>\u042f \u041b\u0435\u0441\u0438\u043a. \u042f \u043f\u0440\u043e\u0432\u043e\u0436\u0443 \u0442\u0435\u0431\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d.</h2>
-      <p>\u042f \u0437\u043d\u0430\u044e, \u043a\u0430\u043a \u0441\u0442\u0440\u0430\u0448\u043d\u043e \u043e\u0442\u043a\u0440\u044b\u0442\u044c \u0440\u043e\u0442. \u041a\u043e\u0433\u0434\u0430-\u0442\u043e \u044f \u0441\u0430\u043c \u043c\u043e\u043b\u0447\u0430\u043b. \u0422\u0435\u043f\u0435\u0440\u044c \u043c\u043e\u044f \u0440\u0430\u0431\u043e\u0442\u0430 \u2014 \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0442\u0430\u043a, \u0447\u0442\u043e\u0431\u044b \u0442\u0435\u0431\u0435 \u0431\u044b\u043b\u043e \u043b\u0435\u0433\u043a\u043e.</p>
-      <p>\u041d\u0430 \u043a\u0430\u0436\u0434\u043e\u043c \u0441\u043e\u0437\u0432\u043e\u043d\u0435 \u044f \u0440\u044f\u0434\u043e\u043c. \u0417\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438 \u0438 \u043d\u0430\u043f\u043e\u043c\u0438\u043d\u0430\u044e: \u043e\u0448\u0438\u0431\u043a\u0438 \u2014 \u044d\u0442\u043e \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u043e.</p>
-      <div class="lesik-traits">
-        <div class="trait">\ud83d\udc3e \u041f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
-        <div class="trait">\ud83d\udcac \u0417\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0432\u0441\u0435\u043c\u0438</div>
-        <div class="trait">\u2b50 \u0412\u0435\u0440\u044e \u0432 \u0442\u0435\u0431\u044f</div>
-        <div class="trait">\ud83c\udf89 \u0412\u0441\u0435\u0433\u0434\u0430 \u0432 \u043f\u043e\u0437\u0438\u0442\u0438\u0432\u0435</div>
+<section id="lesik">
+  <div class="container">
+    <div class="lesik-block">
+      <div class="lesik-emoji">🦊</div>
+      <div>
+        <h2>Лесик — не маскот для детей</h2>
+        <p>Он проводит тебя по сайту, знакомит со спикерами и появляется на созвонах. Меньше «не бойся», больше «давай уже говорить».</p>
+        <p>Если коротко: гид, который знает, как это работает, и не будет разжёвывать очевидное.</p>
+        <div class="chips">
+          <span class="chip">Проводник</span>
+          <span class="chip">Знакомит со спикерами</span>
+          <span class="chip">Без сюсюканья</span>
+          <span class="chip">Мемы в комплекте</span>
+        </div>
       </div>
     </div>
   </div>
@@ -588,147 +412,129 @@ footer {
 
 <section id="meets">
   <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">\ud83d\udcc5 \u0411\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u044b</div>
-      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0443</h2>
-      <p>\u041c\u0435\u0441\u0442\u0430 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u044b \u2014 \u0432 \u0433\u0440\u0443\u043f\u043f\u0435 \u043c\u0430\u043a\u0441\u0438\u043c\u0443\u043c 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</p>
+    <h2 class="section-title">Ближайшие созвоны</h2>
+    <p class="section-sub">Мест мало. Группы до 6.</p>
+    <div class="event">
+      <div>
+        <h3>🌍 Travel Stories — Alex</h3>
+        <div class="event-meta">
+          <span>Пт, 19:00</span>
+          <span>60 мин</span>
+          <span class="spot hot">2 места</span>
+        </div>
+      </div>
+      <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">Записаться</a>
     </div>
-    <div class="events-list">
-      <div class="event-card">
-        <div class="event-info">
-          <h3>\ud83c\udf0d Travel Stories \u2014 \u0441 Alex</h3>
-          <div class="event-meta">
-            <span>\ud83d\udcc5 \u041f\u044f\u0442\u043d\u0438\u0446\u0430, 19:00</span>
-            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
-            <span class="spots hot">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 2 \u043c\u0435\u0441\u0442\u0430</span>
-          </div>
+    <div class="event">
+      <div>
+        <h3>🤖 Future Tech — Emma</h3>
+        <div class="event-meta">
+          <span>Сб, 18:00</span>
+          <span>60 мин</span>
+          <span class="spot">4 места</span>
         </div>
-        <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
-      <div class="event-card">
-        <div class="event-info">
-          <h3>\ud83e\udd16 Future Tech \u2014 \u0441 Emma</h3>
-          <div class="event-meta">
-            <span>\ud83d\udcc5 \u0421\u0443\u0431\u0431\u043e\u0442\u0430, 18:00</span>
-            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
-            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 4 \u043c\u0435\u0441\u0442\u0430</span>
-          </div>
+      <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a>
+    </div>
+    <div class="event">
+      <div>
+        <h3>🎬 Movies & Memes — Carlos</h3>
+        <div class="event-meta">
+          <span>Вс, 17:00</span>
+          <span>60 мин</span>
+          <span class="spot">3 места</span>
         </div>
-        <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
-      <div class="event-card">
-        <div class="event-info">
-          <h3>\ud83c\udfac Movies & Memes \u2014 \u0441 Carlos</h3>
-          <div class="event-meta">
-            <span>\ud83d\udcc5 \u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435, 17:00</span>
-            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
-            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 3 \u043c\u0435\u0441\u0442\u0430</span>
-          </div>
-        </div>
-        <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
-      </div>
+      <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">Записаться</a>
     </div>
   </div>
 </section>
 
 <section id="pricing">
   <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">\ud83d\udcb0 \u0426\u0435\u043d\u044b</div>
-      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u0439 \u0444\u043e\u0440\u043c\u0430\u0442</h2>
-      <p>\u0427\u0435\u043c \u0431\u043e\u043b\u044c\u0448\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432 \u2014 \u0442\u0435\u043c \u0432\u044b\u0433\u043e\u0434\u043d\u0435\u0435</p>
-    </div>
-    <div class="pricing-grid">
+    <h2 class="section-title">Цены</h2>
+    <p class="section-sub">Без подписок «навсегда». Бери сколько нужно.</p>
+    <div class="prices">
       <div class="price-card">
-        <h3>\u0420\u0430\u0437\u043e\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d</h3>
-        <div class="price">15 <span>BYN</span></div>
-        <div class="price-desc">\u041f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0430\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0443</div>
-        <ul class="price-features">
-          <li>1 \u0441\u043e\u0437\u0432\u043e\u043d 60 \u043c\u0438\u043d</li>
-          <li>\u0413\u0440\u0443\u043f\u043f\u0430 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</li>
-          <li>\u0416\u0438\u0432\u043e\u0439 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0435\u0446</li>
-          <li>Zoom</li>
+        <h3>Разовый</h3>
+        <div class="price-num">15 <span>BYN</span></div>
+        <div class="price-desc">Просто попробовать</div>
+        <ul class="price-list">
+          <li>1 созвон 60 мин</li>
+          <li>Группа до 6</li>
+          <li>Иностранный спикер</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
+        <a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a>
       </div>
-      <div class="price-card popular">
-        <div class="popular-badge">\ud83d\udd25 \u0421\u0430\u043c\u044b\u0439 \u0432\u044b\u0433\u043e\u0434\u043d\u044b\u0439</div>
-        <h3>4 \u0441\u043e\u0437\u0432\u043e\u043d\u0430</h3>
-        <div class="price">50 <span>BYN</span></div>
-        <div class="price-desc">\u041b\u0443\u0447\u0448\u0438\u0439 \u0441\u0442\u0430\u0440\u0442</div>
-        <ul class="price-features">
-          <li>4 \u0441\u043e\u0437\u0432\u043e\u043d\u0430 60 \u043c\u0438\u043d</li>
-          <li>\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u043f\u0440\u0438 \u0437\u0430\u043f\u0438\u0441\u0438</li>
-          <li>\u041c\u0435\u043c-\u043f\u0430\u043a \u043e\u0442 \u041b\u0435\u0441\u0438\u043a\u0430</li>
-          <li>\u0420\u0430\u0437\u043d\u044b\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</li>
+      <div class="price-card hot">
+        <div class="badge">Оптимально</div>
+        <h3>4 созвона</h3>
+        <div class="price-num">50 <span>BYN</span></div>
+        <div class="price-desc">Нормальный объём практики</div>
+        <ul class="price-list">
+          <li>4 созвона</li>
+          <li>Приоритет при записи</li>
+          <div>Мем-пак от Лесика</div>
+          <li>Разные комнаты</li>
         </ul>
-        <a href="#meets" class="btn" style="width:100%">\u0412\u0437\u044f\u0442\u044c</a>
+        <a href="#meets" class="btn" style="width:100%;justify-content:center">Взять</a>
       </div>
       <div class="price-card">
-        <h3>8 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432</h3>
-        <div class="price">90 <span>BYN</span></div>
-        <div class="price-desc">\u041c\u0430\u043a\u0441\u0438\u043c\u0443\u043c \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0438</div>
-        <ul class="price-features">
-          <li>8 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432 60 \u043c\u0438\u043d</li>
-          <li>\u041b\u0438\u0447\u043d\u044b\u0439 \u0447\u0430\u0442 \u0441 \u041b\u0435\u0441\u0438\u043a\u043e\u043c</li>
-          <li>\u041f\u043e\u0434\u0430\u0440\u043e\u043a-\u0441\u044e\u0440\u043f\u0440\u0438\u0437</li>
-          <li>\u0412\u0441\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</li>
+        <h3>8 созвонов</h3>
+        <div class="price-num">90 <span>BYN</span></div>
+        <div class="price-desc">Максимум практики</div>
+        <ul class="price-list">
+          <li>8 созвонов</li>
+          <li>Чат с Лесиком</li>
+          <li>Все комнаты</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
+        <a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a>
       </div>
     </div>
     <div class="promo">
       <div>
-        <h3>\ud83c\udf81 \u041f\u0435\u0440\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d \u2014 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e</h3>
-        <p>\u041f\u0440\u0438\u0445\u043e\u0434\u0438 \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0431\u0435\u0437 \u043e\u043f\u043b\u0430\u0442\u044b. \u0418\u043b\u0438 \u043f\u0440\u0438\u0432\u0435\u0434\u0438 \u0434\u0440\u0443\u0433\u0430 \u2014 \u043e\u0431\u0430 \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u0441\u043a\u0438\u0434\u043a\u0443 20%</p>
+        <h3>Первый созвон — free</h3>
+        <p>Или приведи друга — оба по −20%</p>
       </div>
-      <a href="#meets" class="btn btn-white">\u0425\u043e\u0447\u0443 \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c</a>
+      <a href="#meets" class="btn">Попробовать</a>
     </div>
   </div>
 </section>
 
-<section class="cta">
-  <div class="container">
-    <h2>\u0413\u043e\u0442\u043e\u0432 \u0437\u0430\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c?</h2>
-    <p>\u041b\u0435\u0441\u0438\u043a \u0443\u0436\u0435 \u0436\u0434\u0451\u0442 \u0432 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0435. \u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u044f\u0439\u0441\u044f \u043a \u0433\u0440\u0443\u043f\u043f\u0435 \u0438 \u043d\u0430\u0447\u043d\u0438 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438.</p>
-    <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap;">
-      <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d</a>
-      <a href="#speakers" class="btn btn-white">\u0421\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0441\u043f\u0438\u043a\u0435\u0440\u043e\u0432</a>
-    </div>
-  </div>
+<section class="cta container">
+  <h2>Хватит готовиться. Пора говорить.</h2>
+  <p>Выбери комнату, зайди на созвон, начни.</p>
+  <a href="#meets" class="btn">Записаться</a>
 </section>
 
 <footer>
   <div class="container">
-    <div class="footer-logo">\ud83e\udd8a LESICHI</div>
-    <div class="footer-tag">\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438 \u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440 \u00b7 Speaking club \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438</div>
+    <div class="footer-logo">🦊 LESICHI</div>
+    <div class="footer-tag">Speaking club · groups of 6 · real foreigners</div>
     <div class="footer-links">
-      <a href="#why">\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u044b</a>
-      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
-      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
-      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
-      <a href="#meets">\u0421\u043e\u0437\u0432\u043e\u043d\u044b</a>
-      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
+      <a href="#why">Зачем</a>
+      <a href="#rooms">Комнаты</a>
+      <a href="#speakers">Спикеры</a>
+      <a href="#meets">Созвоны</a>
+      <a href="#pricing">Цены</a>
     </div>
-    <div class="footer-copy">\u00a9 2026 LESICHI \u00b7 \u0421\u0434\u0435\u043b\u0430\u043d\u043e \u0441 \ud83d\udc3e</div>
+    <div class="footer-copy">© 2026 LESICHI</div>
   </div>
 </footer>
 
 <script>
-(function() {
-  const bg = document.getElementById('pawsBg');
-  const count = 16;
-  for (let i = 0; i < count; i++) {
-    const paw = document.createElement('div');
-    paw.className = 'paw';
-    paw.textContent = '\ud83d\udc3e';
-    paw.style.left = Math.random() * 100 + '%';
-    paw.style.bottom = '-' + (Math.random() * 15) + '%';
-    paw.style.fontSize = (16 + Math.random() * 26) + 'px';
-    paw.style.animationDuration = (14 + Math.random() * 18) + 's';
-    paw.style.animationDelay = (Math.random() * 9) + 's';
-    paw.style.opacity = 0.03 + Math.random() * 0.07;
-    bg.appendChild(paw);
+(function(){
+  const el = document.getElementById('paws');
+  for(let i=0;i<14;i++){
+    const p = document.createElement('div');
+    p.className = 'paw';
+    p.textContent = '🐾';
+    p.style.left = Math.random()*100+'%';
+    p.style.bottom = '-'+(Math.random()*20)+'%';
+    p.style.fontSize = (14+Math.random()*22)+'px';
+    p.style.animationDuration = (16+Math.random()*20)+'s';
+    p.style.animationDelay = (Math.random()*8)+'s';
+    el.appendChild(p);
   }
 })();
 </script>
