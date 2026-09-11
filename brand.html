@@ -3,208 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LESICHI — Фирменный стиль</title>
+<title>Lesichi — Фирменный стиль</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #FFFBF7;
-  --card: #fff;
+  --purple: #6B21A8;
+  --purple-mid: #7C3AED;
+  --purple-deep: #4C1D95;
+  --purple-soft: #EDE9FE;
   --orange: #FF6B00;
-  --orange-soft: #FF8C33;
-  --orange-pale: #FFF0E0;
-  --text: #1C1917;
-  --muted: #6B635A;
-  --line: rgba(255,107,0,0.14);
+  --bg: #FAF8FF;
+  --card: #fff;
+  --text: #1E1B2E;
+  --muted: #6B6580;
+  --line: rgba(107,33,168,0.14);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 .wrap { max-width: 900px; margin: 0 auto; padding: 48px 20px 80px; }
-h1 { font-size: 36px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 8px; }
-.lead { color: var(--muted); font-size: 16px; margin-bottom: 40px; }
-h2 { font-size: 22px; font-weight: 900; margin: 40px 0 14px; letter-spacing: -0.02em; border-bottom: 2px solid var(--orange); padding-bottom: 8px; display: inline-block; }
-h3 { font-size: 15px; font-weight: 800; margin: 18px 0 8px; }
-p, li { font-size: 14.5px; color: var(--muted); }
-ul { padding-left: 18px; margin: 8px 0 16px; }
-li { margin-bottom: 6px; }
+h1 { font-size: 34px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 8px; }
+.lead { color: var(--muted); font-size: 16px; margin-bottom: 36px; }
+h2 { font-size: 20px; font-weight: 900; margin: 36px 0 12px; letter-spacing: -0.02em; color: var(--purple); }
+h3 { font-size: 14px; font-weight: 800; margin: 16px 0 8px; }
+p, li { font-size: 14px; color: var(--muted); }
+ul { padding-left: 18px; margin: 8px 0 14px; }
+li { margin-bottom: 5px; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px; margin: 12px 0 20px; box-shadow: 0 8px 28px rgba(255,107,0,0.06);
+  padding: 18px; margin: 10px 0 18px; box-shadow: 0 8px 28px rgba(107,33,168,0.06);
 }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
 .swatch {
-  border-radius: 12px; padding: 18px 14px; min-height: 90px;
+  border-radius: 12px; padding: 16px 12px; min-height: 84px;
   display: flex; flex-direction: column; justify-content: flex-end;
   font-size: 12px; font-weight: 700; color: #fff;
 }
 .swatch span { opacity: 0.85; font-weight: 500; font-size: 11px; }
-.tag { display: inline-block; background: var(--orange-pale); color: var(--orange); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin: 2px 4px 2px 0; }
+.tag { display: inline-block; background: var(--purple-soft); color: var(--purple); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin: 2px 4px 2px 0; }
 .do { border-left: 3px solid #16a34a; padding-left: 12px; margin: 8px 0; }
 .dont { border-left: 3px solid #dc2626; padding-left: 12px; margin: 8px 0; }
-.quote { font-size: 18px; font-weight: 800; color: var(--text); margin: 10px 0; }
-.mono { font-family: ui-monospace, monospace; font-size: 12.5px; background: #f5f5f4; padding: 2px 6px; border-radius: 4px; }
-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
-td, th { border: 1px solid var(--line); padding: 10px 12px; text-align: left; }
-th { background: var(--orange-pale); color: var(--text); font-weight: 700; }
-.back { display: inline-block; margin-bottom: 24px; color: var(--orange); font-weight: 700; text-decoration: none; font-size: 14px; }
-@media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } h1 { font-size: 28px; } }
+.quote { font-size: 18px; font-weight: 800; color: var(--text); margin: 8px 0; }
+.mono { font-family: ui-monospace, monospace; font-size: 12px; background: var(--purple-soft); padding: 2px 6px; border-radius: 4px; }
+.back { display: inline-block; margin-bottom: 20px; color: var(--purple-mid); font-weight: 700; text-decoration: none; font-size: 14px; }
+.hero-brand {
+  background: linear-gradient(135deg, #6B21A8, #4C1D95);
+  border-radius: 16px; padding: 28px; color: #fff; text-align: center; margin-bottom: 24px;
+}
+.hero-brand .fox { font-size: 56px; }
+.hero-brand .name { font-size: 28px; font-weight: 900; }
+.hero-brand .sub { font-size: 11px; letter-spacing: 0.12em; opacity: 0.85; font-weight: 700; }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <a class="back" href="index.html">← На сайт</a>
-  <h1>🦊 LESICHI — фирменный стиль</h1>
-  <p class="lead">Брендбук speaking-клуба. Позитив, лиса-гид, группы по 6, живые иностранцы. Всё, что нужно, чтобы бренд звучал одинаково везде.</p>
 
-  <h2>1. Суть бренда</h2>
-  <div class="card">
-    <p class="quote">Перехитри языковой барьер</p>
-    <p>LESICHI — онлайн speaking club, где люди в группах до 6 человек говорят с иностранцами. Не курсы, не грамматика, не «занятие по учебнику». Живой разговор, комфорт и привычка говорить.</p>
-    <h3>Позиционирование</h3>
-    <ul>
-      <li><strong>Для кого:</strong> те, кто уже что-то понимает, но молчит; кто устал от теории и хочет практику.</li>
-      <li><strong>Против чего:</strong> огромные группы, cringe-атмосфера, скучные темы, страх ошибки.</li>
-      <li><strong>Обещание:</strong> зашёл — и уже говоришь. Без очереди, без оценок, с живым человеком.</li>
-    </ul>
+  <div class="hero-brand">
+    <div class="fox">🦊👑</div>
+    <div class="name">Lesichi</div>
+    <div class="sub">SPEAKING CLUB</div>
   </div>
 
-  <h2>2. Персонаж — Лесик</h2>
+  <h1>Фирменный стиль</h1>
+  <p class="lead">Фиолетовый + оранжевый + белый. Лесик с короной, наушниками и микрофоном. Позитив, speaking, уверенность.</p>
+
+  <h2>1. Суть</h2>
   <div class="card">
-    <p><strong>Лесик</strong> — гид бренда, не «детский маскот». Проводит по speaking-комнатам, знакомит со спикерами, задаёт тон: спокойно, с юмором, без давления.</p>
-    <h3>Характер</h3>
-    <ul>
-      <li>Уверенный, но лёгкий</li>
-      <li>С мемами и без пафоса</li>
-      <li>Всегда на стороне говорящего: «ошибся — ок, говори дальше»</li>
-      <li>Не учит, а ведёт</li>
-    </ul>
-    <h3>Внешний вид (стиль стикеров)</h3>
-    <ul>
-      <li>Оранжевая лиса, chibi / kawaii sticker-стиль</li>
-      <li>Чёрные уши с фиолетовой внутренней частью</li>
-      <li>Чёрная бабочка</li>
-      <li>Большие выразительные глаза, мягкая заливка, белый контур</li>
-      <li>Набор эмоций: привет, thumbs up, говорит, в наушниках, chill, «погнали»</li>
-    </ul>
-    <p>На сайте и в контенте Лесик = проводник. Не «милый зверёк для детей», а персонаж клуба с характером.</p>
+    <p class="quote">Перехитри языковой барьер · Говори с уверенностью · Better together</p>
+    <p>Онлайн speaking club: группы до 6, живые иностранцы, Лесик — голос и гид клуба.</p>
   </div>
 
-  <h2>3. Логотип</h2>
-  <div class="card">
-    <h3>Основной</h3>
-    <p><span class="tag">🦊 LESICHI</span> — лиса + слово. Коротко, читается в шапке и в сторис.</p>
-    <h3>Правила</h3>
-    <ul>
-      <li>Не растягивать, не менять пропорции</li>
-      <li>Минимальный отступ вокруг = высота буквы «L»</li>
-      <li>На тёмном фоне — белая/светлая версия; на светлом — оранжевая/чёрная</li>
-      <li>Не ставить логотип на пёстрые фото без подложки</li>
-    </ul>
-    <h3>Слоган</h3>
-    <p class="quote">Перехитри языковой барьер</p>
-    <p>Используется рядом с лого или отдельно в hero, рекламе, шапке канала.</p>
-  </div>
-
-  <h2>4. Цвета</h2>
+  <h2>2. Цвета (из логопака)</h2>
   <div class="grid">
-    <div class="swatch" style="background:#FF6B00">Orange<br><span>#FF6B00 · акцент, CTA</span></div>
-    <div class="swatch" style="background:#FF8C33">Orange soft<br><span>#FF8C33 · hover</span></div>
-    <div class="swatch" style="background:#FFF0E0;color:#1C1917">Pale<br><span>#FFF0E0 · чипы, теги</span></div>
-    <div class="swatch" style="background:#1C1917">Text<br><span>#1C1917 · заголовки</span></div>
-    <div class="swatch" style="background:#6B635A">Muted<br><span>#6B635A · текст</span></div>
-    <div class="swatch" style="background:#FFFBF7;color:#1C1917;border:1px solid #eee">BG<br><span>#FFFBF7 · фон</span></div>
-  </div>
-  <div class="card">
-    <p>Доп. акценты на карточках (не в лого): teal <span class="mono">#0D9488</span>, blue <span class="mono">#3B82F6</span>, coral <span class="mono">#FF5A5F</span>, purple <span class="mono">#8B5CF6</span> — только для разнообразия блоков, основа всегда оранжевый + нейтраль.</p>
+    <div class="swatch" style="background:#6B21A8">Purple<br><span>#6B21A8 · основа</span></div>
+    <div class="swatch" style="background:#7C3AED">Purple mid<br><span>#7C3AED · кнопки</span></div>
+    <div class="swatch" style="background:#4C1D95">Purple deep<br><span>#4C1D95 · градиенты</span></div>
+    <div class="swatch" style="background:#FF6B00">Orange<br><span>#FF6B00 · CTA / лиса</span></div>
+    <div class="swatch" style="background:#EDE9FE;color:#4C1D95">Soft<br><span>#EDE9FE · чипы</span></div>
+    <div class="swatch" style="background:#FAF8FF;color:#1E1B2E;border:1px solid #e5e0f0">BG<br><span>#FAF8FF · фон</span></div>
   </div>
 
-  <h2>5. Типографика</h2>
+  <h2>3. Лесик</h2>
   <div class="card">
-    <p><strong>Основной шрифт:</strong> Inter (или system-ui). Только без засечек.</p>
-    <table>
-      <tr><th>Роль</th><th>Начертание</th><th>Размер (примерно)</th></tr>
-      <tr><td>Hero / слоган</td><td>900</td><td>34–48px</td></tr>
-      <tr><td>Заголовки секций</td><td>900</td><td>22–30px</td></tr>
-      <tr><td>Подзаголовки</td><td>700–800</td><td>15–16px</td></tr>
-      <tr><td>Текст</td><td>400–500</td><td>13–16px</td></tr>
-      <tr><td>Кнопки / теги</td><td>700–800</td><td>12–14px</td></tr>
-    </table>
-    <p>Заголовки — плотные, короткие. Без «водички» и сюсюканья.</p>
-  </div>
-
-  <h2>6. Тон голоса</h2>
-  <div class="card">
-    <h3>Как говорим</h3>
+    <p>Оранжевая лиса, корона, наушники, микрофон, фиолетовая одежда — как на логотипе и стикерах.</p>
     <ul>
-      <li>Прямо и по делу</li>
-      <li>С лёгкой мемностью, без попытки быть «кринжовым подростком»</li>
-      <li>На «ты», но не как с детьми</li>
-      <li>Фокус на действии: зайти, говорить, записаться</li>
-    </ul>
-    <h3>Примеры</h3>
-    <div class="do">✅ «Присоединяйся — места в группах ограничены»</div>
-    <div class="do">✅ «Зашёл — и уже в разговоре»</div>
-    <div class="do">✅ «Без cringe и давления»</div>
-    <div class="dont">❌ «Наши маленькие лисята учат английский весело-весело!»</div>
-    <div class="dont">❌ «Уникальная инновационная методика XXI века»</div>
-    <div class="dont">❌ Длинные абзацы про «важность коммуникации в глобальном мире»</div>
-  </div>
-
-  <h2>7. Визуальные константы</h2>
-  <div class="card">
-    <ul>
-      <li><strong>Лапки 🐾</strong> — хаотичная анимация на фоне (оранжевые, много, разный размер). Фирменный «шум» бренда.</li>
-      <li><strong>Speaking-комнаты</strong> — Travel & Stories, Tech & Future, Movies, Memes & Life. Всегда с номерами 01 / 02 / 03.</li>
-      <li><strong>Спикеры</strong> — живые люди + страна + короткие теги. Упор на личность, не на «носитель языка».</li>
-      <li><strong>Карточки</strong> — светлые, лёгкая тень, цветная полоска сверху для акцентов.</li>
-      <li><strong>CTA</strong> — оранжевые кнопки, короткие глаголы: Записаться, Взять, Попробовать.</li>
+      <li>Гид и голос клуба, не детский маскот</li>
+      <li>Фразы со стикеров: «Говорим!», «Ты можешь!», «Всё получится!», «Найди свой голос»</li>
+      <li>Вайб: уверенность + поддержка + мемность</li>
     </ul>
   </div>
 
-  <h2>8. Продукт в коммуникации</h2>
+  <h2>4. Логотип</h2>
   <div class="card">
+    <p><span class="tag">👑 Lesichi</span> <span class="tag">SPEAKING CLUB</span></p>
     <ul>
-      <li>Группы <strong>до 6</strong> — всегда подчёркивать</li>
-      <li><strong>Иностранцы</strong> — США, Британия, Мексика и т.д., живой акцент</li>
-      <li>Формат: <strong>созвоны</strong> и <strong>speaking-комнаты</strong> (не «уроки», не «паки» в тексте для клиента)</li>
-      <li>Цены: 15 / 50 / 90 BYN · первый созвон free / реферал −20%</li>
+      <li>Основной: лиса с короной + wordmark Lesichi</li>
+      <li>App icon / favicon: квадрат с лисой и короной на фиолетовом</li>
+      <li>На тёмном/фиолетовом — белый текст; на светлом — фиолетовый wordmark</li>
     </ul>
   </div>
 
-  <h2>9. Контент и мемы</h2>
+  <h2>5. Типографика и тон</h2>
   <div class="card">
-    <p>Основа — позитив и узнаваемость Лесика.</p>
-    <ul>
-      <li>Стикер-пак Лесика (как референс со стикерами) — для TG, чатов, сторис</li>
-      <li>Короткие фразы от лица Лесика: «Я проведу. Ты говори.»</li>
-      <li>Мемы про «год учил и молчал» → «зашёл на созвон»</li>
-      <li>Закулисье спикеров, куски живых тем (без стыда за ошибки участников)</li>
-    </ul>
+    <p>Шрифт: <strong>Inter</strong>, только без засечек. Заголовки 900, короткие.</p>
+    <p>Тон: на «ты», по делу, с лёгкой мемностью. Без сюсюканья.</p>
+    <div class="do">✅ Говори с уверенностью · Присоединяйся · Зашёл — и уже в разговоре</div>
+    <div class="dont">❌ Детский тон, канцелярит, «инновационная методика»</div>
   </div>
 
-  <h2>10. Do / Don’t</h2>
-  <div class="card">
-    <div class="do">✅ Светлый фон, оранжевый акцент, чёрный слоган на hero</div>
-    <div class="do">✅ Лесик как гид, взрослый тон + лёгкая мемность</div>
-    <div class="do">✅ Короткие заголовки, продающие формулировки про практику</div>
-    <div class="dont">❌ Детский «мультяшный» тон и сюсюканье</div>
-    <div class="dont">❌ Перегруз оранжевым на весь экран</div>
-    <div class="dont">❌ Serif-шрифты, канцелярит, «инновационные экосистемы»</div>
-    <div class="dont">❌ Статы ради статов (150+ участников и т.п.), если не усиливают продажу</div>
-  </div>
-
-  <h2>11. Где применяется</h2>
+  <h2>6. На сайте</h2>
   <div class="card">
     <ul>
-      <li>Сайт (GitHub Pages)</li>
-      <li>Telegram-канал / чат клуба</li>
-      <li>Сторис, реклама, афиши созвонов</li>
-      <li>Стикеры Лесика в переписке</li>
-      <li>Аватары, обложки Zoom / комнат</li>
+      <li>Hero-блок логотипа — фиолетовый градиент как на бренд-шите</li>
+      <li>CTA: фиолетовые кнопки + оранжевый акцент «Записаться»</li>
+      <li>Лапки на фоне: фиолетовые и оранжевые</li>
+      <li>Стикер-фразы в блоке Лесика</li>
     </ul>
-    <p style="margin-top:12px">Сайт: <a href="index.html" style="color:var(--orange);font-weight:700">index.html</a> · Этот гайд: <span class="mono">brand.html</span></p>
+    <p style="margin-top:10px"><a href="index.html" style="color:var(--purple-mid);font-weight:700">Открыть сайт →</a></p>
   </div>
 
-  <p style="margin-top:36px;font-size:12px;color:#a8a29e">LESICHI Brand · 2026 · всё в репозитории smert-s-games/LESICHI</p>
+  <p style="margin-top:32px;font-size:12px;color:#a8a29e">Lesichi Brand · 2026 · smert-s-games/LESICHI</p>
 </div>
 </body>
 </html>
