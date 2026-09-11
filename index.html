@@ -37,8 +37,8 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(250,248,2
 .hero p{font-size:16px;color:var(--muted);max-width:420px;margin-bottom:10px}
 .hero-guide{font-size:15px;font-weight:700;color:var(--purple);margin-bottom:22px}
 .hero-btns{display:flex;gap:10px;flex-wrap:wrap}
-.logo-stage{position:relative;background:linear-gradient(160deg,#6B21A8 0%,#5B21B6 45%,#4C1D95 100%);border-radius:24px;padding:16px;text-align:center;box-shadow:0 20px 50px rgba(76,29,149,.35);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.logo-stage img{width:100%;max-width:340px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 10px 24px rgba(0,0,0,.25));animation:foxFloat 3s ease-in-out infinite}
+.logo-stage{position:relative;background:linear-gradient(160deg,#6B21A8 0%,#5B21B6 45%,#4C1D95 100%);border-radius:24px;padding:20px;text-align:center;box-shadow:0 20px 50px rgba(76,29,149,.35);overflow:hidden;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.logo-stage img{width:100%;max-width:300px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 10px 24px rgba(0,0,0,.25));animation:foxFloat 3s ease-in-out infinite}
 @keyframes foxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 section{padding:58px 0}
 .section-title{font-size:clamp(22px,3.2vw,30px);font-weight:900;letter-spacing:-.02em;margin-bottom:6px}
@@ -177,7 +177,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;backgro
   <h2 class="section-title">Ближайшие созвоны</h2>
   <p class="section-sub">Мест мало. Группы до 6.</p>
   <div class="event"><div><h3>🌍 Travel Stories — Alex</h3><div class="event-meta"><span>Пт, 19:00</span><span>60 мин</span><span class="spot hot">2 места</span></div></div><a href="https://zoom.us/j/9876543210" target="_blank" class="btn">Записаться</a></div>
-  <div class="event"><div><h3>🤖 Future Tech — Emma</h3><div class="event-meta"><span>Сб, 18:00</span><span>60 мин</span><span class="spot">4 места</span></div></div><a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a></div>
+  <div class="event"><div><h3>🤖 Future Tech — Emma</h3><div class="event-meta"><span>Сб, 18:00</span><span>60 мин</span><span class="spot">3 места</span></div></div><a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a></div>
   <div class="event"><div><h3>🎬 Movies & Memes — Carlos</h3><div class="event-meta"><span>Вс, 17:00</span><span>60 мин</span><span class="spot">3 места</span></div></div><a href="https://zoom.us/j/5544332211" target="_blank" class="btn">Записаться</a></div>
 </div></section>
 <section id="pricing"><div class="container">
@@ -204,22 +204,28 @@ footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;backgro
     <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
   </div>
 </footer>
-<script src="assets/la.js"></script>
 <script>
-(function(){
-  function apply(){
-    if(!window.LA) return;
-    const L=window.LA;
-    const set=(id,src)=>{const el=document.getElementById(id);if(el&&src)el.src=src};
-    set('nav-icon',L.icon);set('foot-icon',L.icon);set('hero-fox',L.hero);
-    set('st1',L.s1);set('st2',L.s2);set('st4',L.s4);
-    set('cta1',L.s1);set('cta2',L.s4);set('cta3',L.s2);
-    const fav=document.getElementById('fav');if(fav)fav.href=L.icon;
+(async function(){
+  async function load(path){
+    try { return await fetch(path).then(r=>r.text()); } catch(e){ return ''; }
   }
-  if(window.LA) apply(); else window.addEventListener('load', apply);
-  const el=document.getElementById('paws');
-  const anims=['pawDrift1','pawDrift2','pawDrift3'];
-  const colors=['rgba(124,58,237,0.45)','rgba(255,107,0,0.4)','rgba(107,33,168,0.35)'];
+  const icon = await load('assets/icon.txt');
+  const s1 = await load('assets/s1.txt');
+  const s2 = await load('assets/s2.txt');
+  const s4 = await load('assets/s4.txt');
+  // hero: use full brand logo crop if available, else icon
+  let hero = await load('assets/hero.txt');
+  if(!hero || hero.length < 100 || hero === 'PLACEHOLDER' || hero === 'LOADING') hero = icon;
+  const set = (id, src) => { const el = document.getElementById(id); if(el && src && src.startsWith('data:')) el.src = src; };
+  set('nav-icon', icon); set('foot-icon', icon); set('hero-fox', hero);
+  set('st1', s1); set('st2', s2); set('st4', s4);
+  set('cta1', s1); set('cta2', s4); set('cta3', s2);
+  const fav = document.getElementById('fav'); if(fav && icon) fav.href = icon;
+})();
+(function(){
+  const el = document.getElementById('paws');
+  const anims = ['pawDrift1','pawDrift2','pawDrift3'];
+  const colors = ['rgba(124,58,237,0.45)','rgba(255,107,0,0.4)','rgba(107,33,168,0.35)'];
   for(let i=0;i<36;i++){
     const p=document.createElement('div');p.className='paw';p.textContent='🐾';
     p.style.left=(Math.random()*100)+'%';p.style.bottom=(-8-Math.random()*40)+'%';
