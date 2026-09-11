@@ -1,1 +1,216 @@
-see next
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesichi — Speaking Club</title>
+<link rel="icon" id="fav" href="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#6B21A8;--purple-deep:#4C1D95;--purple-mid:#7C3AED;--purple-soft:#EDE9FE;--purple-pale:#F5F3FF;--orange:#FF6B00;--bg:#FAF8FF;--card:#fff;--text:#1E1B2E;--muted:#6B6580;--line:rgba(107,33,168,.12);--shadow:0 12px 40px rgba(107,33,168,.1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;overflow-x:hidden}
+.paws{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.paw{position:absolute;opacity:0;user-select:none}
+@keyframes pawDrift1{0%{transform:translate(0,0) rotate(0) scale(.85);opacity:0}8%{opacity:.18}100%{transform:translate(50px,-110vh) rotate(340deg) scale(1.1);opacity:0}}
+@keyframes pawDrift2{0%{transform:translate(0,0) rotate(25deg);opacity:0}10%{opacity:.16}100%{transform:translate(-55px,-108vh) rotate(-200deg) scale(.75);opacity:0}}
+@keyframes pawDrift3{0%{transform:translate(0,0) rotate(-15deg);opacity:0}12%{opacity:.2}100%{transform:translate(70px,-115vh) rotate(180deg) scale(1.2);opacity:0}}
+.container{width:92%;max-width:1080px;margin:0 auto;position:relative;z-index:1}
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(250,248,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.logo img{width:42px;height:42px;border-radius:12px;box-shadow:0 4px 14px rgba(107,33,168,.35);object-fit:cover}
+.logo-text{font-weight:900;font-size:20px;letter-spacing:-.02em}
+.logo-text span{color:var(--purple-mid)}
+.logo-sub{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.nav-links{display:flex;gap:20px}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+.nav-links a:hover{color:var(--purple-mid)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;border-radius:12px;background:linear-gradient(135deg,var(--purple-mid),var(--purple));color:#fff;font-weight:700;font-size:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(124,58,237,.35);transition:transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-orange{background:linear-gradient(135deg,var(--orange),#E85D04);box-shadow:0 6px 20px rgba(255,107,0,.3)}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line);box-shadow:none}
+.btn-ghost:hover{border-color:var(--purple-mid);color:var(--purple-mid)}
+.hero{padding:125px 0 55px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.tag{display:inline-block;background:var(--purple-soft);color:var(--purple);font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;margin-bottom:16px;letter-spacing:.04em}
+.hero h1{font-size:clamp(28px,4.5vw,42px);font-weight:900;line-height:1.15;margin-bottom:14px;letter-spacing:-.03em}
+.hero h1 span{color:var(--purple-mid)}
+.hero p{color:var(--muted);font-size:16px;margin-bottom:22px;max-width:440px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.logo-stage{position:relative;text-align:center}
+.logo-stage img{width:100%;max-width:300px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 10px 24px rgba(0,0,0,.25));animation:foxFloat 3s ease-in-out infinite}
+@keyframes foxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.section{padding:60px 0}
+.section-title{font-size:28px;font-weight:900;margin-bottom:8px;letter-spacing:-.02em}
+.section-sub{color:var(--muted);margin-bottom:28px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.card h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.card p{color:var(--muted);font-size:14px}
+.speaker-av{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px}
+.s1{background:#EDE9FE}.s2{background:#FFEDD5}.s3{background:#DCFCE7}
+.from{font-size:12px;color:var(--purple-mid);font-weight:700;margin-bottom:6px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tags span{background:var(--purple-soft);color:var(--purple);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px}
+.lesik-block{background:linear-gradient(135deg,#6B21A8,#7C3AED);border-radius:24px;padding:36px 28px;color:#fff;text-align:center}
+.lesik-block h2{font-size:24px;font-weight:900;margin-bottom:8px}
+.lesik-block p{opacity:.9;margin-bottom:20px}
+.sticker-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-end}
+.sticker-row img{width:92px;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25));transition:transform .2s;border-radius:12px}
+.sticker-row img:hover{transform:scale(1.08) rotate(-2deg)}
+.event{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.event h3{font-size:16px;font-weight:800}
+.event-meta{display:flex;gap:12px;font-size:13px;color:var(--muted);margin-top:4px}
+.spot{background:var(--purple-soft);color:var(--purple);font-weight:700;padding:2px 8px;border-radius:6px}
+.spot.hot{background:#FFEDD5;color:#C2410C}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;box-shadow:var(--shadow)}
+.price-card.hot{border-color:var(--purple-mid);box-shadow:0 12px 40px rgba(124,58,237,.18)}
+.badge{position:absolute;top:-10px;right:16px;background:var(--orange);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:8px}
+.price-num{font-size:32px;font-weight:900;margin:8px 0;color:var(--purple)}
+.price-num span{font-size:14px;font-weight:600;color:var(--muted)}
+.price-desc{color:var(--muted);font-size:13px;margin-bottom:14px}
+.price-list{list-style:none;margin-bottom:18px}
+.price-list li{font-size:13px;padding:4px 0;color:var(--text)}
+.price-list li:before{content:"✓ ";color:var(--purple-mid);font-weight:700}
+.promo{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#FF6B00,#E85D04);border-radius:16px;padding:20px 24px;color:#fff;margin-top:20px}
+.promo h3{font-size:18px;font-weight:800}
+.cta{text-align:center;padding:50px 0 70px}
+.cta h2{font-size:28px;font-weight:900;margin-bottom:8px}
+.cta p{color:var(--muted);margin-bottom:18px}
+.cta-stickers{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.cta-stickers img{width:68px;height:auto;filter:drop-shadow(0 4px 10px rgba(107,33,168,.2))}
+footer{background:#1E1B2E;color:#fff;padding:36px 0 28px;text-align:center}
+.footer-logo{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:900;font-size:18px;margin-bottom:6px}
+.footer-logo img{width:28px;height:28px;border-radius:8px}
+.footer-tag{font-size:13px;opacity:.7;margin-bottom:14px}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:13px}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;opacity:.5}
+@media(max-width:800px){.hero{grid-template-columns:1fr;text-align:center}.hero p{margin:0 auto 22px}.hero-cta{justify-content:center}.grid-3,.prices{grid-template-columns:1fr}.event{flex-direction:column;gap:12px;align-items:flex-start}.nav-links{display:none}.logo-stage img{max-width:220px}}
+</style>
+</head>
+<body>
+<div class="paws" id="paws"></div>
+<nav><div class="container nav-inner">
+  <a href="#" class="logo"><img id="nav-icon" src="" alt="Lesichi"><div><div class="logo-text">Les<span>ichi</span></div><div class="logo-sub">Speaking Club</div></div></a>
+  <div class="nav-links"><a href="#why">Зачем</a><a href="#rooms">Комнаты</a><a href="#speakers">Спикеры</a><a href="#meets">Созвоны</a><a href="#pricing">Цены</a></div>
+  <a href="#meets" class="btn">Записаться</a>
+</div></nav>
+<section class="hero container">
+  <div>
+    <div class="tag">GROUPS OF 6 · REAL FOREIGNERS</div>
+    <h1>Перехитри <span>языковой барьер</span></h1>
+    <p>Speaking club в маленьких группах с иностранцами. Лесик ведёт тебя по комнатам — Travel, Tech, Memes.</p>
+    <div class="hero-cta"><a href="#meets" class="btn btn-orange">На первый созвон free</a><a href="#why" class="btn btn-ghost">Почему это работает</a></div>
+  </div>
+  <div class="logo-stage">
+    <img id="hero-fox" src="" alt="Lesichi — Speaking Club">
+  </div>
+</section>
+<section id="why" class="section"><div class="container">
+  <h2 class="section-title">Почему Lesichi</h2>
+  <p class="section-sub">Не уроки. Живой разговор в безопасной компании.</p>
+  <div class="grid-3">
+    <div class="card"><h3>Группы до 6</h3><p>Всегда есть место сказать. Никто не прячется в толпе.</p></div>
+    <div class="card"><h3>Иностранцы</h3><p>Реальные спикеры из США, UK, Мексики. Живой акцент и юмор.</p></div>
+    <div class="card"><h3>Мемы + поддержка</h3><p>Лесик и стикеры снимают страх. Говоришь — и это нормально.</p></div>
+  </div>
+</div></section>
+<section id="rooms" class="section" style="background:var(--purple-pale)"><div class="container">
+  <h2 class="section-title">Комнаты</h2>
+  <p class="section-sub">Выбирай тему. Лесик знакомит со спикером.</p>
+  <div class="grid-3">
+    <div class="card"><h3>🌍 Travel</h3><p>Истории, города, «а как у вас?»</p></div>
+    <div class="card"><h3>🤖 Tech</h3><p>Будущее, гаджеты, работа.</p></div>
+    <div class="card"><h3>🎬 Memes</h3><p>Фильмы, тренды, просто посмеяться.</p></div>
+  </div>
+</div></section>
+<section id="speakers" class="section"><div class="container">
+  <h2 class="section-title">Спикеры</h2>
+  <p class="section-sub">Лесик знакомит тебя с ними лично.</p>
+  <div class="grid-3">
+    <div class="card speaker"><div class="speaker-av s1">👨‍🎤</div><h3>Alex</h3><div class="from">🇺🇸 California</div><p>Спокойный, с юмором.</p><div class="tags"><span>Travel</span><span>Stories</span></div></div>
+    <div class="card speaker"><div class="speaker-av s2">👩‍💻</div><h3>Emma</h3><div class="from">🇬🇧 London</div><p>Быстрая, с британским сарказмом.</p><div class="tags"><span>Tech</span><span>British</span></div></div>
+    <div class="card speaker"><div class="speaker-av s3">👨‍🍳</div><h3>Carlos</h3><div class="from">🇲🇽 Mexico City</div><p>Энергия 200%.</p><div class="tags"><span>Life</span><span>Energy</span></div></div>
+  </div>
+</div></section>
+<section id="lesik"><div class="container">
+  <div class="lesik-block">
+    <h2>Лесик — голос клуба</h2>
+    <p>Тот самый персонаж с короной, микрофоном и мемами. Он ведёт по комнатам и остаётся на созвоне.</p>
+    <div class="sticker-row">
+      <img id="st1" src="" alt="Говорим!">
+      <img id="st2" src="" alt="Ты можешь!">
+      <img id="st4" src="" alt="Найди свой голос!">
+    </div>
+  </div>
+</div></section>
+<section id="meets"><div class="container">
+  <h2 class="section-title">Ближайшие созвоны</h2>
+  <p class="section-sub">Мест мало. Группы до 6.</p>
+  <div class="event"><div><h3>🌍 Travel Stories — Alex</h3><div class="event-meta"><span>Пт, 19:00</span><span>60 мин</span><span class="spot hot">2 места</span></div></div><a href="https://zoom.us/j/9876543210" target="_blank" class="btn">Записаться</a></div>
+  <div class="event"><div><h3>🤖 Future Tech — Emma</h3><div class="event-meta"><span>Сб, 18:00</span><span>60 мин</span><span class="spot">3 места</span></div></div><a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a></div>
+  <div class="event"><div><h3>🎬 Movies & Memes — Carlos</h3><div class="event-meta"><span>Вс, 17:00</span><span>60 мин</span><span class="spot">3 места</span></div></div><a href="https://zoom.us/j/5544332211" target="_blank" class="btn">Записаться</a></div>
+</div></section>
+<section id="pricing"><div class="container">
+  <h2 class="section-title">Цены</h2>
+  <p class="section-sub">Бери сколько нужно. Без лишних подписок.</p>
+  <div class="prices">
+    <div class="price-card"><h3>Разовый</h3><div class="price-num">15 <span>BYN</span></div><div class="price-desc">Просто попробовать</div><ul class="price-list"><li>1 созвон 60 мин</li><li>Группа до 6</li><li>Иностранный спикер</li></ul><a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a></div>
+    <div class="price-card hot"><div class="badge">Оптимально</div><h3>4 созвона</h3><div class="price-num">50 <span>BYN</span></div><div class="price-desc">Нормальный объём практики</div><ul class="price-list"><li>4 созвона</li><li>Приоритет при записи</li><li>Мем-пак от Лесика</li><li>Разные комнаты</li></ul><a href="#meets" class="btn" style="width:100%;justify-content:center">Взять</a></div>
+    <div class="price-card"><h3>8 созвонов</h3><div class="price-num">90 <span>BYN</span></div><div class="price-desc">Максимум практики</div><ul class="price-list"><li>8 созвонов</li><li>Чат с Лесиком</li><li>Все комнаты</li></ul><a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a></div>
+  </div>
+  <div class="promo"><div><h3>Первый созвон — free</h3><p>Или приведи друга — оба по −20%</p></div><a href="#meets" class="btn">Попробовать</a></div>
+</div></section>
+<section class="cta container">
+  <div class="cta-stickers">
+    <img id="cta1" src="" alt="Говорим!">
+    <img id="cta2" src="" alt="Ты можешь!">
+    <img id="cta3" src="" alt="Найди свой голос!">
+  </div>
+  <h2>Говори с уверенностью</h2>
+  <p>Better together. Лесик уже в speaking комнате.</p>
+  <a href="#meets" class="btn btn-orange">Записаться</a>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-logo"><img id="foot-icon" src="" alt=""> Lesichi</div>
+    <div class="footer-tag">Speaking Club · groups of 6 · real foreigners</div>
+    <div class="footer-links"><a href="#why">Зачем</a><a href="#rooms">Комнаты</a><a href="#speakers">Спикеры</a><a href="#meets">Созвоны</a><a href="#pricing">Цены</a><a href="brand.html">Бренд</a></div>
+    <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
+  </div>
+</footer>
+<script>
+(async function(){
+  async function load(path){
+    try { return await fetch(path).then(r=>r.text()); } catch(e){ return ''; }
+  }
+  const icon = await load('assets/icon.txt');
+  const s1 = await load('assets/s1.txt');
+  const s2 = await load('assets/s2.txt');
+  const s4 = await load('assets/s4.txt');
+  let hero = await load('assets/hero.txt');
+  if(!hero || hero.length < 50) hero = icon;
+  const set = (id, src) => { const el = document.getElementById(id); if(el && src && src.startsWith('data:')) el.src = src; };
+  set('nav-icon', icon); set('foot-icon', icon); set('hero-fox', hero);
+  set('st1', s1); set('st2', s2); set('st4', s4);
+  set('cta1', s1); set('cta2', s2); set('cta3', s4);
+  const fav = document.getElementById('fav'); if(fav && icon) fav.href = icon;
+})();
+(function(){
+  const el = document.getElementById('paws');
+  const anims = ['pawDrift1','pawDrift2','pawDrift3'];
+  const colors = ['rgba(124,58,237,0.45)','rgba(255,107,0,0.4)','rgba(107,33,168,0.35)'];
+  for(let i=0;i<36;i++){
+    const p=document.createElement('div');p.className='paw';p.textContent='🐾';
+    p.style.left=(Math.random()*100)+'%';p.style.bottom=(-8-Math.random()*40)+'%';
+    p.style.fontSize=(16+Math.random()*26)+'px';
+    p.style.animation=anims[i%3]+' '+(14+Math.random()*16)+'s linear '+(Math.random()*12)+'s infinite';
+    p.style.color=colors[i%3];el.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
