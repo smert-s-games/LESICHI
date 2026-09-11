@@ -31,7 +31,6 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-/* Animated soft video-like background */
 .bg-video-wrap {
   position: fixed;
   inset: 0;
@@ -116,10 +115,7 @@ nav {
 .btn-outline:hover { background: var(--orange); color: white; }
 .btn-white { background: white; color: var(--orange); box-shadow: 0 7px 22px rgba(0,0,0,0.1); }
 .btn-white:hover { transform: translateY(-3px) scale(1.03); }
-.hero {
-  padding: 145px 0 60px;
-  position: relative;
-}
+.hero { padding: 145px 0 60px; position: relative; }
 .hero-grid {
   display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px; align-items: center;
 }
@@ -144,17 +140,13 @@ nav {
   background: linear-gradient(135deg, var(--orange), #FF9A3C);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero-sub {
-  font-size: 17.5px; color: var(--muted); margin-bottom: 8px; max-width: 480px;
-}
+.hero-sub { font-size: 17.5px; color: var(--muted); margin-bottom: 8px; max-width: 480px; }
 .hero-slogan {
   font-size: 17px; font-weight: 800; color: var(--orange);
   margin-bottom: 24px; display: flex; align-items: center; gap: 7px;
 }
 .hero-btns { display: flex; flex-wrap: wrap; gap: 11px; margin-bottom: 22px; }
-.hero-note {
-  font-size: 13.5px; color: var(--muted); font-weight: 600;
-}
+.hero-note { font-size: 13.5px; color: var(--muted); font-weight: 600; }
 .fox-stage { position: relative; display: flex; justify-content: center; align-items: center; }
 .fox-circle {
   width: 270px; height: 270px;
@@ -199,10 +191,7 @@ section { padding: 70px 0; }
 .guide-banner .fox-mini { font-size: 40px; flex-shrink: 0; }
 .guide-banner p { font-size: 14.5px; font-weight: 700; color: var(--dark); margin: 0; }
 .guide-banner span { color: var(--orange); }
-/* Why Us */
-.why-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-}
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .why-card {
   background: white; border-radius: 20px; padding: 24px 20px;
   box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
@@ -212,10 +201,7 @@ section { padding: 70px 0; }
 .why-card .icon { font-size: 32px; margin-bottom: 12px; }
 .why-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--dark); }
 .why-card p { font-size: 13.5px; color: var(--muted); }
-/* Rooms */
-.rooms-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-}
+.rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .room-card {
   background: white; border-radius: 20px; padding: 24px 18px;
   box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
@@ -234,11 +220,8 @@ section { padding: 70px 0; }
 }
 .room-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 7px; color: var(--dark); }
 .room-card p { color: var(--muted); font-size: 13px; }
-/* Speakers accent */
 .speakers-section { background: white; }
-.speakers-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-}
+.speakers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .speaker-card {
   background: var(--cream); border-radius: 20px; padding: 22px 16px;
   text-align: center; border: 1px solid rgba(255,107,0,0.09);
@@ -264,10 +247,7 @@ section { padding: 70px 0; }
   background: white; padding: 3px 8px; border-radius: 50px;
   font-size: 11px; font-weight: 700; color: var(--text);
 }
-/* Lesik */
-.lesik-section {
-  background: linear-gradient(180deg, #FFF0E5 0%, var(--cream) 100%);
-}
+.lesik-section { background: linear-gradient(180deg, #FFF0E5 0%, var(--cream) 100%); }
 .lesik-grid {
   display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 32px; align-items: center;
 }
@@ -288,7 +268,6 @@ section { padding: 70px 0; }
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   border: 1px solid rgba(255,107,0,0.09);
 }
-/* Extra cool blocks */
 .comfort-block {
   display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px;
 }
@@ -300,7 +279,6 @@ section { padding: 70px 0; }
 .comfort-item .ci { font-size: 24px; }
 .comfort-item h4 { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
 .comfort-item p { font-size: 12.5px; color: var(--muted); }
-/* Events */
 .events-list { display: flex; flex-direction: column; gap: 11px; }
 .event-card {
   display: flex; justify-content: space-between; align-items: center;
@@ -320,7 +298,6 @@ section { padding: 70px 0; }
 }
 .spots.hot { background: #FEE2E2; color: #DC2626; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
-/* Pricing */
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
 .price-card {
   background: white; border-radius: 20px; padding: 28px 16px; text-align: center;
@@ -348,7 +325,7 @@ section { padding: 70px 0; }
   padding: 4px 0; font-size: 12.5px; font-weight: 600; color: var(--text);
   display: flex; align-items: center; gap: 6px;
 }
-.price-features li::before { content: '🐾'; font-size: 11px; }
+.price-features li::before { content: '\1F43E'; font-size: 11px; }
 .promo {
   background: linear-gradient(135deg, #FF6B00, #FF9A3C);
   border-radius: 20px; padding: 26px; display: flex; justify-content: space-between;
@@ -356,7 +333,7 @@ section { padding: 70px 0; }
   position: relative; overflow: hidden;
 }
 .promo::before {
-  content: '🐾'; position: absolute; font-size: 130px; opacity: 0.11;
+  content: '\1F43E'; position: absolute; font-size: 130px; opacity: 0.11;
   right: -12px; bottom: -24px; transform: rotate(-18deg);
 }
 .promo h3 { font-size: 20px; font-weight: 900; margin-bottom: 3px; }
@@ -411,339 +388,329 @@ footer {
 <nav>
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <span class="logo-icon">🦊</span>
+      <span class="logo-icon">\ud83e\udd8a</span>
       <span>LESICHI</span>
     </a>
     <div class="nav-links">
-      <a href="#why">Почему мы</a>
-      <a href="#rooms">Комнаты</a>
-      <a href="#speakers">Спикеры</a>
-      <a href="#lesik">Лесик</a>
-      <a href="#meets">Созвоны</a>
-      <a href="#pricing">Цены</a>
+      <a href="#why">\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u044b</a>
+      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
+      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
+      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
+      <a href="#meets">\u0421\u043e\u0437\u0432\u043e\u043d\u044b</a>
+      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
     </div>
-    <a href="#meets" class="btn">🐾 Записаться</a>
+    <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <div class="badge">🌍 Говори с иностранцами уже сегодня</div>
-      <h1>Перехитри<br><span>языковой барьер</span></h1>
-      <p class="hero-sub">Онлайн speaking club в группах до 6 человек. Живое общение с иностранцами — без учебников и напряжения.</p>
-      <div class="hero-slogan">🦊 Лесик проводит тебя на каждый созвон</div>
+      <div class="badge">\ud83c\udf0d \u0413\u043e\u0432\u043e\u0440\u0438 \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438 \u0443\u0436\u0435 \u0441\u0435\u0433\u043e\u0434\u043d\u044f</div>
+      <h1>\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438<br><span>\u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440</span></h1>
+      <p class="hero-sub">\u041e\u043d\u043b\u0430\u0439\u043d speaking club \u0432 \u0433\u0440\u0443\u043f\u043f\u0430\u0445 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a. \u0416\u0438\u0432\u043e\u0435 \u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438 \u2014 \u0431\u0435\u0437 \u0443\u0447\u0435\u0431\u043d\u0438\u043a\u043e\u0432 \u0438 \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u044f.</p>
+      <div class="hero-slogan">\ud83e\udd8a \u041b\u0435\u0441\u0438\u043a \u043f\u0440\u043e\u0432\u043e\u0434\u0438\u0442 \u0442\u0435\u0431\u044f \u043d\u0430 \u043a\u0430\u0436\u0434\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d</div>
       <div class="hero-btns">
-        <a href="#meets" class="btn">🐾 Записаться на созвон</a>
-        <a href="#speakers" class="btn btn-dark">Познакомиться со спикерами</a>
+        <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d</a>
+        <a href="#speakers" class="btn btn-dark">\u041f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u0438\u0442\u044c\u0441\u044f \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438</a>
       </div>
-      <div class="hero-note">Первый созвон можно попробовать бесплатно</div>
+      <div class="hero-note">\u041f\u0435\u0440\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d \u043c\u043e\u0436\u043d\u043e \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e</div>
     </div>
     <div class="fox-stage">
       <div class="fox-circle">
-        <div class="fox-emoji">🦊</div>
+        <div class="fox-emoji">\ud83e\udd8a</div>
         <div class="fox-bubble">Let's speak!</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY US — rewritten -->
 <section id="why">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">🐾 Почему speaking club</div>
-      <h2>Почему это работает</h2>
-      <p>Коротко и честно — зачем приходить именно к нам</p>
+      <div class="eyebrow">\ud83d\udc3e \u041f\u043e\u0447\u0435\u043c\u0443 speaking club</div>
+      <h2>\u041f\u043e\u0447\u0435\u043c\u0443 \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442</h2>
+      <p>\u041a\u043e\u0440\u043e\u0442\u043a\u043e \u0438 \u0447\u0435\u0441\u0442\u043d\u043e \u2014 \u0437\u0430\u0447\u0435\u043c \u043f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u044c \u0438\u043c\u0435\u043d\u043d\u043e \u043a \u043d\u0430\u043c</p>
     </div>
-
     <div class="why-grid">
       <div class="why-card">
-        <div class="icon">👥</div>
-        <h3>Маленькие группы до 6 человек</h3>
-        <p>Каждый успевает поговорить. Нет «тихонь в углу». Ты точно получишь своё время на разговор и обратную связь.</p>
+        <div class="icon">\ud83d\udc65</div>
+        <h3>\u041c\u0430\u043b\u0435\u043d\u044c\u043a\u0438\u0435 \u0433\u0440\u0443\u043f\u043f\u044b \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</h3>
+        <p>\u041a\u0430\u0436\u0434\u044b\u0439 \u0443\u0441\u043f\u0435\u0432\u0430\u0435\u0442 \u043f\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c. \u041d\u0435\u0442 \u00ab\u0442\u0438\u0445\u043e\u043d\u044c \u0432 \u0443\u0433\u043b\u0443\u00bb. \u0422\u044b \u0442\u043e\u0447\u043d\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u0448\u044c \u0441\u0432\u043e\u0451 \u0432\u0440\u0435\u043c\u044f \u043d\u0430 \u0440\u0430\u0437\u0433\u043e\u0432\u043e\u0440.</p>
       </div>
       <div class="why-card">
-        <div class="icon">🌍</div>
-        <h3>Живые иностранцы</h3>
-        <p>Спикеры из США, Британии, Мексики и других стран. Ты слышишь настоящий акцент, живые выражения и учишься понимать разных людей.</p>
+        <div class="icon">\ud83c\udf0d</div>
+        <h3>\u0416\u0438\u0432\u044b\u0435 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u044b</h3>
+        <p>\u0421\u043f\u0438\u043a\u0435\u0440\u044b \u0438\u0437 \u0421\u0428\u0410, \u0411\u0440\u0438\u0442\u0430\u043d\u0438\u0438, \u041c\u0435\u043a\u0441\u0438\u043a\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0442\u0440\u0430\u043d. \u0422\u044b \u0441\u043b\u044b\u0448\u0438\u0448\u044c \u043d\u0430\u0441\u0442\u043e\u044f\u0449\u0438\u0439 \u0430\u043a\u0446\u0435\u043d\u0442 \u0438 \u0436\u0438\u0432\u044b\u0435 \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u044f.</p>
       </div>
       <div class="why-card">
-        <div class="icon">💬</div>
-        <h3>Speaking — это практика, а не теория</h3>
-        <p>Язык открывается только когда ты говоришь. Мы создаём пространство, где говорить легко и безопасно — даже если раньше было страшно.</p>
+        <div class="icon">\ud83d\udcac</div>
+        <h3>Speaking \u2014 \u044d\u0442\u043e \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0430</h3>
+        <p>\u042f\u0437\u044b\u043a \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0442\u043e\u043b\u044c\u043a\u043e \u043a\u043e\u0433\u0434\u0430 \u0442\u044b \u0433\u043e\u0432\u043e\u0440\u0438\u0448\u044c. \u041c\u044b \u0441\u043e\u0437\u0434\u0430\u0451\u043c \u043f\u0440\u043e\u0441\u0442\u0440\u0430\u043d\u0441\u0442\u0432\u043e, \u0433\u0434\u0435 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u043b\u0435\u0433\u043a\u043e \u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e.</p>
       </div>
       <div class="why-card">
-        <div class="icon">😊</div>
-        <h3>Весело и комфортно</h3>
-        <p>Никакого давления и «исправления каждой ошибки». Атмосфера тёплая, люди добрые, темы интересные. После созвона хочется вернуться.</p>
+        <div class="icon">\ud83d\ude0a</div>
+        <h3>\u0412\u0435\u0441\u0435\u043b\u043e \u0438 \u043a\u043e\u043c\u0444\u043e\u0440\u0442\u043d\u043e</h3>
+        <p>\u041d\u0438\u043a\u0430\u043a\u043e\u0433\u043e \u0434\u0430\u0432\u043b\u0435\u043d\u0438\u044f. \u0410\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0430 \u0442\u0451\u043f\u043b\u0430\u044f, \u043b\u044e\u0434\u0438 \u0434\u043e\u0431\u0440\u044b\u0435, \u0442\u0435\u043c\u044b \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435. \u041f\u043e\u0441\u043b\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u0430 \u0445\u043e\u0447\u0435\u0442\u0441\u044f \u0432\u0435\u0440\u043d\u0443\u0442\u044c\u0441\u044f.</p>
       </div>
       <div class="why-card">
-        <div class="icon">🧠</div>
-        <h3>Познавательно</h3>
-        <p>Путешествия, технологии, фильмы, жизнь в других странах. Ты не только говоришь — ты узнаёшь новое и расширяешь кругозор.</p>
+        <div class="icon">\ud83e\udde0</div>
+        <h3>\u041f\u043e\u0437\u043d\u0430\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e</h3>
+        <p>\u041f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438, \u0444\u0438\u043b\u044c\u043c\u044b, \u0436\u0438\u0437\u043d\u044c \u0432 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0442\u0440\u0430\u043d\u0430\u0445. \u0422\u044b \u043d\u0435 \u0442\u043e\u043b\u044c\u043a\u043e \u0433\u043e\u0432\u043e\u0440\u0438\u0448\u044c \u2014 \u0442\u044b \u0443\u0437\u043d\u0430\u0451\u0448\u044c \u043d\u043e\u0432\u043e\u0435.</p>
       </div>
       <div class="why-card">
-        <div class="icon">⚡</div>
-        <h3>Удобно и просто</h3>
-        <p>Всё через Zoom. Зашёл по ссылке — и ты уже в speaking комнате. Никаких сложных приложений и лишних настроек.</p>
+        <div class="icon">\u26a1</div>
+        <h3>\u0423\u0434\u043e\u0431\u043d\u043e \u0438 \u043f\u0440\u043e\u0441\u0442\u043e</h3>
+        <p>\u0412\u0441\u0451 \u0447\u0435\u0440\u0435\u0437 Zoom. \u0417\u0430\u0448\u0451\u043b \u043f\u043e \u0441\u0441\u044b\u043b\u043a\u0435 \u2014 \u0438 \u0442\u044b \u0443\u0436\u0435 \u0432 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0435. \u0411\u0435\u0437 \u043b\u0438\u0448\u043d\u0438\u0445 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0439.</p>
       </div>
     </div>
-
     <div class="comfort-block">
       <div class="comfort-item">
-        <div class="ci">🕐</div>
+        <div class="ci">\ud83d\udd50</div>
         <div>
-          <h4>Гибкое время</h4>
-          <p>Созвоны в будни и выходные — выбирай, когда тебе удобно.</p>
+          <h4>\u0413\u0438\u0431\u043a\u043e\u0435 \u0432\u0440\u0435\u043c\u044f</h4>
+          <p>\u0421\u043e\u0437\u0432\u043e\u043d\u044b \u0432 \u0431\u0443\u0434\u043d\u0438 \u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u044b\u0435 \u2014 \u0432\u044b\u0431\u0438\u0440\u0430\u0439, \u043a\u043e\u0433\u0434\u0430 \u0443\u0434\u043e\u0431\u043d\u043e.</p>
         </div>
       </div>
       <div class="comfort-item">
-        <div class="ci">🛡️</div>
+        <div class="ci">\ud83d\udee1\ufe0f</div>
         <div>
-          <h4>Безопасная среда</h4>
-          <p>Можно ошибаться. Здесь это нормально и даже полезно.</p>
+          <h4>\u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u0430\u044f \u0441\u0440\u0435\u0434\u0430</h4>
+          <p>\u041c\u043e\u0436\u043d\u043e \u043e\u0448\u0438\u0431\u0430\u0442\u044c\u0441\u044f. \u0417\u0434\u0435\u0441\u044c \u044d\u0442\u043e \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u043e \u0438 \u043f\u043e\u043b\u0435\u0437\u043d\u043e.</p>
         </div>
       </div>
       <div class="comfort-item">
-        <div class="ci">🎯</div>
+        <div class="ci">\ud83c\udfaf</div>
         <div>
-          <h4>Разные speaking комнаты</h4>
-          <p>Travel, Tech, Movies — выбирай тему, которая зажигает.</p>
+          <h4>\u0420\u0430\u0437\u043d\u044b\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</h4>
+          <p>Travel, Tech, Movies \u2014 \u0432\u044b\u0431\u0438\u0440\u0430\u0439 \u0442\u0435\u043c\u0443, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0437\u0430\u0436\u0438\u0433\u0430\u0435\u0442.</p>
         </div>
       </div>
       <div class="comfort-item">
-        <div class="ci">🦊</div>
+        <div class="ci">\ud83e\udd8a</div>
         <div>
-          <h4>Лесик рядом</h4>
-          <p>Проводник, который снимает страх и поддерживает на каждом шаге.</p>
+          <h4>\u041b\u0435\u0441\u0438\u043a \u0440\u044f\u0434\u043e\u043c</h4>
+          <p>\u041f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0441\u043d\u0438\u043c\u0430\u0435\u0442 \u0441\u0442\u0440\u0430\u0445 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ROOMS -->
 <section id="rooms">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">🏠 Speaking комнаты</div>
-      <h2>Выбери свою комнату</h2>
-      <p>Каждая комната — своя атмосфера и свои темы</p>
+      <div class="eyebrow">\ud83c\udfe0 Speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</div>
+      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u044e \u043a\u043e\u043c\u043d\u0430\u0442\u0443</h2>
+      <p>\u041a\u0430\u0436\u0434\u0430\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430 \u2014 \u0441\u0432\u043e\u044f \u0430\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0430 \u0438 \u0441\u0432\u043e\u0438 \u0442\u0435\u043c\u044b</p>
     </div>
     <div class="guide-banner">
-      <div class="fox-mini">🦊</div>
-      <p>Я провожу тебя по speaking комнатам. Выбирай, куда зайти <span>сегодня</span> — я буду рядом на созвоне.</p>
+      <div class="fox-mini">\ud83e\udd8a</div>
+      <p>\u042f \u043f\u0440\u043e\u0432\u043e\u0436\u0443 \u0442\u0435\u0431\u044f \u043f\u043e speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0430\u043c. \u0412\u044b\u0431\u0438\u0440\u0430\u0439, \u043a\u0443\u0434\u0430 \u0437\u0430\u0439\u0442\u0438 <span>\u0441\u0435\u0433\u043e\u0434\u043d\u044f</span> \u2014 \u044f \u0431\u0443\u0434\u0443 \u0440\u044f\u0434\u043e\u043c \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d\u0435.</p>
     </div>
     <div class="rooms-grid">
       <div class="room-card">
-        <div class="room-num">Комната 01</div>
-        <div class="room-icon">🌍</div>
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 01</div>
+        <div class="room-icon">\ud83c\udf0d</div>
         <h3>Travel & Stories</h3>
-        <p>Истории, путешествия, мечты. Здесь легко заговорить даже тем, кто обычно молчит.</p>
+        <p>\u0418\u0441\u0442\u043e\u0440\u0438\u0438, \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u043c\u0435\u0447\u0442\u044b. \u0417\u0434\u0435\u0441\u044c \u043b\u0435\u0433\u043a\u043e \u0437\u0430\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0434\u0430\u0436\u0435 \u0442\u0435\u043c, \u043a\u0442\u043e \u043e\u0431\u044b\u0447\u043d\u043e \u043c\u043e\u043b\u0447\u0438\u0442.</p>
       </div>
       <div class="room-card">
-        <div class="room-num">Комната 02</div>
-        <div class="room-icon">🤖</div>
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 02</div>
+        <div class="room-icon">\ud83e\udd16</div>
         <h3>Tech & Future</h3>
-        <p>ИИ, гаджеты, будущее. Для тех, кто любит спорить и фантазировать вслух.</p>
+        <p>\u0418\u0418, \u0433\u0430\u0434\u0436\u0435\u0442\u044b, \u0431\u0443\u0434\u0443\u0449\u0435\u0435. \u0414\u043b\u044f \u0442\u0435\u0445, \u043a\u0442\u043e \u043b\u044e\u0431\u0438\u0442 \u0441\u043f\u043e\u0440\u0438\u0442\u044c \u0438 \u0444\u0430\u043d\u0442\u0430\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432\u0441\u043b\u0443\u0445.</p>
       </div>
       <div class="room-card">
-        <div class="room-num">Комната 03</div>
-        <div class="room-icon">🎬</div>
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 03</div>
+        <div class="room-icon">\ud83c\udfac</div>
         <h3>Movies, Memes & Life</h3>
-        <p>Фильмы, мемы и жизнь. Самая расслабленная speaking комната — здесь всегда смеются.</p>
+        <p>\u0424\u0438\u043b\u044c\u043c\u044b, \u043c\u0435\u043c\u044b \u0438 \u0436\u0438\u0437\u043d\u044c. \u0421\u0430\u043c\u0430\u044f \u0440\u0430\u0441\u0441\u043b\u0430\u0431\u043b\u0435\u043d\u043d\u0430\u044f speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0430 \u2014 \u0437\u0434\u0435\u0441\u044c \u0432\u0441\u0435\u0433\u0434\u0430 \u0441\u043c\u0435\u044e\u0442\u0441\u044f.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SPEAKERS — strong accent -->
 <section id="speakers" class="speakers-section">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">🌍 Иностранные спикеры</div>
-      <h2>С кем ты будешь говорить</h2>
-      <p>Настоящие люди из разных стран — не роботы и не учебники</p>
+      <div class="eyebrow">\ud83c\udf0d \u0418\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u044b\u0435 \u0441\u043f\u0438\u043a\u0435\u0440\u044b</div>
+      <h2>\u0421 \u043a\u0435\u043c \u0442\u044b \u0431\u0443\u0434\u0435\u0448\u044c \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c</h2>
+      <p>\u041d\u0430\u0441\u0442\u043e\u044f\u0449\u0438\u0435 \u043b\u044e\u0434\u0438 \u0438\u0437 \u0440\u0430\u0437\u043d\u044b\u0445 \u0441\u0442\u0440\u0430\u043d</p>
     </div>
     <div class="guide-banner" style="margin-bottom:28px;">
-      <div class="fox-mini">🦊</div>
-      <p>Это мои друзья-иностранцы. Они <span>слушают и отвечают</span>, а не исправляют каждое слово. Выбирай, с кем хочешь познакомиться.</p>
+      <div class="fox-mini">\ud83e\udd8a</div>
+      <p>\u042d\u0442\u043e \u043c\u043e\u0438 \u0434\u0440\u0443\u0437\u044c\u044f-\u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u044b. \u041e\u043d\u0438 <span>\u0441\u043b\u0443\u0448\u0430\u044e\u0442 \u0438 \u043e\u0442\u0432\u0435\u0447\u0430\u044e\u0442</span>, \u0430 \u043d\u0435 \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0442 \u043a\u0430\u0436\u0434\u043e\u0435 \u0441\u043b\u043e\u0432\u043e.</p>
     </div>
     <div class="speakers-grid">
       <div class="speaker-card">
-        <div class="speaker-avatar">👨‍🎤</div>
+        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udfab</div>
         <h3>Alex</h3>
-        <div class="speaker-from">🇺🇸 California, USA</div>
-        <p>Спокойный, с юмором и кучей историй. Идеален для первого созвона.</p>
+        <div class="speaker-from">\ud83c\uddfa\ud83c\uddf8 California, USA</div>
+        <p>\u0421\u043f\u043e\u043a\u043e\u0439\u043d\u044b\u0439, \u0441 \u044e\u043c\u043e\u0440\u043e\u043c \u0438 \u043a\u0443\u0447\u0435\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0439. \u0418\u0434\u0435\u0430\u043b\u0435\u043d \u0434\u043b\u044f \u043f\u0435\u0440\u0432\u043e\u0433\u043e \u0441\u043e\u0437\u0432\u043e\u043d\u0430.</p>
         <div class="speaker-tags"><span>Travel</span><span>Stories</span><span>Chill</span></div>
       </div>
       <div class="speaker-card">
-        <div class="speaker-avatar">👩‍💻</div>
+        <div class="speaker-avatar">\ud83d\udc69\u200d\ud83d\udcbb</div>
         <h3>Emma</h3>
-        <div class="speaker-from">🇬🇧 London, UK</div>
-        <p>Умная и тёплая. Любит технологии, сериалы и британский сарказм.</p>
+        <div class="speaker-from">\ud83c\uddec\ud83c\udde7 London, UK</div>
+        <p>\u0423\u043c\u043d\u0430\u044f \u0438 \u0442\u0451\u043f\u043b\u0430\u044f. \u041b\u044e\u0431\u0438\u0442 \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438, \u0441\u0435\u0440\u0438\u0430\u043b\u044b \u0438 \u0431\u0440\u0438\u0442\u0430\u043d\u0441\u043a\u0438\u0439 \u0441\u0430\u0440\u043a\u0430\u0437\u043c.</p>
         <div class="speaker-tags"><span>Tech</span><span>Series</span><span>British</span></div>
       </div>
       <div class="speaker-card">
-        <div class="speaker-avatar">👨‍🍳</div>
+        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udf73</div>
         <h3>Carlos</h3>
-        <div class="speaker-from">🇲🇽 Mexico City</div>
-        <p>Энергия, еда и «давай ещё!». С ним невозможно остаться молчаливым.</p>
+        <div class="speaker-from">\ud83c\uddf2\ud83c\uddfd Mexico City</div>
+        <p>\u042d\u043d\u0435\u0440\u0433\u0438\u044f, \u0435\u0434\u0430 \u0438 \u00ab\u0434\u0430\u0432\u0430\u0439 \u0435\u0449\u0451!\u00bb. \u0421 \u043d\u0438\u043c \u043d\u0435\u0432\u043e\u0437\u043c\u043e\u0436\u043d\u043e \u043e\u0441\u0442\u0430\u0442\u044c\u0441\u044f \u043c\u043e\u043b\u0447\u0430\u043b\u0438\u0432\u044b\u043c.</p>
         <div class="speaker-tags"><span>Food</span><span>Life</span><span>Energy</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LESIK -->
 <section id="lesik" class="lesik-section">
   <div class="container lesik-grid">
-    <div class="lesik-fox">🦊</div>
+    <div class="lesik-fox">\ud83e\udd8a</div>
     <div class="lesik-content">
-      <div class="eyebrow" style="background:rgba(255,107,0,0.15);color:var(--orange);display:inline-block;padding:5px 13px;border-radius:50px;font-weight:800;font-size:12px;margin-bottom:11px;">Твой проводник</div>
-      <h2>Я Лесик. Я провожу тебя на созвон.</h2>
-      <p>Я знаю, как страшно открыть рот. Когда-то я сам молчал. Теперь моя работа — сделать так, чтобы тебе было легко и спокойно.</p>
-      <p>На каждом созвоне я рядом. Знакомлю со спикерами, поддерживаю и напоминаю: ошибки — это нормально.</p>
+      <div class="eyebrow" style="background:rgba(255,107,0,0.15);color:var(--orange);display:inline-block;padding:5px 13px;border-radius:50px;font-weight:800;font-size:12px;margin-bottom:11px;">\u0422\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
+      <h2>\u042f \u041b\u0435\u0441\u0438\u043a. \u042f \u043f\u0440\u043e\u0432\u043e\u0436\u0443 \u0442\u0435\u0431\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d.</h2>
+      <p>\u042f \u0437\u043d\u0430\u044e, \u043a\u0430\u043a \u0441\u0442\u0440\u0430\u0448\u043d\u043e \u043e\u0442\u043a\u0440\u044b\u0442\u044c \u0440\u043e\u0442. \u041a\u043e\u0433\u0434\u0430-\u0442\u043e \u044f \u0441\u0430\u043c \u043c\u043e\u043b\u0447\u0430\u043b. \u0422\u0435\u043f\u0435\u0440\u044c \u043c\u043e\u044f \u0440\u0430\u0431\u043e\u0442\u0430 \u2014 \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0442\u0430\u043a, \u0447\u0442\u043e\u0431\u044b \u0442\u0435\u0431\u0435 \u0431\u044b\u043b\u043e \u043b\u0435\u0433\u043a\u043e.</p>
+      <p>\u041d\u0430 \u043a\u0430\u0436\u0434\u043e\u043c \u0441\u043e\u0437\u0432\u043e\u043d\u0435 \u044f \u0440\u044f\u0434\u043e\u043c. \u0417\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438 \u0438 \u043d\u0430\u043f\u043e\u043c\u0438\u043d\u0430\u044e: \u043e\u0448\u0438\u0431\u043a\u0438 \u2014 \u044d\u0442\u043e \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u043e.</p>
       <div class="lesik-traits">
-        <div class="trait">🐾 Проводник</div>
-        <div class="trait">💬 Знакомлю со всеми</div>
-        <div class="trait">⭐ Верю в тебя</div>
-        <div class="trait">🎉 Всегда в позитиве</div>
+        <div class="trait">\ud83d\udc3e \u041f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
+        <div class="trait">\ud83d\udcac \u0417\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0432\u0441\u0435\u043c\u0438</div>
+        <div class="trait">\u2b50 \u0412\u0435\u0440\u044e \u0432 \u0442\u0435\u0431\u044f</div>
+        <div class="trait">\ud83c\udf89 \u0412\u0441\u0435\u0433\u0434\u0430 \u0432 \u043f\u043e\u0437\u0438\u0442\u0438\u0432\u0435</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MEETS / SOZVONY -->
 <section id="meets">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">📅 Ближайшие созвоны</div>
-      <h2>Выбери speaking комнату</h2>
-      <p>Места ограничены — в группе максимум 6 человек</p>
+      <div class="eyebrow">\ud83d\udcc5 \u0411\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u044b</div>
+      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0443</h2>
+      <p>\u041c\u0435\u0441\u0442\u0430 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u044b \u2014 \u0432 \u0433\u0440\u0443\u043f\u043f\u0435 \u043c\u0430\u043a\u0441\u0438\u043c\u0443\u043c 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</p>
     </div>
     <div class="events-list">
       <div class="event-card">
         <div class="event-info">
-          <h3>🌍 Travel Stories — с Alex</h3>
+          <h3>\ud83c\udf0d Travel Stories \u2014 \u0441 Alex</h3>
           <div class="event-meta">
-            <span>📅 Пятница, 19:00</span>
-            <span>⏱ 60 мин</span>
-            <span class="spots hot">Осталось 2 места</span>
+            <span>\ud83d\udcc5 \u041f\u044f\u0442\u043d\u0438\u0446\u0430, 19:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots hot">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 2 \u043c\u0435\u0441\u0442\u0430</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
       <div class="event-card">
         <div class="event-info">
-          <h3>🤖 Future Tech — с Emma</h3>
+          <h3>\ud83e\udd16 Future Tech \u2014 \u0441 Emma</h3>
           <div class="event-meta">
-            <span>📅 Суббота, 18:00</span>
-            <span>⏱ 60 мин</span>
-            <span class="spots">Осталось 4 места</span>
+            <span>\ud83d\udcc5 \u0421\u0443\u0431\u0431\u043e\u0442\u0430, 18:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 4 \u043c\u0435\u0441\u0442\u0430</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
       <div class="event-card">
         <div class="event-info">
-          <h3>🎬 Movies & Memes — с Carlos</h3>
+          <h3>\ud83c\udfac Movies & Memes \u2014 \u0441 Carlos</h3>
           <div class="event-meta">
-            <span>📅 Воскресенье, 17:00</span>
-            <span>⏱ 60 мин</span>
-            <span class="spots">Осталось 3 места</span>
+            <span>\ud83d\udcc5 \u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435, 17:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 3 \u043c\u0435\u0441\u0442\u0430</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">💰 Цены</div>
-      <h2>Выбери свой формат</h2>
-      <p>Чем больше созвонов — тем выгоднее</p>
+      <div class="eyebrow">\ud83d\udcb0 \u0426\u0435\u043d\u044b</div>
+      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u0439 \u0444\u043e\u0440\u043c\u0430\u0442</h2>
+      <p>\u0427\u0435\u043c \u0431\u043e\u043b\u044c\u0448\u0435 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432 \u2014 \u0442\u0435\u043c \u0432\u044b\u0433\u043e\u0434\u043d\u0435\u0435</p>
     </div>
     <div class="pricing-grid">
       <div class="price-card">
-        <h3>Разовый созвон</h3>
+        <h3>\u0420\u0430\u0437\u043e\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d</h3>
         <div class="price">15 <span>BYN</span></div>
-        <div class="price-desc">Попробовать атмосферу</div>
+        <div class="price-desc">\u041f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0430\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0443</div>
         <ul class="price-features">
-          <li>1 созвон 60 мин</li>
-          <li>Группа до 6 человек</li>
-          <li>Живой иностранец</li>
+          <li>1 \u0441\u043e\u0437\u0432\u043e\u043d 60 \u043c\u0438\u043d</li>
+          <li>\u0413\u0440\u0443\u043f\u043f\u0430 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</li>
+          <li>\u0416\u0438\u0432\u043e\u0439 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0435\u0446</li>
           <li>Zoom</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">Выбрать</a>
+        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
       </div>
       <div class="price-card popular">
-        <div class="popular-badge">🔥 Самый выгодный</div>
-        <h3>4 созвона</h3>
+        <div class="popular-badge">\ud83d\udd25 \u0421\u0430\u043c\u044b\u0439 \u0432\u044b\u0433\u043e\u0434\u043d\u044b\u0439</div>
+        <h3>4 \u0441\u043e\u0437\u0432\u043e\u043d\u0430</h3>
         <div class="price">50 <span>BYN</span></div>
-        <div class="price-desc">Лучший старт</div>
+        <div class="price-desc">\u041b\u0443\u0447\u0448\u0438\u0439 \u0441\u0442\u0430\u0440\u0442</div>
         <ul class="price-features">
-          <li>4 созвона 60 мин</li>
-          <li>Приоритет при записи</li>
-          <li>Мем-пак от Лесика</li>
-          <li>Разные speaking комнаты</li>
+          <li>4 \u0441\u043e\u0437\u0432\u043e\u043d\u0430 60 \u043c\u0438\u043d</li>
+          <li>\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u043f\u0440\u0438 \u0437\u0430\u043f\u0438\u0441\u0438</li>
+          <li>\u041c\u0435\u043c-\u043f\u0430\u043a \u043e\u0442 \u041b\u0435\u0441\u0438\u043a\u0430</li>
+          <li>\u0420\u0430\u0437\u043d\u044b\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</li>
         </ul>
-        <a href="#meets" class="btn" style="width:100%">Взять</a>
+        <a href="#meets" class="btn" style="width:100%">\u0412\u0437\u044f\u0442\u044c</a>
       </div>
       <div class="price-card">
-        <h3>8 созвонов</h3>
+        <h3>8 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432</h3>
         <div class="price">90 <span>BYN</span></div>
-        <div class="price-desc">Максимум практики</div>
+        <div class="price-desc">\u041c\u0430\u043a\u0441\u0438\u043c\u0443\u043c \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0438</div>
         <ul class="price-features">
-          <li>8 созвонов 60 мин</li>
-          <li>Личный чат с Лесиком</li>
-          <li>Подарок-сюрприз</li>
-          <li>Все speaking комнаты</li>
+          <li>8 \u0441\u043e\u0437\u0432\u043e\u043d\u043e\u0432 60 \u043c\u0438\u043d</li>
+          <li>\u041b\u0438\u0447\u043d\u044b\u0439 \u0447\u0430\u0442 \u0441 \u041b\u0435\u0441\u0438\u043a\u043e\u043c</li>
+          <li>\u041f\u043e\u0434\u0430\u0440\u043e\u043a-\u0441\u044e\u0440\u043f\u0440\u0438\u0437</li>
+          <li>\u0412\u0441\u0435 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u044b</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">Выбрать</a>
+        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
       </div>
     </div>
     <div class="promo">
       <div>
-        <h3>🎁 Первый созвон — бесплатно</h3>
-        <p>Приходи попробовать без оплаты. Или приведи друга — оба получите скидку 20%</p>
+        <h3>\ud83c\udf81 \u041f\u0435\u0440\u0432\u044b\u0439 \u0441\u043e\u0437\u0432\u043e\u043d \u2014 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e</h3>
+        <p>\u041f\u0440\u0438\u0445\u043e\u0434\u0438 \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0431\u0435\u0437 \u043e\u043f\u043b\u0430\u0442\u044b. \u0418\u043b\u0438 \u043f\u0440\u0438\u0432\u0435\u0434\u0438 \u0434\u0440\u0443\u0433\u0430 \u2014 \u043e\u0431\u0430 \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u0441\u043a\u0438\u0434\u043a\u0443 20%</p>
       </div>
-      <a href="#meets" class="btn btn-white">Хочу попробовать</a>
+      <a href="#meets" class="btn btn-white">\u0425\u043e\u0447\u0443 \u043f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c</a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta">
   <div class="container">
-    <h2>Готов заговорить?</h2>
-    <p>Лесик уже ждёт в speaking комнате. Присоединяйся к группе и начни говорить с иностранцами уже сегодня.</p>
+    <h2>\u0413\u043e\u0442\u043e\u0432 \u0437\u0430\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c?</h2>
+    <p>\u041b\u0435\u0441\u0438\u043a \u0443\u0436\u0435 \u0436\u0434\u0451\u0442 \u0432 speaking \u043a\u043e\u043c\u043d\u0430\u0442\u0435. \u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u044f\u0439\u0441\u044f \u043a \u0433\u0440\u0443\u043f\u043f\u0435 \u0438 \u043d\u0430\u0447\u043d\u0438 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438.</p>
     <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap;">
-      <a href="#meets" class="btn">🐾 Записаться на созвон</a>
-      <a href="#speakers" class="btn btn-white">Смотреть спикеров</a>
+      <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0441\u043e\u0437\u0432\u043e\u043d</a>
+      <a href="#speakers" class="btn btn-white">\u0421\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0441\u043f\u0438\u043a\u0435\u0440\u043e\u0432</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="footer-logo">🦊 LESICHI</div>
-    <div class="footer-tag">Перехитри языковой барьер · Speaking club с иностранцами</div>
+    <div class="footer-logo">\ud83e\udd8a LESICHI</div>
+    <div class="footer-tag">\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438 \u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440 \u00b7 Speaking club \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438</div>
     <div class="footer-links">
-      <a href="#why">Почему мы</a>
-      <a href="#rooms">Комнаты</a>
-      <a href="#speakers">Спикеры</a>
-      <a href="#lesik">Лесик</a>
-      <a href="#meets">Созвоны</a>
-      <a href="#pricing">Цены</a>
+      <a href="#why">\u041f\u043e\u0447\u0435\u043c\u0443 \u043c\u044b</a>
+      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
+      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
+      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
+      <a href="#meets">\u0421\u043e\u0437\u0432\u043e\u043d\u044b</a>
+      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
     </div>
-    <div class="footer-copy">© 2026 LESICHI · Сделано с 🐾</div>
+    <div class="footer-copy">\u00a9 2026 LESICHI \u00b7 \u0421\u0434\u0435\u043b\u0430\u043d\u043e \u0441 \ud83d\udc3e</div>
   </div>
 </footer>
 
@@ -754,7 +721,7 @@ footer {
   for (let i = 0; i < count; i++) {
     const paw = document.createElement('div');
     paw.className = 'paw';
-    paw.textContent = '🐾';
+    paw.textContent = '\ud83d\udc3e';
     paw.style.left = Math.random() * 100 + '%';
     paw.style.bottom = '-' + (Math.random() * 15) + '%';
     paw.style.fontSize = (16 + Math.random() * 26) + 'px';
