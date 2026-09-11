@@ -4,19 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LESICHI — Перехитри языковой барьер</title>
-<meta name="description" content="Speaking club в группах до 6 человек с иностранцами. Живой английский без скуки.">
+<meta name="description" content="Speaking club в группах до 6 человек с иностранцами. Лесик — твой гид.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0F0E0C;
-  --bg-soft: #1A1814;
-  --card: #221F1A;
+  --bg: #FFF8F0;
+  --bg-soft: #FFF1E3;
+  --card: #FFFFFF;
   --orange: #FF6B00;
   --orange-soft: #FF8C33;
-  --text: #F5F0E8;
-  --muted: #A89B8C;
-  --line: rgba(255,107,0,0.15);
+  --orange-pale: #FFF0E0;
+  --text: #1A120B;
+  --muted: #7A6A5A;
+  --line: rgba(255,107,0,0.12);
+  --shadow: 0 12px 40px rgba(255,107,0,0.08);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -31,19 +33,19 @@ body {
   position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
 }
 .paw {
-  position: absolute; font-size: 22px; opacity: 0.04;
+  position: absolute; font-size: 22px; opacity: 0.06;
   animation: floatUp linear infinite;
 }
 @keyframes floatUp {
-  0% { transform: translateY(0) rotate(0); opacity: 0.03; }
-  50% { opacity: 0.07; }
+  0% { transform: translateY(0) rotate(0); opacity: 0.04; }
+  50% { opacity: 0.09; }
   100% { transform: translateY(-100vh) rotate(280deg); opacity: 0.02; }
 }
 .container { width: 92%; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
 nav {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  background: rgba(15,14,12,0.85);
+  background: rgba(255,248,240,0.9);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
@@ -64,115 +66,123 @@ nav {
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 12px 22px; border-radius: 12px;
-  background: var(--orange); color: #111; font-weight: 800; font-size: 14px;
+  background: var(--orange); color: #fff; font-weight: 800; font-size: 14px;
   text-decoration: none; border: none; cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 6px 20px rgba(255,107,0,0.3);
 }
 .btn:hover { background: var(--orange-soft); transform: translateY(-2px); }
 .btn-ghost {
   background: transparent; color: var(--text);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(26,18,11,0.15);
+  box-shadow: none;
 }
 .btn-ghost:hover { border-color: var(--orange); color: var(--orange); background: transparent; }
 
 .hero {
-  padding: 140px 0 80px;
-  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
+  padding: 140px 0 70px;
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center;
 }
 .tag {
   display: inline-block;
-  background: rgba(255,107,0,0.12);
+  background: var(--orange-pale);
   color: var(--orange);
   font-size: 12px; font-weight: 700;
   padding: 6px 12px; border-radius: 8px;
-  margin-bottom: 18px;
-  letter-spacing: 0.02em;
+  margin-bottom: 16px;
 }
 .hero h1 {
-  font-size: clamp(36px, 5vw, 52px);
+  font-size: clamp(36px, 5vw, 50px);
   font-weight: 900;
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   letter-spacing: -0.03em;
 }
 .hero h1 span { color: var(--orange); }
 .hero p {
-  font-size: 17px; color: var(--muted); max-width: 460px; margin-bottom: 28px;
+  font-size: 16.5px; color: var(--muted); max-width: 440px; margin-bottom: 12px;
+}
+.hero-guide {
+  font-size: 15px; font-weight: 700; color: var(--orange);
+  margin-bottom: 24px;
 }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .fox-box {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 24px;
-  padding: 40px;
+  padding: 36px;
   text-align: center;
+  box-shadow: var(--shadow);
   position: relative;
 }
-.fox-big { font-size: 120px; line-height: 1; margin-bottom: 12px; }
+.fox-big { font-size: 110px; line-height: 1; margin-bottom: 10px; }
 .fox-quote {
-  font-size: 15px; font-weight: 700; color: var(--muted);
+  font-size: 14.5px; font-weight: 700; color: var(--muted);
 }
 
-section { padding: 70px 0; }
+section { padding: 65px 0; }
 .section-title {
-  font-size: clamp(26px, 3.5vw, 34px);
+  font-size: clamp(24px, 3.4vw, 32px);
   font-weight: 900;
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .section-sub {
-  color: var(--muted); font-size: 15px; margin-bottom: 36px; max-width: 480px;
+  color: var(--muted); font-size: 15px; margin-bottom: 32px; max-width: 460px;
 }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .card {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
+  box-shadow: var(--shadow);
   transition: border-color 0.2s, transform 0.2s;
 }
 .card:hover { border-color: rgba(255,107,0,0.35); transform: translateY(-3px); }
-.card .ico { font-size: 28px; margin-bottom: 12px; }
-.card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.card .ico { font-size: 26px; margin-bottom: 10px; }
+.card h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 6px; }
 .card p { font-size: 13.5px; color: var(--muted); }
 
 .rooms .card { position: relative; }
 .room-tag {
   position: absolute; top: 14px; right: 14px;
   font-size: 11px; font-weight: 700; color: var(--orange);
-  background: rgba(255,107,0,0.12); padding: 3px 8px; border-radius: 6px;
+  background: var(--orange-pale); padding: 3px 8px; border-radius: 6px;
 }
 
 .speakers-section { background: var(--bg-soft); }
 .speaker { text-align: center; }
 .speaker-av {
-  width: 72px; height: 72px; border-radius: 50%;
+  width: 70px; height: 70px; border-radius: 50%;
   background: linear-gradient(135deg, #FF8C33, #FF6B00);
   display: flex; align-items: center; justify-content: center;
-  font-size: 32px; margin: 0 auto 12px;
+  font-size: 30px; margin: 0 auto 12px;
+  box-shadow: 0 6px 16px rgba(255,107,0,0.25);
 }
 .speaker h3 { font-size: 15px; font-weight: 800; }
-.speaker .from { font-size: 12px; color: var(--orange); font-weight: 600; margin: 4px 0 8px; }
+.speaker .from { font-size: 12px; color: var(--orange); font-weight: 600; margin: 3px 0 8px; }
 .speaker p { font-size: 13px; color: var(--muted); }
 .tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 10px; }
 .tags span {
-  background: rgba(255,255,255,0.06); padding: 3px 8px; border-radius: 6px;
-  font-size: 11px; font-weight: 600; color: var(--muted);
+  background: var(--orange-pale); padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; color: var(--orange);
 }
 
 .lesik-block {
-  display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 30px; align-items: center;
-  background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px;
+  display: grid; grid-template-columns: 0.55fr 1.45fr; gap: 28px; align-items: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+  padding: 32px; box-shadow: var(--shadow);
 }
-.lesik-emoji { font-size: 100px; text-align: center; }
-.lesik-block h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
-.lesik-block p { color: var(--muted); font-size: 14.5px; margin-bottom: 10px; }
+.lesik-emoji { font-size: 96px; text-align: center; }
+.lesik-block h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
+.lesik-block p { color: var(--muted); font-size: 14.5px; margin-bottom: 8px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .chip {
-  background: rgba(255,107,0,0.12); color: var(--orange);
+  background: var(--orange-pale); color: var(--orange);
   padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
 }
 
@@ -180,29 +190,31 @@ section { padding: 70px 0; }
   display: flex; justify-content: space-between; align-items: center;
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
   padding: 18px 20px; margin-bottom: 10px; gap: 14px; flex-wrap: wrap;
+  box-shadow: var(--shadow);
   transition: border-color 0.2s;
 }
 .event:hover { border-color: rgba(255,107,0,0.4); }
 .event h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
 .event-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); font-weight: 500; }
 .spot {
-  background: rgba(255,107,0,0.15); color: var(--orange);
+  background: var(--orange-pale); color: var(--orange);
   padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px;
 }
-.spot.hot { background: rgba(220,38,38,0.2); color: #F87171; }
+.spot.hot { background: #FEE2E2; color: #DC2626; }
 
 .prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .price-card {
   background: var(--card); border: 1px solid var(--line); border-radius: 16px;
   padding: 26px 18px; text-align: center; position: relative;
+  box-shadow: var(--shadow);
 }
 .price-card.hot {
   border-color: var(--orange);
-  box-shadow: 0 0 0 1px var(--orange);
+  box-shadow: 0 0 0 1.5px var(--orange), var(--shadow);
 }
 .price-card .badge {
   position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-  background: var(--orange); color: #111; font-size: 11px; font-weight: 800;
+  background: var(--orange); color: #fff; font-size: 11px; font-weight: 800;
   padding: 4px 12px; border-radius: 8px; white-space: nowrap;
 }
 .price-card h3 { font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
@@ -221,19 +233,19 @@ section { padding: 70px 0; }
   background: linear-gradient(135deg, #FF6B00, #E55A00);
   border-radius: 16px; padding: 24px 28px;
   display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
-  color: #111;
+  color: #fff;
 }
 .promo h3 { font-size: 18px; font-weight: 900; margin-bottom: 2px; }
-.promo p { font-size: 13.5px; opacity: 0.85; }
-.promo .btn { background: #111; color: #fff; }
-.promo .btn:hover { background: #222; }
+.promo p { font-size: 13.5px; opacity: 0.9; }
+.promo .btn { background: #fff; color: var(--orange); box-shadow: none; }
+.promo .btn:hover { background: #FFF5EB; }
 
 .cta {
-  text-align: center; padding: 80px 0;
+  text-align: center; padding: 75px 0;
   border-top: 1px solid var(--line);
 }
-.cta h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
-.cta p { color: var(--muted); margin-bottom: 24px; font-size: 15px; }
+.cta h2 { font-size: clamp(24px, 3.8vw, 34px); font-weight: 900; margin-bottom: 10px; letter-spacing: -0.02em; }
+.cta p { color: var(--muted); margin-bottom: 22px; font-size: 15px; }
 
 footer {
   border-top: 1px solid var(--line);
@@ -244,12 +256,12 @@ footer {
 .footer-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
 .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
 .footer-links a:hover { color: var(--orange); }
-.footer-copy { font-size: 11px; color: #5A5248; }
+.footer-copy { font-size: 11px; color: #B0A090; }
 
 @media (max-width: 900px) {
-  .hero, .lesik-block, .grid-3, .grid-2, .prices { grid-template-columns: 1fr; }
+  .hero, .lesik-block, .grid-3, .prices { grid-template-columns: 1fr; }
   .hero { padding-top: 120px; text-align: center; }
-  .hero p { margin-left: auto; margin-right: auto; }
+  .hero p, .hero-guide { margin-left: auto; margin-right: auto; }
   .hero-btns { justify-content: center; }
   .nav-links { display: none; }
   .event { flex-direction: column; text-align: center; }
@@ -281,7 +293,8 @@ footer {
   <div>
     <div class="tag">SPEAKING CLUB · GROUPS OF 6</div>
     <h1>Перехитри<br><span>языковой барьер</span></h1>
-    <p>Говори с иностранцами в маленьких группах. Без учебников, без «исправьте меня, пожалуйста» и без скуки.</p>
+    <p>Говори с иностранцами в маленьких группах. Без учебников и без скуки.</p>
+    <div class="hero-guide">🦊 Лесик — твой гид по speaking комнатам и спикерам</div>
     <div class="hero-btns">
       <a href="#meets" class="btn">Записаться на созвон</a>
       <a href="#speakers" class="btn btn-ghost">Смотреть спикеров</a>
@@ -289,44 +302,44 @@ footer {
   </div>
   <div class="fox-box">
     <div class="fox-big">🦊</div>
-    <div class="fox-quote">«Skill issue? Мы фиксим.»</div>
+    <div class="fox-quote">«Я проведу. Ты говори.»</div>
   </div>
 </section>
 
 <section id="why">
   <div class="container">
-    <h2 class="section-title">Зачем это нужно</h2>
-    <p class="section-sub">Не мотивационные лозунги. Реальные причины, почему speaking club работает.</p>
+    <h2 class="section-title">Зачем это работает</h2>
+    <p class="section-sub">Коротко и по делу.</p>
     <div class="grid-3">
       <div class="card">
         <div class="ico">👥</div>
         <h3>Группы до 6 человек</h3>
-        <p>Каждый реально говорит. Не 30 человек и «следующий, пожалуйста». Ты в игре всё время.</p>
+        <p>Каждый реально говорит. Не 30 человек и очередь. Ты в разговоре всё время.</p>
       </div>
       <div class="card">
         <div class="ico">🌍</div>
-        <h3>Иностранцы, а не «носители из учебника»</h3>
-        <p>Люди из США, Британии, Мексики. Настоящий акцент, живые реакции, мемы, которые не переводятся.</p>
+        <h3>Живые иностранцы</h3>
+        <p>Спикеры из США, Британии, Мексики. Настоящий акцент, живые реакции, мемы.</p>
       </div>
       <div class="card">
         <div class="ico">💬</div>
         <h3>Speaking > теория</h3>
-        <p>Можно знать 5000 слов и молчать. Здесь ты просто начинаешь говорить. Мозг перестраивается сам.</p>
+        <p>Можно знать кучу слов и молчать. Здесь ты просто начинаешь говорить.</p>
       </div>
       <div class="card">
         <div class="ico">🔥</div>
-        <h3>Без cringe-атмосферы</h3>
-        <p>Никто не будет публично разбирать твои ошибки. Можно шутить, ошибаться и двигаться дальше.</p>
+        <h3>Без cringe</h3>
+        <p>Никто не разбирает ошибки на публику. Можно шутить, ошибаться и идти дальше.</p>
       </div>
       <div class="card">
         <div class="ico">🧠</div>
-        <h3>Темы, которые не бесят</h3>
-        <p>Travel, tech, фильмы, мемы, жизнь. Не «расскажите о своём хобби» в стиле 2008.</p>
+        <h3>Темы, которые заходят</h3>
+        <p>Travel, tech, фильмы, мемы. Не «расскажите о своём хобби» из учебника.</p>
       </div>
       <div class="card">
         <div class="ico">⚡</div>
         <h3>Просто зашёл и говоришь</h3>
-        <p>Zoom-ссылка → speaking комната. Без приложений, без квестов «где мой пароль».</p>
+        <p>Zoom-ссылка → speaking комната. Без лишних приложений и настроек.</p>
       </div>
     </div>
   </div>
@@ -341,7 +354,7 @@ footer {
         <div class="room-tag">01</div>
         <div class="ico">🌍</div>
         <h3>Travel & Stories</h3>
-        <p>Истории, поездки, «а вот однажды в…». Легко заговорить, даже если обычно молчишь.</p>
+        <p>Истории, поездки, «а вот однажды…». Легко заговорить даже если обычно молчишь.</p>
       </div>
       <div class="card">
         <div class="room-tag">02</div>
@@ -353,7 +366,7 @@ footer {
         <div class="room-tag">03</div>
         <div class="ico">🎬</div>
         <h3>Movies, Memes & Life</h3>
-        <p>Фильмы, мемы, быт. Самая расслабленная комната. Здесь можно просто прикалываться.</p>
+        <p>Фильмы, мемы, быт. Самая расслабленная комната — здесь можно просто прикалываться.</p>
       </div>
     </div>
   </div>
@@ -362,20 +375,20 @@ footer {
 <section id="speakers" class="speakers-section">
   <div class="container">
     <h2 class="section-title">Спикеры</h2>
-    <p class="section-sub">Люди, с которыми ты будешь говорить. Не роботы.</p>
+    <p class="section-sub">Лесик знакомит тебя с ними лично.</p>
     <div class="grid-3">
       <div class="card speaker">
         <div class="speaker-av">👨‍🎤</div>
         <h3>Alex</h3>
         <div class="from">🇺🇸 California</div>
-        <p>Спокойный, с юмором. Куча историй. Хороший вариант для старта.</p>
+        <p>Спокойный, с юмором. Куча историй. Хороший старт.</p>
         <div class="tags"><span>Travel</span><span>Stories</span><span>Chill</span></div>
       </div>
       <div class="card speaker">
         <div class="speaker-av">👩‍💻</div>
         <h3>Emma</h3>
         <div class="from">🇬🇧 London</div>
-        <p>Быстрая, умная, с британским сарказмом. Tech и сериалы — её зона.</p>
+        <p>Быстрая, с британским сарказмом. Tech и сериалы — её зона.</p>
         <div class="tags"><span>Tech</span><span>Series</span><span>British</span></div>
       </div>
       <div class="card speaker">
@@ -394,14 +407,14 @@ footer {
     <div class="lesik-block">
       <div class="lesik-emoji">🦊</div>
       <div>
-        <h2>Лесик — не маскот для детей</h2>
-        <p>Он проводит тебя по сайту, знакомит со спикерами и появляется на созвонах. Меньше «не бойся», больше «давай уже говорить».</p>
-        <p>Если коротко: гид, который знает, как это работает, и не будет разжёвывать очевидное.</p>
+        <h2>Лесик — твой гид</h2>
+        <p>Он встречает на сайте, проводит по speaking комнатам, знакомит со спикерами и остаётся с тобой на созвоне.</p>
+        <p>Меньше теории — больше движения. Лесик показывает, куда идти, и ты просто начинаешь говорить.</p>
         <div class="chips">
-          <span class="chip">Проводник</span>
+          <span class="chip">Гид по комнатам</span>
           <span class="chip">Знакомит со спикерами</span>
-          <span class="chip">Без сюсюканья</span>
-          <span class="chip">Мемы в комплекте</span>
+          <span class="chip">На каждом созвоне</span>
+          <span class="chip">С мемами</span>
         </div>
       </div>
     </div>
@@ -451,7 +464,7 @@ footer {
 <section id="pricing">
   <div class="container">
     <h2 class="section-title">Цены</h2>
-    <p class="section-sub">Без подписок «навсегда». Бери сколько нужно.</p>
+    <p class="section-sub">Бери сколько нужно. Без лишних подписок.</p>
     <div class="prices">
       <div class="price-card">
         <h3>Разовый</h3>
@@ -500,15 +513,15 @@ footer {
 </section>
 
 <section class="cta container">
-  <h2>Хватит готовиться. Пора говорить.</h2>
-  <p>Выбери комнату, зайди на созвон, начни.</p>
+  <h2>Выбери комнату. Зайди. Говори.</h2>
+  <p>Лесик уже в speaking комнате.</p>
   <a href="#meets" class="btn">Записаться</a>
 </section>
 
 <footer>
   <div class="container">
     <div class="footer-logo">🦊 LESICHI</div>
-    <div class="footer-tag">Speaking club · groups of 6 · real foreigners</div>
+    <div class="footer-tag">Speaking club · groups of 6 · real foreigners · Лесик — гид</div>
     <div class="footer-links">
       <a href="#why">Зачем</a>
       <a href="#rooms">Комнаты</a>
