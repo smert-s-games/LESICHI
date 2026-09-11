@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LESICHI — Перехитри языковой барьер ⏩ Online Speaking Club</title>
-<meta name="description" content="Международный speaking club в группах до 6 человек с иностранцами. Перехитри языковой барьер вместе с лисом Лесиком!">
+<meta name="description" content="Международный speaking club в группах до 6 человек с иностранцами. Лесик — твой проводник. Перехитри языковой барьер!">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
@@ -24,15 +24,8 @@
   --card-shadow: 0 20px 50px rgba(255, 107, 0, 0.12);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Nunito', sans-serif;
@@ -43,14 +36,10 @@ body {
   position: relative;
 }
 
-/* ========== FOX PAWS BACKGROUND ========== */
 body::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   z-index: -1;
   opacity: 0.07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23FF6B00'%3E%3Ccircle cx='30' cy='25' r='8'/%3E%3Ccircle cx='50' cy='18' r='7'/%3E%3Ccircle cx='68' cy='25' r='8'/%3E%3Ccircle cx='42' cy='38' r='10'/%3E%3Ccircle cx='55' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
@@ -64,892 +53,388 @@ body::before {
   100% { background-position: 140px 140px; }
 }
 
-.container {
-  width: 92%;
-  max-width: 1180px;
-  margin: 0 auto;
-}
+.container { width: 92%; max-width: 1180px; margin: 0 auto; }
 
-/* ========== NAV ========== */
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  position: fixed; top: 0; left: 0; width: 100%;
   background: rgba(255, 248, 240, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 107, 0, 0.1);
   z-index: 1000;
-  transition: all 0.3s ease;
 }
 
 .nav-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   padding: 16px 0;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-weight: 900;
-  font-size: 26px;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; font-weight: 900; font-size: 26px;
   color: var(--orange);
-  letter-spacing: -0.5px;
 }
 
-.logo-icon {
-  font-size: 34px;
-  animation: logoWiggle 3s ease-in-out infinite;
-}
+.logo-icon { font-size: 34px; animation: logoWiggle 3s ease-in-out infinite; }
 
 @keyframes logoWiggle {
   0%, 100% { transform: rotate(-5deg); }
   50% { transform: rotate(5deg); }
 }
 
-.nav-links {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
+.nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 700;
-  font-size: 15px;
+  text-decoration: none; color: var(--text); font-weight: 700; font-size: 15px;
   transition: color 0.2s;
 }
-
-.nav-links a:hover {
-  color: var(--orange);
-}
+.nav-links a:hover { color: var(--orange); }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 14px 28px;
   background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 15px;
-  text-decoration: none;
-  cursor: pointer;
+  color: white; border: none; border-radius: 50px;
+  font-weight: 800; font-size: 15px; text-decoration: none; cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 8px 25px rgba(255, 107, 0, 0.35);
 }
+.btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 35px rgba(255, 107, 0, 0.45); }
+.btn-dark { background: linear-gradient(135deg, var(--brown), var(--dark)); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+.btn-outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); box-shadow: none; }
+.btn-outline:hover { background: var(--orange); color: white; }
+.btn-white { background: white; color: var(--orange); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.btn-white:hover { transform: translateY(-3px) scale(1.03); }
 
-.btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 14px 35px rgba(255, 107, 0, 0.45);
-}
-
-.btn-dark {
-  background: linear-gradient(135deg, var(--brown), var(--dark));
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--orange);
-  color: var(--orange);
-  box-shadow: none;
-}
-
-.btn-outline:hover {
-  background: var(--orange);
-  color: white;
-}
-
-.btn-white {
-  background: white;
-  color: var(--orange);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.btn-white:hover {
-  transform: translateY(-3px) scale(1.03);
-}
-
-/* ========== HERO ========== */
-.hero {
-  padding: 160px 0 100px;
-  position: relative;
-}
-
+.hero { padding: 160px 0 80px; }
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 50px;
-  align-items: center;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: linear-gradient(135deg, #FFF0E0, #FFE0C0);
-  color: var(--orange-dark);
-  padding: 8px 18px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 13px;
-  margin-bottom: 24px;
+  color: var(--orange-dark); padding: 8px 18px; border-radius: 50px;
+  font-weight: 800; font-size: 13px; margin-bottom: 24px;
   border: 1px solid rgba(255,107,0,0.2);
 }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(42px, 6vw, 68px);
-  font-weight: 800;
-  line-height: 1.12;
-  color: var(--dark);
-  margin-bottom: 20px;
+  font-size: clamp(42px, 6vw, 64px); font-weight: 800; line-height: 1.12;
+  color: var(--dark); margin-bottom: 20px;
 }
-
 .hero h1 span {
   background: linear-gradient(135deg, var(--orange), #FF9A3C);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-.hero-sub {
-  font-size: 20px;
-  color: var(--muted);
-  margin-bottom: 12px;
-  max-width: 520px;
-}
-
+.hero-sub { font-size: 19px; color: var(--muted); margin-bottom: 12px; max-width: 520px; }
 .hero-slogan {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--orange);
-  margin-bottom: 36px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 20px; font-weight: 800; color: var(--orange);
+  margin-bottom: 32px; display: flex; align-items: center; gap: 10px;
 }
+.hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 36px; }
 
-.hero-btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 40px;
-}
-
-.hero-trust {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.avatars {
-  display: flex;
-}
-
+.hero-trust { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.avatars { display: flex; }
 .avatars span {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   background: linear-gradient(135deg, var(--orange-light), var(--orange));
-  border: 3px solid white;
-  margin-left: -12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
+  border: 3px solid white; margin-left: -12px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
 }
+.avatars span:first-child { margin-left: 0; }
+.trust-text { font-size: 14px; color: var(--muted); font-weight: 600; }
+.trust-text strong { color: var(--text); }
 
-.avatars span:first-child {
-  margin-left: 0;
-}
-
-.trust-text {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.trust-text strong {
-  color: var(--text);
-}
-
-/* Fox mascot */
-.fox-stage {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+.fox-stage { position: relative; display: flex; justify-content: center; align-items: center; }
 .fox-circle {
-  width: 340px;
-  height: 340px;
+  width: 320px; height: 320px;
   background: linear-gradient(145deg, #FFE8D6, #FFD4B0);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 30px 60px rgba(255, 107, 0, 0.2);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  position: relative; box-shadow: 0 30px 60px rgba(255, 107, 0, 0.2);
   animation: float 5s ease-in-out infinite;
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-18px); }
 }
-
-.fox-emoji {
-  font-size: 180px;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
-  z-index: 2;
-}
-
+.fox-emoji { font-size: 160px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15)); z-index: 2; }
 .fox-bubble {
-  position: absolute;
-  top: 20px;
-  right: -10px;
-  background: white;
-  padding: 12px 18px;
-  border-radius: 20px 20px 20px 4px;
-  font-weight: 800;
-  font-size: 15px;
+  position: absolute; top: 15px; right: -15px;
+  background: white; padding: 12px 18px;
+  border-radius: 20px 20px 20px 4px; font-weight: 800; font-size: 14px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  animation: bubblePop 4s ease-in-out infinite;
-  z-index: 3;
+  animation: bubblePop 4s ease-in-out infinite; z-index: 3;
 }
-
 @keyframes bubblePop {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
-
-.floating-paw {
-  position: absolute;
-  font-size: 28px;
-  opacity: 0.5;
-  animation: pawFloat 6s ease-in-out infinite;
-}
-
-.paw1 { top: 10%; left: 5%; animation-delay: 0s; }
-.paw2 { top: 60%; right: 0%; animation-delay: 1.5s; }
-.paw3 { bottom: 15%; left: 15%; animation-delay: 3s; }
-
+.floating-paw { position: absolute; font-size: 26px; opacity: 0.5; animation: pawFloat 6s ease-in-out infinite; }
+.paw1 { top: 10%; left: 5%; }
+.paw2 { top: 55%; right: 0%; animation-delay: 1.5s; }
+.paw3 { bottom: 12%; left: 12%; animation-delay: 3s; }
 @keyframes pawFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
   50% { transform: translateY(-20px) rotate(15deg); opacity: 0.7; }
 }
 
-/* ========== STATS ========== */
-.stats {
-  padding: 40px 0 80px;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
+.stats { padding: 30px 0 70px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .stat-card {
-  background: white;
-  border-radius: 24px;
-  padding: 32px 20px;
-  text-align: center;
-  box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255,107,0,0.08);
+  background: white; border-radius: 22px; padding: 28px 18px; text-align: center;
+  box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.08);
   transition: transform 0.3s;
 }
+.stat-card:hover { transform: translateY(-6px); }
+.stat-num { font-size: 40px; font-weight: 900; color: var(--orange); line-height: 1; margin-bottom: 6px; }
+.stat-label { font-size: 14px; font-weight: 700; color: var(--muted); }
 
-.stat-card:hover {
-  transform: translateY(-6px);
-}
-
-.stat-num {
-  font-size: 42px;
-  font-weight: 900;
-  color: var(--orange);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.stat-label {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--muted);
-}
-
-/* ========== SECTIONS ========== */
-section {
-  padding: 90px 0;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 55px;
-}
-
+section { padding: 85px 0; }
+.section-header { text-align: center; margin-bottom: 50px; }
 .section-header .eyebrow {
-  display: inline-block;
-  background: rgba(255,107,0,0.1);
-  color: var(--orange);
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 13px;
-  margin-bottom: 14px;
+  display: inline-block; background: rgba(255,107,0,0.1); color: var(--orange);
+  padding: 6px 16px; border-radius: 50px; font-weight: 800; font-size: 13px; margin-bottom: 14px;
 }
-
 .section-header h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 800;
-  color: var(--dark);
-  margin-bottom: 14px;
+  font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; color: var(--dark); margin-bottom: 12px;
 }
+.section-header p { font-size: 17px; color: var(--muted); max-width: 560px; margin: 0 auto; }
 
-.section-header p {
-  font-size: 18px;
-  color: var(--muted);
-  max-width: 560px;
-  margin: 0 auto;
+/* GUIDE / ROOMS */
+.guide-banner {
+  background: linear-gradient(135deg, #FFF0E5, #FFE8D6);
+  border-radius: 24px; padding: 28px 32px;
+  display: flex; align-items: center; gap: 20px; margin-bottom: 50px;
+  border: 1px solid rgba(255,107,0,0.15);
 }
+.guide-banner .fox-mini { font-size: 52px; flex-shrink: 0; }
+.guide-banner p { font-size: 16px; font-weight: 700; color: var(--dark); margin: 0; }
+.guide-banner span { color: var(--orange); }
 
-/* ========== HOW IT WORKS ========== */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+.rooms-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
 }
-
-.feature-card {
-  background: white;
-  border-radius: 28px;
-  padding: 36px 28px;
-  box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255,107,0,0.06);
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
+.room-card {
+  background: white; border-radius: 26px; padding: 32px 26px;
+  box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
+  transition: all 0.3s; position: relative; overflow: hidden;
 }
-
-.feature-card:hover {
+.room-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 25px 50px rgba(255,107,0,0.18);
 }
+.room-num {
+  position: absolute; top: 16px; right: 18px;
+  font-size: 13px; font-weight: 800; color: var(--orange);
+  background: rgba(255,107,0,0.1); padding: 4px 12px; border-radius: 50px;
+}
+.room-icon {
+  width: 60px; height: 60px; background: linear-gradient(135deg, #FFE8D6, #FFD4B0);
+  border-radius: 18px; display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin-bottom: 18px;
+}
+.room-card h3 { font-size: 19px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+.room-card p { color: var(--muted); font-size: 14.5px; }
 
-.feature-icon {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #FFE8D6, #FFD4B0);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  margin-bottom: 20px;
+/* SPEAKERS */
+.speakers-section { background: white; }
+.speakers-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.speaker-card {
+  background: var(--cream); border-radius: 26px; padding: 28px 24px;
+  text-align: center; border: 1px solid rgba(255,107,0,0.1);
+  transition: all 0.3s;
+}
+.speaker-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--orange);
+  box-shadow: 0 15px 35px rgba(255,107,0,0.12);
+}
+.speaker-avatar {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange-light), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px; margin: 0 auto 16px;
+  border: 4px solid white; box-shadow: 0 8px 20px rgba(255,107,0,0.2);
+}
+.speaker-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; color: var(--dark); }
+.speaker-from { font-size: 13px; font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+.speaker-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.speaker-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px; }
+.speaker-tags span {
+  background: white; padding: 4px 10px; border-radius: 50px;
+  font-size: 12px; font-weight: 700; color: var(--text);
 }
 
-.feature-card h3 {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  color: var(--dark);
-}
-
-.feature-card p {
-  color: var(--muted);
-  font-size: 15px;
-}
-
-/* ========== LESIK CHARACTER ========== */
+/* LESIK GUIDE */
 .lesik-section {
   background: linear-gradient(180deg, #FFF0E5 0%, var(--cream) 100%);
-  position: relative;
-  overflow: hidden;
 }
-
 .lesik-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 50px;
-  align-items: center;
+  display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 45px; align-items: center;
 }
-
 .lesik-fox {
-  font-size: 220px;
-  text-align: center;
+  font-size: 200px; text-align: center;
   animation: float 4.5s ease-in-out infinite;
   filter: drop-shadow(0 20px 30px rgba(255,107,0,0.25));
 }
-
 .lesik-content h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 40px;
-  font-weight: 800;
-  margin-bottom: 16px;
-  color: var(--dark);
+  font-size: 36px; font-weight: 800; margin-bottom: 14px; color: var(--dark);
 }
-
-.lesik-content p {
-  font-size: 17px;
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-
-.lesik-traits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
-}
-
+.lesik-content p { font-size: 16.5px; color: var(--muted); margin-bottom: 16px; }
+.lesik-traits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .trait {
-  background: white;
-  padding: 10px 18px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 14px;
+  background: white; padding: 9px 16px; border-radius: 50px;
+  font-weight: 700; font-size: 13.5px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.06);
   border: 1px solid rgba(255,107,0,0.1);
 }
 
-/* ========== EVENTS / MEETS ========== */
-.events-section {
-  background: white;
-}
-
-.events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
+/* EVENTS */
+.events-list { display: flex; flex-direction: column; gap: 16px; }
 .event-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--cream);
-  border-radius: 24px;
-  padding: 26px 30px;
-  border: 1px solid rgba(255,107,0,0.1);
-  transition: all 0.3s;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--cream); border-radius: 22px; padding: 24px 28px;
+  border: 1px solid rgba(255,107,0,0.1); transition: all 0.3s; gap: 18px; flex-wrap: wrap;
 }
-
 .event-card:hover {
   border-color: var(--orange);
   box-shadow: 0 12px 30px rgba(255,107,0,0.12);
-  transform: translateX(6px);
+  transform: translateX(5px);
 }
-
-.event-info h3 {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  color: var(--dark);
-}
-
-.event-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.event-meta span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
+.event-info h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; color: var(--dark); }
+.event-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13.5px; color: var(--muted); font-weight: 600; }
 .spots {
-  background: #FEF3C7;
-  color: #B45309;
-  padding: 4px 12px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 13px;
+  background: #FEF3C7; color: #B45309; padding: 3px 11px; border-radius: 50px;
+  font-weight: 800; font-size: 12.5px;
 }
+.spots.hot { background: #FEE2E2; color: #DC2626; animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-.spots.hot {
-  background: #FEE2E2;
-  color: #DC2626;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-/* ========== PRICING ========== */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: stretch;
-}
-
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .price-card {
-  background: white;
-  border-radius: 28px;
-  padding: 40px 28px;
-  text-align: center;
-  box-shadow: var(--card-shadow);
-  border: 2px solid transparent;
-  position: relative;
+  background: white; border-radius: 26px; padding: 36px 24px; text-align: center;
+  box-shadow: var(--card-shadow); border: 2px solid transparent; position: relative;
   transition: all 0.3s;
 }
-
-.price-card:hover {
-  transform: translateY(-8px);
-}
-
+.price-card:hover { transform: translateY(-8px); }
 .price-card.popular {
-  border-color: var(--orange);
-  transform: scale(1.04);
+  border-color: var(--orange); transform: scale(1.03);
   box-shadow: 0 25px 50px rgba(255,107,0,0.2);
 }
-
-.price-card.popular:hover {
-  transform: scale(1.06) translateY(-4px);
-}
-
+.price-card.popular:hover { transform: scale(1.05) translateY(-4px); }
 .popular-badge {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
   background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: white;
-  padding: 6px 18px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 12px;
-  white-space: nowrap;
+  color: white; padding: 5px 16px; border-radius: 50px;
+  font-weight: 800; font-size: 12px; white-space: nowrap;
 }
-
-.price-card h3 {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 8px;
-  color: var(--dark);
-}
-
-.price {
-  font-size: 52px;
-  font-weight: 900;
-  color: var(--orange);
-  line-height: 1;
-  margin: 16px 0 6px;
-}
-
-.price span {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.price-desc {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-.price-features {
-  list-style: none;
-  text-align: left;
-  margin-bottom: 28px;
-}
-
+.price-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; color: var(--dark); }
+.price { font-size: 48px; font-weight: 900; color: var(--orange); line-height: 1; margin: 14px 0 6px; }
+.price span { font-size: 18px; font-weight: 700; }
+.price-desc { color: var(--muted); font-size: 13.5px; margin-bottom: 22px; }
+.price-features { list-style: none; text-align: left; margin-bottom: 24px; }
 .price-features li {
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 7px 0; font-size: 13.5px; font-weight: 600; color: var(--text);
+  display: flex; align-items: center; gap: 9px;
 }
+.price-features li::before { content: '\1F43E'; font-size: 13px; }
 
-.price-features li::before {
-  content: '🐾';
-  font-size: 14px;
-}
-
-/* ========== PROMO BANNER ========== */
 .promo {
   background: linear-gradient(135deg, #FF6B00, #FF9A3C);
-  border-radius: 28px;
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  color: white;
-  margin-top: 50px;
-  position: relative;
-  overflow: hidden;
+  border-radius: 26px; padding: 36px; display: flex; justify-content: space-between;
+  align-items: center; gap: 28px; flex-wrap: wrap; color: white; margin-top: 45px;
+  position: relative; overflow: hidden;
 }
-
 .promo::before {
-  content: '🐾';
-  position: absolute;
-  font-size: 180px;
-  opacity: 0.1;
-  right: -20px;
-  bottom: -40px;
-  transform: rotate(-20deg);
+  content: '\1F43E'; position: absolute; font-size: 160px; opacity: 0.1;
+  right: -20px; bottom: -35px; transform: rotate(-20deg);
 }
+.promo h3 { font-size: 26px; font-weight: 900; margin-bottom: 6px; }
+.promo p { font-size: 15px; opacity: 0.95; }
 
-.promo h3 {
-  font-size: 28px;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.promo p {
-  font-size: 16px;
-  opacity: 0.95;
-}
-
-/* ========== TESTIMONIALS ========== */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .review-card {
-  background: white;
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255,107,0,0.06);
+  background: white; border-radius: 22px; padding: 26px;
+  box-shadow: var(--card-shadow); border: 1px solid rgba(255,107,0,0.06);
 }
-
-.review-stars {
-  color: #FBBF24;
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.review-text {
-  font-size: 15px;
-  color: var(--text);
-  margin-bottom: 18px;
-  font-style: italic;
-}
-
-.review-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
+.review-stars { color: #FBBF24; font-size: 17px; margin-bottom: 10px; }
+.review-text { font-size: 14.5px; color: var(--text); margin-bottom: 16px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 11px; }
 .review-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 42px; height: 42px; border-radius: 50%;
   background: linear-gradient(135deg, var(--orange-light), var(--orange));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
+.review-name { font-weight: 800; font-size: 14.5px; }
+.review-role { font-size: 12.5px; color: var(--muted); }
 
-.review-name {
-  font-weight: 800;
-  font-size: 15px;
-}
-
-.review-role {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* ========== CTA ========== */
 .cta {
   background: linear-gradient(135deg, var(--brown), var(--dark));
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  position: relative;
-  overflow: hidden;
+  color: white; text-align: center; padding: 90px 20px; position: relative; overflow: hidden;
 }
-
 .cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='25' cy='20' r='6'/%3E%3Ccircle cx='42' cy='14' r='5'/%3E%3Ccircle cx='57' cy='20' r='6'/%3E%3Ccircle cx='35' cy='32' r='8'/%3E%3Ccircle cx='48' cy='35' r='4'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 100px 100px;
 }
-
 .cta h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
-  margin-bottom: 16px;
-  position: relative;
+  font-size: clamp(30px, 5vw, 48px); font-weight: 800; margin-bottom: 14px; position: relative;
 }
+.cta p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; position: relative; }
+.cta .btn { position: relative; }
 
-.cta p {
-  font-size: 19px;
-  opacity: 0.9;
-  margin-bottom: 36px;
-  position: relative;
-}
-
-.cta .btn {
-  position: relative;
-}
-
-/* ========== FOOTER ========== */
 footer {
-  background: var(--dark);
-  color: white;
-  padding: 60px 0 30px;
-  text-align: center;
+  background: var(--dark); color: white; padding: 55px 0 28px; text-align: center;
 }
+.footer-logo { font-size: 30px; font-weight: 900; color: var(--orange); margin-bottom: 10px; }
+.footer-tag { color: rgba(255,255,255,0.6); margin-bottom: 22px; }
+.footer-links { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; margin-bottom: 26px; }
+.footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.footer-links a:hover { color: var(--orange); }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 18px; }
 
-.footer-logo {
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--orange);
-  margin-bottom: 12px;
-}
-
-.footer-tag {
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 24px;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.footer-links a {
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover {
-  color: var(--orange);
-}
-
-.footer-copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 20px;
-}
-
-/* ========== MOBILE ========== */
 @media (max-width: 960px) {
-  .hero-grid,
-  .lesik-grid,
-  .features-grid,
-  .stats-grid,
-  .pricing-grid,
-  .reviews-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding-top: 130px;
-    text-align: center;
-  }
-
-  .hero-sub,
-  .hero-slogan {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-btns {
-    justify-content: center;
-  }
-
-  .hero-trust {
-    justify-content: center;
-  }
-
-  .fox-circle {
-    width: 260px;
-    height: 260px;
-  }
-
-  .fox-emoji {
-    font-size: 130px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .price-card.popular {
-    transform: none;
-  }
-
-  .price-card.popular:hover {
-    transform: translateY(-8px);
-  }
-
-  .event-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .event-meta {
-    justify-content: center;
-  }
-
-  .promo {
-    text-align: center;
-    justify-content: center;
-  }
+  .hero-grid, .lesik-grid, .rooms-grid, .speakers-grid,
+  .stats-grid, .pricing-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 130px; text-align: center; }
+  .hero-sub, .hero-slogan { margin-left: auto; margin-right: auto; }
+  .hero-btns, .hero-trust { justify-content: center; }
+  .fox-circle { width: 250px; height: 250px; }
+  .fox-emoji { font-size: 120px; }
+  .nav-links { display: none; }
+  .price-card.popular { transform: none; }
+  .price-card.popular:hover { transform: translateY(-8px); }
+  .event-card { flex-direction: column; text-align: center; }
+  .event-meta { justify-content: center; }
+  .promo { text-align: center; justify-content: center; }
+  .guide-banner { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <span class="logo-icon">🦊</span>
+      <span class="logo-icon">\ud83e\udd8a</span>
       <span>LESICHI</span>
     </a>
     <div class="nav-links">
-      <a href="#how">Как это работает</a>
-      <a href="#lesik">Лесик</a>
-      <a href="#meets">Встречи</a>
-      <a href="#pricing">Цены</a>
-      <a href="#reviews">Отзывы</a>
+      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
+      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
+      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
+      <a href="#meets">\u0412\u0441\u0442\u0440\u0435\u0447\u0438</a>
+      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
     </div>
-    <a href="#meets" class="btn">🐾 Записаться</a>
+    <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
   </div>
 </nav>
 
@@ -957,33 +442,28 @@ footer {
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <div class="badge">🔥 Самый тёплый speaking club в 2026</div>
-      <h1>Перехитри<br><span>языковой барьер</span></h1>
-      <p class="hero-sub">Онлайн speaking club в маленьких группах до 6 человек. Общаемся с иностранцами из разных стран без скучных учебников.</p>
-      <div class="hero-slogan">🦊 Лиса Лесик уже ждёт тебя на созвоне!</div>
+      <div class="badge">\ud83d\udd25 \u0421\u0430\u043c\u044b\u0439 \u0442\u0451\u043f\u043b\u044b\u0439 speaking club \u0432 2026</div>
+      <h1>\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438<br><span>\u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440</span></h1>
+      <p class="hero-sub">\u041e\u043d\u043b\u0430\u0439\u043d speaking club \u0432 \u043c\u0430\u043b\u0435\u043d\u044c\u043a\u0438\u0445 \u0433\u0440\u0443\u043f\u043f\u0430\u0445 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a. \u041e\u0431\u0449\u0430\u0435\u043c\u0441\u044f \u0441 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u0446\u0430\u043c\u0438 \u0438\u0437 \u0440\u0430\u0437\u043d\u044b\u0445 \u0441\u0442\u0440\u0430\u043d.</p>
+      <div class="hero-slogan">\ud83e\udd8a \u041b\u0435\u0441\u0438\u043a \u2014 \u0442\u0432\u043e\u0439 \u043b\u0438\u0447\u043d\u044b\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a \u043f\u043e \u043a\u043b\u0443\u0431\u0443</div>
       <div class="hero-btns">
-        <a href="#meets" class="btn">🐾 Записаться на встречу</a>
-        <a href="https://zoom.us/j/1234567890" target="_blank" class="btn btn-dark">💻 Войти в Zoom сейчас</a>
+        <a href="#rooms" class="btn">\ud83d\udc3e \u041d\u0430\u0447\u0430\u0442\u044c \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u0435</a>
+        <a href="#speakers" class="btn btn-dark">\ud83c\udf0d \u041f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u0438\u0442\u044c\u0441\u044f \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438</a>
       </div>
       <div class="hero-trust">
         <div class="avatars">
-          <span>👩</span>
-          <span>👨</span>
-          <span>👩‍🦰</span>
-          <span>👨‍🦱</span>
-          <span>🦊</span>
+          <span>\ud83d\udc69</span><span>\ud83d\udc68</span><span>\ud83d\udc69\u200d\ud83e\uddb0</span><span>\ud83d\udc68\u200d\ud83e\uddb1</span><span>\ud83e\udd8a</span>
         </div>
-        <div class="trust-text"><strong>150+</strong> участников уже перехитрили барьер</div>
+        <div class="trust-text"><strong>150+</strong> \u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u043e\u0432 \u0443\u0436\u0435 \u043f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438\u043b\u0438 \u0431\u0430\u0440\u044c\u0435\u0440</div>
       </div>
     </div>
-
     <div class="fox-stage">
-      <div class="floating-paw paw1">🐾</div>
-      <div class="floating-paw paw2">🐾</div>
-      <div class="floating-paw paw3">🐾</div>
+      <div class="floating-paw paw1">\ud83d\udc3e</div>
+      <div class="floating-paw paw2">\ud83d\udc3e</div>
+      <div class="floating-paw paw3">\ud83d\udc3e</div>
       <div class="fox-circle">
-        <div class="fox-emoji">🦊</div>
-        <div class="fox-bubble">Let's speak! 🗣️</div>
+        <div class="fox-emoji">\ud83e\udd8a</div>
+        <div class="fox-bubble">\u042f \u043f\u0440\u043e\u0432\u0435\u0434\u0443 \u0442\u0435\u0431\u044f! \ud83d\udc47</div>
       </div>
     </div>
   </div>
@@ -993,65 +473,92 @@ footer {
 <section class="stats">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-num">150+</div>
-        <div class="stat-label">участников</div>
+      <div class="stat-card"><div class="stat-num">150+</div><div class="stat-label">\u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u043e\u0432</div></div>
+      <div class="stat-card"><div class="stat-num">17</div><div class="stat-label">\u0441\u0442\u0440\u0430\u043d</div></div>
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">\u0447\u0435\u043b\u043e\u0432\u0435\u043a \u0432 \u0433\u0440\u0443\u043f\u043f\u0435</div></div>
+      <div class="stat-card"><div class="stat-num">4.9</div><div class="stat-label">\u0441\u0440\u0435\u0434\u043d\u044f\u044f \u043e\u0446\u0435\u043d\u043a\u0430</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS (\u041b\u0435\u0441\u0438\u043a \u043a\u0430\u043a \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a) -->
+<section id="rooms">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">\ud83d\udc3e \u041a\u043e\u043c\u043d\u0430\u0442\u044b LESICHI</div>
+      <h2>\u041b\u0435\u0441\u0438\u043a \u043f\u0440\u043e\u0432\u043e\u0434\u0438\u0442 \u0442\u0435\u0431\u044f \u043f\u043e \u043a\u043b\u0443\u0431\u0443</h2>
+      <p>\u0417\u0430\u0445\u043e\u0434\u0438 \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u044b, \u0437\u043d\u0430\u043a\u043e\u043c\u044c\u0441\u044f \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438 \u0438 \u0432\u044b\u0431\u0438\u0440\u0430\u0439, \u043a\u0443\u0434\u0430 \u0445\u043e\u0447\u0435\u0448\u044c \u043f\u043e\u043f\u0430\u0441\u0442\u044c \u0441\u0435\u0433\u043e\u0434\u043d\u044f</p>
+    </div>
+
+    <div class="guide-banner">
+      <div class="fox-mini">\ud83e\udd8a</div>
+      <p>\u041f\u0440\u0438\u0432\u0435\u0442! \u042f \u041b\u0435\u0441\u0438\u043a \u2014 \u0442\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a. \u0421\u0435\u0439\u0447\u0430\u0441 \u043f\u043e\u043a\u0430\u0436\u0443 \u0442\u0435\u0431\u0435 <span>\u0442\u0440\u0438 \u0433\u043b\u0430\u0432\u043d\u044b\u0435 \u043a\u043e\u043c\u043d\u0430\u0442\u044b</span>. \u0412 \u043a\u0430\u0436\u0434\u043e\u0439 \u2014 \u0441\u0432\u043e\u0438 \u0441\u043f\u0438\u043a\u0435\u0440\u044b \u0438 \u0441\u0432\u043e\u044f \u0430\u0442\u043c\u043e\u0441\u0444\u0435\u0440\u0430. \u0412\u044b\u0431\u0438\u0440\u0430\u0439 \u043b\u044e\u0431\u0443\u044e!</p>
+    </div>
+
+    <div class="rooms-grid">
+      <div class="room-card">
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 1</div>
+        <div class="room-icon">\ud83c\udf0d</div>
+        <h3>Travel & Stories</h3>
+        <p>\u0420\u0430\u0441\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u043c \u043f\u0440\u043e \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u043c\u0435\u0447\u0442\u044b \u0438 \u0441\u0430\u043c\u044b\u0435 \u044f\u0440\u043a\u0438\u0435 \u0432\u043f\u0435\u0447\u0430\u0442\u043b\u0435\u043d\u0438\u044f. \u0418\u0434\u0435\u0430\u043b\u044c\u043d\u043e, \u0435\u0441\u043b\u0438 \u043b\u044e\u0431\u0438\u0448\u044c \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u043e \u0436\u0438\u0437\u043d\u0438.</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">17</div>
-        <div class="stat-label">стран</div>
+      <div class="room-card">
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 2</div>
+        <div class="room-icon">\ud83e\udd16</div>
+        <h3>Tech & Future</h3>
+        <p>\u0418\u0418, \u0433\u0430\u0434\u0436\u0435\u0442\u044b, \u0441\u0442\u0430\u0440\u0442\u0430\u043f\u044b \u0438 \u0442\u043e, \u0447\u0442\u043e \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u0432\u0442\u0440\u0430. \u0414\u043b\u044f \u0442\u0435\u0445, \u043a\u0442\u043e \u043b\u044e\u0431\u0438\u0442 \u0441\u043f\u043e\u0440\u0438\u0442\u044c \u0438 \u0444\u0430\u043d\u0442\u0430\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c.</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">6</div>
-        <div class="stat-label">человек в группе</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">4.9</div>
-        <div class="stat-label">средняя оценка</div>
+      <div class="room-card">
+        <div class="room-num">\u041a\u043e\u043c\u043d\u0430\u0442\u0430 3</div>
+        <div class="room-icon">\ud83c\udfac</div>
+        <h3>Movies, Memes & Life</h3>
+        <p>\u0424\u0438\u043b\u044c\u043c\u044b, \u0441\u0435\u0440\u0438\u0430\u043b\u044b, \u043c\u0435\u043c\u044b \u0438 \u043f\u0440\u043e\u0441\u0442\u043e \u0436\u0438\u0437\u043d\u044c. \u0421\u0430\u043c\u0430\u044f \u0440\u0430\u0441\u0441\u043b\u0430\u0431\u043b\u0435\u043d\u043d\u0430\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430 \u2014 \u0437\u0434\u0435\u0441\u044c \u0432\u0441\u0435\u0433\u0434\u0430 \u0441\u043c\u0435\u044e\u0442\u0441\u044f.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
+<!-- SPEAKERS (\u0443\u043f\u043e\u0440 \u043d\u0430 \u0441\u043f\u0438\u043a\u0435\u0440\u043e\u0432) -->
+<section id="speakers" class="speakers-section">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">🐾 Как это работает</div>
-      <h2>Просто. Весело. Эффективно.</h2>
-      <p>Никаких скучных уроков. Только живое общение с реальными людьми из других стран.</p>
+      <div class="eyebrow">\ud83c\udf0d \u041d\u0430\u0448\u0438 \u0441\u043f\u0438\u043a\u0435\u0440\u044b</div>
+      <h2>\u041f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u044c\u0441\u044f \u0441 \u0442\u0435\u043c\u0438, \u0441 \u043a\u0435\u043c \u0431\u0443\u0434\u0435\u0448\u044c \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c</h2>
+      <p>\u041b\u0435\u0441\u0438\u043a \u043b\u0438\u0447\u043d\u043e \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u0442 \u0442\u0435\u0431\u0435 \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430. \u042d\u0442\u043e \u043d\u0435 \u0443\u0447\u0438\u0442\u0435\u043b\u044f \u2014 \u044d\u0442\u043e \u0436\u0438\u0432\u044b\u0435 \u043b\u044e\u0434\u0438 \u0438\u0437 \u0440\u0430\u0437\u043d\u044b\u0445 \u0441\u0442\u0440\u0430\u043d</p>
     </div>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🌍</div>
-        <h3>Иностранцы в каждой группе</h3>
-        <p>Говориш с людьми из США, Европы, Азии и Латинской Америки. Живой язык без акцента «как в учебнике».</p>
+    <div class="guide-banner" style="margin-bottom:40px;">
+      <div class="fox-mini">\ud83e\udd8a</div>
+      <p>\u042d\u0442\u043e \u043c\u043e\u0438 \u0434\u0440\u0443\u0437\u044c\u044f-\u0441\u043f\u0438\u043a\u0435\u0440\u044b. \u041e\u043d\u0438 \u043d\u0435 \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u044f\u044e\u0442 \u043a\u0430\u0436\u0434\u0443\u044e \u043e\u0448\u0438\u0431\u043a\u0443 \u2014 \u043e\u043d\u0438 \u043f\u043e\u043c\u043e\u0433\u0430\u044e\u0442 <span>\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0438 \u043d\u0435 \u0431\u043e\u044f\u0442\u044c\u0441\u044f</span>. \u0412\u044b\u0431\u0438\u0440\u0430\u0439, \u0441 \u043a\u0435\u043c \u0445\u043e\u0447\u0435\u0448\u044c \u043f\u043e\u0437\u043d\u0430\u043a\u043e\u043c\u0438\u0442\u044c\u0441\u044f \u043f\u0435\u0440\u0432\u044b\u043c!</p>
+    </div>
+
+    <div class="speakers-grid">
+      <div class="speaker-card">
+        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udfab</div>
+        <h3>Alex</h3>
+        <div class="speaker-from">\ud83c\uddfa\ud83c\uddf8 \u0418\u0437 \u0421\u0428\u0410 \u00b7 California</div>
+        <p>\u041b\u044e\u0431\u0438\u0442 \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f, \u043a\u043e\u0444\u0435 \u0438 \u0445\u043e\u0440\u043e\u0448\u0438\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u0438. \u0413\u043e\u0432\u043e\u0440\u0438\u0442 \u043f\u0440\u043e\u0441\u0442\u043e \u0438 \u0441 \u044e\u043c\u043e\u0440\u043e\u043c. \u0418\u0434\u0435\u0430\u043b\u0435\u043d \u0434\u043b\u044f \u043f\u0435\u0440\u0432\u043e\u0439 \u0432\u0441\u0442\u0440\u0435\u0447\u0438.</p>
+        <div class="speaker-tags">
+          <span>Travel</span><span>Stories</span><span>Chill</span>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">👥</div>
-        <h3>Максимум 6 человек</h3>
-        <p>Маленькие группы = каждый говорит. Нет «тихих в углу». Ты точно получишь своё время на разговор.</p>
+      <div class="speaker-card">
+        <div class="speaker-avatar">\ud83d\udc69\u200d\ud83d\udcbb</div>
+        <h3>Emma</h3>
+        <div class="speaker-from">\ud83c\uddec\ud83c\udde7 \u0418\u0437 \u0412\u0435\u043b\u0438\u043a\u043e\u0431\u0440\u0438\u0442\u0430\u043d\u0438\u0438 \u00b7 London</div>
+        <p>\u041e\u0431\u043e\u0436\u0430\u0435\u0442 \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438, \u0441\u0435\u0440\u0438\u0430\u043b\u044b \u0438 \u0431\u0440\u0438\u0442\u0430\u043d\u0441\u043a\u0438\u0439 \u044e\u043c\u043e\u0440. \u041f\u043e\u043c\u043e\u0433\u0430\u0435\u0442 \u0440\u0430\u0441\u0441\u043b\u0430\u0431\u0438\u0442\u044c\u0441\u044f \u0434\u0430\u0436\u0435 \u0441\u0430\u043c\u044b\u043c \u0441\u0442\u0435\u0441\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u043c.</p>
+        <div class="speaker-tags">
+          <span>Tech</span><span>Series</span><span>British</span>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3>Интересные темы</h3>
-        <p>Путешествия, фильмы, технологии, еда, мемы, жизнь. Говорим о том, что действительно интересно, а не «моя семья» из учебника.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💻</div>
-        <h3>Только Zoom</h3>
-        <p>Никаких приложений. Заходиш по ссылке, включаешь камеру и начинаешь говорить. Всё.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🦊</div>
-        <h3>Лесик ведёт тебя</h3>
-        <p>Наш лис-маскот Лесик создаёт атмосферу, в которой не стыдно ошибаться. Он сам когда-то тоже боялся говорить 😉</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔥</div>
-        <h3>Быстрый прогресс</h3>
-        <p>94% участников говорят, что через 4–6 встреч уже чувствуют себя гораздо увереннее. Это не магия — это практика.</p>
+      <div class="speaker-card">
+        <div class="speaker-avatar">\ud83d\udc68\u200d\ud83c\udf73</div>
+        <h3>Carlos</h3>
+        <div class="speaker-from">\ud83c\uddf2\ud83c\uddfd \u0418\u0437 \u041c\u0435\u043a\u0441\u0438\u043a\u0438 \u00b7 Mexico City</div>
+        <p>\u042d\u043d\u0435\u0440\u0433\u0438\u044f, \u0435\u0434\u0430, \u043c\u0443\u0437\u044b\u043a\u0430 \u0438 \u0436\u0438\u0437\u043d\u044c. \u0421 \u043d\u0438\u043c \u043d\u0435\u0432\u043e\u0437\u043c\u043e\u0436\u043d\u043e \u043d\u0443\u0434\u0438\u0442\u044c\u0441\u044f. \u041e\u0447\u0435\u043d\u044c \u0442\u0451\u043f\u043b\u044b\u0439 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044e\u0449\u0438\u0439.</p>
+        <div class="speaker-tags">
+          <span>Food</span><span>Life</span><span>Energy</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1060,78 +567,64 @@ footer {
 <!-- LESIK -->
 <section id="lesik" class="lesik-section">
   <div class="container lesik-grid">
-    <div class="lesik-fox">🦊</div>
+    <div class="lesik-fox">\ud83e\udd8a</div>
     <div class="lesik-content">
-      <div class="eyebrow" style="background:rgba(255,107,0,0.15);color:var(--orange);display:inline-block;padding:6px 16px;border-radius:50px;font-weight:800;font-size:13px;margin-bottom:14px;">Наш главный герой</div>
-      <h2>Познакомься — это Лесик!</h2>
-      <p>Лесик — хитрая, добрая и очень разговорчивая лиса. Он сам когда-то стеснялся говорить на английском, а теперь помогает другим перехитрить языковой барьер.</p>
-      <p>Его философия: <strong>«Лучше говорить с ошибками, чем молчать безупречно»</strong>. И он прав.</p>
+      <div class="eyebrow" style="background:rgba(255,107,0,0.15);color:var(--orange);display:inline-block;padding:6px 16px;border-radius:50px;font-weight:800;font-size:13px;margin-bottom:14px;">\u0422\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
+      <h2>\u042f \u041b\u0435\u0441\u0438\u043a. \u042f \u043f\u0440\u043e\u0432\u0435\u0434\u0443 \u0442\u0435\u0431\u044f.</h2>
+      <p>\u042f \u043d\u0435 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0438 \u043d\u0435 \u0441\u0442\u0440\u043e\u0433\u0438\u0439 \u043d\u0430\u0441\u0442\u0430\u0432\u043d\u0438\u043a. \u042f \u2014 \u0442\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a \u043f\u043e LESICHI. \u041f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u044e \u043a\u043e\u043c\u043d\u0430\u0442\u044b, \u0437\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0441\u043f\u0438\u043a\u0435\u0440\u0430\u043c\u0438 \u0438 \u043f\u043e\u043c\u043e\u0433\u0430\u044e \u043d\u0435 \u0431\u043e\u044f\u0442\u044c\u0441\u044f \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c.</p>
+      <p>\u041c\u043e\u044f \u0433\u043b\u0430\u0432\u043d\u0430\u044f \u0444\u0440\u0430\u0437\u0430: <strong>\u00ab\u041b\u0443\u0447\u0448\u0435 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0441 \u043e\u0448\u0438\u0431\u043a\u0430\u043c\u0438, \u0447\u0435\u043c \u043c\u043e\u043b\u0447\u0430\u0442\u044c \u0431\u0435\u0437\u0443\u043f\u0440\u0435\u0447\u043d\u043e\u00bb</strong>.</p>
       <div class="lesik-traits">
-        <div class="trait">🐾 Хитрый как лиса</div>
-        <div class="trait">🗣️ Любит поболтать</div>
-        <div class="trait">🌟 Верит в тебя</div>
-        <div class="trait">🎉 Всегда в настроении</div>
+        <div class="trait">\ud83d\udc3e \u041f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
+        <div class="trait">\ud83d\udde3\ufe0f \u0417\u043d\u0430\u043a\u043e\u043c\u043b\u044e \u0441\u043e \u0432\u0441\u0435\u043c\u0438</div>
+        <div class="trait">\ud83c\udf1f \u0412\u0435\u0440\u044e \u0432 \u0442\u0435\u0431\u044f</div>
+        <div class="trait">\ud83c\udf89 \u0412\u0441\u0435\u0433\u0434\u0430 \u0432 \u043f\u043e\u0437\u0438\u0442\u0438\u0432\u0435</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- MEETS -->
-<section id="meets" class="events-section">
+<section id="meets">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">📅 Ближайшие встречи</div>
-      <h2>Выбери свою встречу</h2>
-      <p>Группы набираются быстро. Лучше забронировать место сейчас.</p>
+      <div class="eyebrow">\ud83d\udcc5 \u0411\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0435 \u0432\u0441\u0442\u0440\u0435\u0447\u0438</div>
+      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u044e \u043a\u043e\u043c\u043d\u0430\u0442\u0443 \u043d\u0430 \u0441\u0435\u0433\u043e\u0434\u043d\u044f</h2>
+      <p>\u041b\u0435\u0441\u0438\u043a \u0443\u0436\u0435 \u0436\u0434\u0451\u0442 \u0442\u0435\u0431\u044f \u0432 \u043e\u0434\u043d\u043e\u0439 \u0438\u0437 \u043a\u043e\u043c\u043d\u0430\u0442</p>
     </div>
 
     <div class="events-list">
       <div class="event-card">
         <div class="event-info">
-          <h3>🌍 Travel Stories & Dream Trips</h3>
+          <h3>\ud83c\udf0d Travel Stories \u2014 \u0441 Alex</h3>
           <div class="event-meta">
-            <span>📅 Пятница, 19:00</span>
-            <span>⏱️ 60 минут</span>
-            <span class="spots hot">Осталось 2 места!</span>
+            <span>\ud83d\udcc5 \u041f\u044f\u0442\u043d\u0438\u0446\u0430, 19:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots hot">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 2 \u043c\u0435\u0441\u0442\u0430!</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
-
       <div class="event-card">
         <div class="event-info">
-          <h3>🤖 Future Tech & AI</h3>
+          <h3>\ud83e\udd16 Future Tech \u2014 \u0441 Emma</h3>
           <div class="event-meta">
-            <span>📅 Суббота, 18:00</span>
-            <span>⏱️ 60 минут</span>
-            <span class="spots">Осталось 4 места</span>
+            <span>\ud83d\udcc5 \u0421\u0443\u0431\u0431\u043e\u0442\u0430, 18:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 4 \u043c\u0435\u0441\u0442\u0430</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
-
       <div class="event-card">
         <div class="event-info">
-          <h3>🎬 Movies, Series & Memes</h3>
+          <h3>\ud83c\udfac Movies & Memes \u2014 \u0441 Carlos</h3>
           <div class="event-meta">
-            <span>📅 Воскресенье, 17:00</span>
-            <span>⏱️ 60 минут</span>
-            <span class="spots">Осталось 3 места</span>
+            <span>\ud83d\udcc5 \u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435, 17:00</span>
+            <span>\u23f1\ufe0f 60 \u043c\u0438\u043d</span>
+            <span class="spots">\u041e\u0441\u0442\u0430\u043b\u043e\u0441\u044c 3 \u043c\u0435\u0441\u0442\u0430</span>
           </div>
         </div>
-        <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">🐾 Записаться</a>
-      </div>
-
-      <div class="event-card">
-        <div class="event-info">
-          <h3>🍴 Food, Culture & Life Hacks</h3>
-          <div class="event-meta">
-            <span>📅 Вторник, 19:30</span>
-            <span>⏱️ 60 минут</span>
-            <span class="spots">Осталось 5 мест</span>
-          </div>
-        </div>
-        <a href="https://zoom.us/j/6677889900" target="_blank" class="btn">🐾 Записаться</a>
+        <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f</a>
       </div>
     </div>
   </div>
@@ -1141,139 +634,85 @@ footer {
 <section id="pricing">
   <div class="container">
     <div class="section-header">
-      <div class="eyebrow">💰 Цены</div>
-      <h2>Выбери свой пакет</h2>
-      <p>Чем больше встреч — тем выгоднее. И да, первая встреча может быть бесплатной 😉</p>
+      <div class="eyebrow">\ud83d\udcb0 \u0426\u0435\u043d\u044b</div>
+      <h2>\u0412\u044b\u0431\u0435\u0440\u0438 \u0441\u0432\u043e\u0439 \u043f\u0430\u043a\u0435\u0442</h2>
+      <p>\u0427\u0435\u043c \u0431\u043e\u043b\u044c\u0448\u0435 \u0432\u0441\u0442\u0440\u0435\u0447 \u2014 \u0442\u0435\u043c \u0432\u044b\u0433\u043e\u0434\u043d\u0435\u0435</p>
     </div>
 
     <div class="pricing-grid">
       <div class="price-card">
-        <h3>Разовая</h3>
+        <h3>\u0420\u0430\u0437\u043e\u0432\u0430\u044f</h3>
         <div class="price">15 <span>BYN</span></div>
-        <div class="price-desc">Для знакомства с клубом</div>
+        <div class="price-desc">\u0414\u043b\u044f \u0437\u043d\u0430\u043a\u043e\u043c\u0441\u0442\u0432\u0430</div>
         <ul class="price-features">
-          <li>1 встреча 60 мин</li>
-          <li>Группа до 6 человек</li>
-          <li>Иностранные спикеры</li>
-          <li>Доступ в Zoom</li>
+          <li>1 \u0432\u0441\u0442\u0440\u0435\u0447\u0430 60 \u043c\u0438\u043d</li>
+          <li>\u0413\u0440\u0443\u043f\u043f\u0430 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</li>
+          <li>\u0416\u0438\u0432\u043e\u0439 \u0441\u043f\u0438\u043a\u0435\u0440</li>
+          <li>\u0414\u043e\u0441\u0442\u0443\u043f \u0432 Zoom</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">Выбрать</a>
+        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
       </div>
-
       <div class="price-card popular">
-        <div class="popular-badge">🔥 Самый выгодный</div>
-        <h3>4 встречи</h3>
+        <div class="popular-badge">\ud83d\udd25 \u0421\u0430\u043c\u044b\u0439 \u0432\u044b\u0433\u043e\u0434\u043d\u044b\u0439</div>
+        <h3>4 \u0432\u0441\u0442\u0440\u0435\u0447\u0438</h3>
         <div class="price">50 <span>BYN</span></div>
-        <div class="price-desc">Экономия 10 BYN + бонус</div>
+        <div class="price-desc">\u042d\u043a\u043e\u043d\u043e\u043c\u0438\u044f + \u0431\u043e\u043d\u0443\u0441</div>
         <ul class="price-features">
-          <li>4 встречи 60 мин</li>
-          <li>Группа до 6 человек</li>
-          <li>Иностранные спикеры</li>
-          <li>Приоритет при записи</li>
-          <li>Мем-пак от Лесика 🦊</li>
+          <li>4 \u0432\u0441\u0442\u0440\u0435\u0447\u0438 60 \u043c\u0438\u043d</li>
+          <li>\u0413\u0440\u0443\u043f\u043f\u0430 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</li>
+          <li>\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u043f\u0440\u0438 \u0437\u0430\u043f\u0438\u0441\u0438</li>
+          <li>\u041c\u0435\u043c-\u043f\u0430\u043a \u043e\u0442 \u041b\u0435\u0441\u0438\u043a\u0430</li>
         </ul>
-        <a href="#meets" class="btn" style="width:100%">Взять пакет</a>
+        <a href="#meets" class="btn" style="width:100%">\u0412\u0437\u044f\u0442\u044c \u043f\u0430\u043a\u0435\u0442</a>
       </div>
-
       <div class="price-card">
-        <h3>8 встреч</h3>
+        <h3>8 \u0432\u0441\u0442\u0440\u0435\u0447</h3>
         <div class="price">90 <span>BYN</span></div>
-        <div class="price-desc">Максимальная выгода</div>
+        <div class="price-desc">\u041c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u0430\u044f \u0432\u044b\u0433\u043e\u0434\u0430</div>
         <ul class="price-features">
-          <li>8 встреч 60 мин</li>
-          <li>Всё из пакета «4 встречи»</li>
-          <li>Личный чат с Лесиком</li>
-          <li>Подарок-сюрприз</li>
+          <li>8 \u0432\u0441\u0442\u0440\u0435\u0447 60 \u043c\u0438\u043d</li>
+          <li>\u0412\u0441\u0451 \u0438\u0437 \u043f\u0430\u043a\u0435\u0442\u0430 \u00ab4 \u0432\u0441\u0442\u0440\u0435\u0447\u0438\u00bb</li>
+          <li>\u041b\u0438\u0447\u043d\u044b\u0439 \u0447\u0430\u0442 \u0441 \u041b\u0435\u0441\u0438\u043a\u043e\u043c</li>
+          <li>\u041f\u043e\u0434\u0430\u0440\u043e\u043a-\u0441\u044e\u0440\u043f\u0440\u0438\u0437</li>
         </ul>
-        <a href="#meets" class="btn btn-outline" style="width:100%">Выбрать</a>
+        <a href="#meets" class="btn btn-outline" style="width:100%">\u0412\u044b\u0431\u0440\u0430\u0442\u044c</a>
       </div>
     </div>
 
-    <!-- PROMO -->
     <div class="promo">
       <div>
-        <h3>🎁 Акция «Первая лапка бесплатно»</h3>
-        <p>Приведи друга — и оба получаете скидку 20% на пакет из 4 встреч. Или просто приходи на первую встречу бесплатно!</p>
+        <h3>\ud83c\udf81 \u0410\u043a\u0446\u0438\u044f \u00ab\u041f\u0435\u0440\u0432\u0430\u044f \u043b\u0430\u043f\u043a\u0430 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e\u00bb</h3>
+        <p>\u041f\u0440\u0438\u0445\u043e\u0434\u0438 \u043d\u0430 \u043f\u0435\u0440\u0432\u0443\u044e \u0432\u0441\u0442\u0440\u0435\u0447\u0443 \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e \u0438\u043b\u0438 \u043f\u0440\u0438\u0432\u0435\u0434\u0438 \u0434\u0440\u0443\u0433\u0430 \u2014 \u043e\u0431\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0435 \u0441\u043a\u0438\u0434\u043a\u0443 20%</p>
       </div>
-      <a href="#meets" class="btn btn-white">Хочу акцию!</a>
+      <a href="#meets" class="btn btn-white">\u0425\u043e\u0447\u0443 \u0430\u043a\u0446\u0438\u044e!</a>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section id="reviews">
-  <div class="container">
-    <div class="section-header">
-      <div class="eyebrow">⭐ Отзывы</div>
-      <h2>Что говорят люди</h2>
-      <p>Реальные отзывы тех, кто уже перехитрил барьер вместе с Лесиком</p>
-    </div>
-
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p class="review-text">«Я всегда стеснялась говорить. На первой встрече Лесик так разрядил атмосферу, что я забыла про страх. Теперь хожу каждую неделю!»</p>
-        <div class="review-author">
-          <div class="review-avatar">👩</div>
-          <div>
-            <div class="review-name">Аня, 24</div>
-            <div class="review-role">Минск · 8 встреч</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p class="review-text">«Группа из 6 человек — идеально. Все успевают поговорить, а не только слушать. И да, лиса очень крутая 🦊»</p>
-        <div class="review-author">
-          <div class="review-avatar">👨</div>
-          <div>
-            <div class="review-name">Дима, 31</div>
-            <div class="review-role">Гродно · 12 встреч</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p class="review-text">«Пришёл «попробовать» и застрял. Теперь уже спокойно говорю с иностранцами. Лесик — лучший маскот всех времён!»</p>
-        <div class="review-author">
-          <div class="review-avatar">👩‍🦰</div>
-          <div>
-            <div class="review-name">Катя, 27</div>
-            <div class="review-role">Брест · 6 встреч</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
+<!-- CTA -->
 <section class="cta">
   <div class="container">
-    <h2>Готов перехитрить барьер?</h2>
-    <p>Лесик уже ждёт тебя на созвоне. Присоединяйся к группе до 6 человек и начни говорить уже сегодня.</p>
+    <h2>\u0413\u043e\u0442\u043e\u0432 \u043f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438\u0442\u044c \u0431\u0430\u0440\u044c\u0435\u0440?</h2>
+    <p>\u041b\u0435\u0441\u0438\u043a \u0443\u0436\u0435 \u0436\u0434\u0451\u0442 \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u0435. \u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u044f\u0439\u0441\u044f \u043a \u0433\u0440\u0443\u043f\u043f\u0435 \u0434\u043e 6 \u0447\u0435\u043b\u043e\u0432\u0435\u043a \u0438 \u043d\u0430\u0447\u043d\u0438 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="#meets" class="btn">🐾 Записаться на встречу</a>
-      <a href="https://zoom.us/j/1234567890" target="_blank" class="btn btn-white">💻 Войти в Zoom</a>
+      <a href="#meets" class="btn">\ud83d\udc3e \u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0432\u0441\u0442\u0440\u0435\u0447\u0443</a>
+      <a href="#speakers" class="btn btn-white">\ud83c\udf0d \u0421\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0441\u043f\u0438\u043a\u0435\u0440\u043e\u0432</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-logo">🦊 LESICHI</div>
-    <div class="footer-tag">Перехитри языковой барьер</div>
+    <div class="footer-logo">\ud83e\udd8a LESICHI</div>
+    <div class="footer-tag">\u041f\u0435\u0440\u0435\u0445\u0438\u0442\u0440\u0438 \u044f\u0437\u044b\u043a\u043e\u0432\u043e\u0439 \u0431\u0430\u0440\u044c\u0435\u0440 \u00b7 \u041b\u0435\u0441\u0438\u043a \u0442\u0432\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043d\u0438\u043a</div>
     <div class="footer-links">
-      <a href="#how">Как это работает</a>
-      <a href="#lesik">Лесик</a>
-      <a href="#meets">Встречи</a>
-      <a href="#pricing">Цены</a>
-      <a href="#reviews">Отзывы</a>
+      <a href="#rooms">\u041a\u043e\u043c\u043d\u0430\u0442\u044b</a>
+      <a href="#speakers">\u0421\u043f\u0438\u043a\u0435\u0440\u044b</a>
+      <a href="#lesik">\u041b\u0435\u0441\u0438\u043a</a>
+      <a href="#meets">\u0412\u0441\u0442\u0440\u0435\u0447\u0438</a>
+      <a href="#pricing">\u0426\u0435\u043d\u044b</a>
     </div>
-    <div class="footer-copy">© 2026 LESICHI Speaking Club · Сделано с 🐾 и любовью к языку</div>
+    <div class="footer-copy">\u00a9 2026 LESICHI Speaking Club \u00b7 \u0421\u0434\u0435\u043b\u0430\u043d\u043e \u0441 \ud83d\udc3e \u0438 \u043b\u044e\u0431\u043e\u0432\u044c\u044e \u043a \u044f\u0437\u044b\u043a\u0443</div>
   </div>
 </footer>
 
