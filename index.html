@@ -9,16 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #FAFAF8;
-  --bg-soft: #F4F2EE;
+  --bg: #FFFBF7;
+  --bg-soft: #FFF3E8;
   --card: #FFFFFF;
-  --accent: #E85D04;
-  --accent-soft: #F48C06;
-  --accent-pale: #FFF4EB;
+  --orange: #FF6B00;
+  --orange-soft: #FF8C33;
+  --coral: #FF5A5F;
+  --teal: #0D9488;
+  --blue: #3B82F6;
+  --purple: #8B5CF6;
   --text: #1C1917;
-  --muted: #78716C;
-  --line: rgba(28,25,23,0.08);
-  --shadow: 0 8px 30px rgba(28,25,23,0.06);
+  --muted: #6B635A;
+  --line: rgba(255,107,0,0.12);
+  --shadow: 0 10px 36px rgba(255,107,0,0.07);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -33,19 +36,19 @@ body {
   position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
 }
 .paw {
-  position: absolute; font-size: 20px; opacity: 0.04;
+  position: absolute; font-size: 20px; opacity: 0.05;
   animation: floatUp linear infinite;
 }
 @keyframes floatUp {
   0% { transform: translateY(0) rotate(0); opacity: 0.03; }
-  50% { opacity: 0.06; }
+  50% { opacity: 0.07; }
   100% { transform: translateY(-100vh) rotate(280deg); opacity: 0.02; }
 }
 .container { width: 92%; max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
 
 nav {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  background: rgba(250,250,248,0.92);
+  background: rgba(255,251,247,0.9);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
@@ -54,33 +57,30 @@ nav {
   padding: 14px 0;
 }
 .logo {
-  font-weight: 900; font-size: 21px; color: var(--text);
+  font-weight: 900; font-size: 21px; color: var(--orange);
   text-decoration: none; display: flex; align-items: center; gap: 8px;
 }
-.logo span { color: var(--accent); }
 .nav-links { display: flex; gap: 22px; }
 .nav-links a {
   color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px;
   transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--text); }
+.nav-links a:hover { color: var(--orange); }
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 11px 20px; border-radius: 10px;
-  background: var(--text); color: #fff; font-weight: 700; font-size: 14px;
+  background: var(--orange); color: #fff; font-weight: 700; font-size: 14px;
   text-decoration: none; border: none; cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 6px 18px rgba(255,107,0,0.28);
 }
-.btn:hover { background: #292524; transform: translateY(-1px); }
-.btn-accent {
-  background: var(--accent); color: #fff;
-}
-.btn-accent:hover { background: var(--accent-soft); }
+.btn:hover { background: var(--orange-soft); transform: translateY(-1px); }
 .btn-ghost {
   background: transparent; color: var(--text);
-  border: 1.5px solid var(--line);
+  border: 1.5px solid rgba(28,25,23,0.12);
+  box-shadow: none;
 }
-.btn-ghost:hover { border-color: var(--text); }
+.btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
 
 .hero {
   padding: 135px 0 65px;
@@ -88,10 +88,10 @@ nav {
 }
 .tag {
   display: inline-block;
-  background: var(--bg-soft);
-  color: var(--muted);
-  font-size: 12px; font-weight: 600;
-  padding: 5px 11px; border-radius: 6px;
+  background: linear-gradient(135deg, #FFF0E0, #FFE4CC);
+  color: var(--orange);
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 8px;
   margin-bottom: 16px;
 }
 .hero h1 {
@@ -101,26 +101,29 @@ nav {
   margin-bottom: 14px;
   letter-spacing: -0.03em;
 }
-.hero h1 span { color: var(--accent); }
+.hero h1 span {
+  background: linear-gradient(135deg, #FF6B00, #FF8C33);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 .hero p {
   font-size: 16px; color: var(--muted); max-width: 420px; margin-bottom: 10px;
 }
 .hero-guide {
-  font-size: 14.5px; font-weight: 600; color: var(--text);
+  font-size: 14.5px; font-weight: 700; color: var(--orange);
   margin-bottom: 22px;
 }
 .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 .fox-box {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 20px;
+  background: linear-gradient(160deg, #FFF5EB, #FFE8D4);
+  border: 1px solid rgba(255,107,0,0.15);
+  border-radius: 22px;
   padding: 36px;
   text-align: center;
   box-shadow: var(--shadow);
 }
 .fox-big { font-size: 100px; line-height: 1; margin-bottom: 10px; }
 .fox-quote {
-  font-size: 14px; font-weight: 600; color: var(--muted);
+  font-size: 14px; font-weight: 700; color: var(--muted);
 }
 
 section { padding: 60px 0; }
@@ -144,39 +147,50 @@ section { padding: 60px 0; }
   box-shadow: var(--shadow);
   transition: border-color 0.2s, transform 0.2s;
 }
-.card:hover { border-color: rgba(28,25,23,0.15); transform: translateY(-2px); }
+.card:hover { border-color: rgba(255,107,0,0.3); transform: translateY(-2px); }
 .card .ico { font-size: 24px; margin-bottom: 10px; }
 .card h3 { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
 .card p { font-size: 13px; color: var(--muted); }
 
+.card.c1 { border-top: 3px solid var(--orange); }
+.card.c2 { border-top: 3px solid var(--teal); }
+.card.c3 { border-top: 3px solid var(--blue); }
+.card.c4 { border-top: 3px solid var(--coral); }
+.card.c5 { border-top: 3px solid var(--purple); }
+.card.c6 { border-top: 3px solid #EAB308; }
+
 .rooms .card { position: relative; }
 .room-tag {
   position: absolute; top: 12px; right: 12px;
-  font-size: 11px; font-weight: 700; color: var(--muted);
-  background: var(--bg-soft); padding: 3px 8px; border-radius: 5px;
+  font-size: 11px; font-weight: 700; color: var(--orange);
+  background: #FFF0E0; padding: 3px 8px; border-radius: 6px;
 }
 
 .speakers-section { background: var(--bg-soft); }
 .speaker { text-align: center; }
 .speaker-av {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--bg-soft);
-  border: 2px solid var(--line);
+  width: 66px; height: 66px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px; margin: 0 auto 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
+.s1 { background: linear-gradient(135deg, #FFD4A8, #FFB347); }
+.s2 { background: linear-gradient(135deg, #A5B4FC, #818CF8); }
+.s3 { background: linear-gradient(135deg, #6EE7B7, #34D399); }
 .speaker h3 { font-size: 14.5px; font-weight: 800; }
-.speaker .from { font-size: 12px; color: var(--accent); font-weight: 600; margin: 3px 0 7px; }
+.speaker .from { font-size: 12px; color: var(--orange); font-weight: 600; margin: 3px 0 7px; }
 .speaker p { font-size: 12.5px; color: var(--muted); }
 .tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 9px; }
 .tags span {
-  background: var(--bg-soft); padding: 2px 7px; border-radius: 5px;
-  font-size: 11px; font-weight: 600; color: var(--muted);
+  background: #FFF0E0; padding: 2px 7px; border-radius: 5px;
+  font-size: 11px; font-weight: 600; color: var(--orange);
 }
 
 .lesik-block {
   display: grid; grid-template-columns: 0.5fr 1.5fr; gap: 24px; align-items: center;
-  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  background: linear-gradient(135deg, #FFF8F0, #FFF0E0);
+  border: 1px solid rgba(255,107,0,0.18);
+  border-radius: 18px;
   padding: 28px; box-shadow: var(--shadow);
 }
 .lesik-emoji { font-size: 88px; text-align: center; }
@@ -184,8 +198,9 @@ section { padding: 60px 0; }
 .lesik-block p { color: var(--muted); font-size: 14px; margin-bottom: 7px; }
 .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
 .chip {
-  background: var(--bg-soft); color: var(--text);
-  padding: 5px 11px; border-radius: 7px; font-size: 12px; font-weight: 600;
+  background: #fff; color: var(--orange);
+  border: 1px solid rgba(255,107,0,0.2);
+  padding: 5px 11px; border-radius: 7px; font-size: 12px; font-weight: 700;
 }
 
 .event {
@@ -195,11 +210,11 @@ section { padding: 60px 0; }
   box-shadow: var(--shadow);
   transition: border-color 0.2s;
 }
-.event:hover { border-color: rgba(28,25,23,0.18); }
+.event:hover { border-color: rgba(255,107,0,0.35); }
 .event h3 { font-size: 14.5px; font-weight: 800; margin-bottom: 3px; }
 .event-meta { display: flex; gap: 11px; flex-wrap: wrap; font-size: 12px; color: var(--muted); font-weight: 500; }
 .spot {
-  background: var(--bg-soft); color: var(--text);
+  background: #FFF0E0; color: var(--orange);
   padding: 2px 7px; border-radius: 5px; font-weight: 700; font-size: 11px;
 }
 .spot.hot { background: #FEE2E2; color: #DC2626; }
@@ -211,15 +226,16 @@ section { padding: 60px 0; }
   box-shadow: var(--shadow);
 }
 .price-card.hot {
-  border-color: var(--text);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1.5px var(--orange), var(--shadow);
 }
 .price-card .badge {
   position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-  background: var(--text); color: #fff; font-size: 11px; font-weight: 700;
+  background: var(--orange); color: #fff; font-size: 11px; font-weight: 700;
   padding: 3px 11px; border-radius: 6px; white-space: nowrap;
 }
 .price-card h3 { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 5px; }
-.price-num { font-size: 34px; font-weight: 900; color: var(--text); margin-bottom: 3px; }
+.price-num { font-size: 34px; font-weight: 900; color: var(--orange); margin-bottom: 3px; }
 .price-num span { font-size: 13px; font-weight: 600; }
 .price-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
 .price-list { list-style: none; text-align: left; margin-bottom: 16px; }
@@ -227,19 +243,19 @@ section { padding: 60px 0; }
   font-size: 12.5px; color: var(--muted); padding: 3px 0;
   display: flex; align-items: center; gap: 6px;
 }
-.price-list li::before { content: '→'; color: var(--text); font-weight: 700; }
+.price-list li::before { content: '→'; color: var(--orange); font-weight: 700; }
 
 .promo {
   margin-top: 22px;
-  background: var(--text);
+  background: linear-gradient(135deg, #FF6B00, #E85D04);
   border-radius: 14px; padding: 22px 26px;
   display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
   color: #fff;
 }
 .promo h3 { font-size: 17px; font-weight: 800; margin-bottom: 2px; }
-.promo p { font-size: 13px; opacity: 0.75; }
-.promo .btn { background: #fff; color: var(--text); }
-.promo .btn:hover { background: #F5F5F4; }
+.promo p { font-size: 13px; opacity: 0.9; }
+.promo .btn { background: #fff; color: var(--orange); box-shadow: none; }
+.promo .btn:hover { background: #FFF5EB; }
 
 .cta {
   text-align: center; padding: 70px 0;
@@ -252,11 +268,11 @@ footer {
   border-top: 1px solid var(--line);
   padding: 28px 0; text-align: center;
 }
-.footer-logo { font-weight: 900; font-size: 17px; color: var(--text); margin-bottom: 5px; }
+.footer-logo { font-weight: 900; font-size: 17px; color: var(--orange); margin-bottom: 5px; }
 .footer-tag { color: var(--muted); font-size: 12.5px; margin-bottom: 12px; }
 .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
 .footer-links a { color: var(--muted); text-decoration: none; font-size: 12.5px; font-weight: 600; }
-.footer-links a:hover { color: var(--text); }
+.footer-links a:hover { color: var(--orange); }
 .footer-copy { font-size: 11px; color: #A8A29E; }
 
 @media (max-width: 900px) {
@@ -277,7 +293,7 @@ footer {
 
 <nav>
   <div class="container nav-inner">
-    <a href="#" class="logo">🦊 <span>LESICHI</span></a>
+    <a href="#" class="logo">🦊 LESICHI</a>
     <div class="nav-links">
       <a href="#why">Зачем</a>
       <a href="#rooms">Комнаты</a>
@@ -286,7 +302,7 @@ footer {
       <a href="#meets">Созвоны</a>
       <a href="#pricing">Цены</a>
     </div>
-    <a href="#meets" class="btn btn-accent">Записаться</a>
+    <a href="#meets" class="btn">Записаться</a>
   </div>
 </nav>
 
@@ -297,7 +313,7 @@ footer {
     <p>Говори с иностранцами в маленьких группах. Без учебников и без скуки.</p>
     <div class="hero-guide">🦊 Лесик — твой гид по speaking комнатам и спикерам</div>
     <div class="hero-btns">
-      <a href="#meets" class="btn btn-accent">Записаться на созвон</a>
+      <a href="#meets" class="btn">Записаться на созвон</a>
       <a href="#speakers" class="btn btn-ghost">Смотреть спикеров</a>
     </div>
   </div>
@@ -312,32 +328,32 @@ footer {
     <h2 class="section-title">Зачем это работает</h2>
     <p class="section-sub">Коротко и по делу.</p>
     <div class="grid-3">
-      <div class="card">
+      <div class="card c1">
         <div class="ico">👥</div>
         <h3>Группы до 6 человек</h3>
         <p>Каждый реально говорит. Не 30 человек и очередь. Ты в разговоре всё время.</p>
       </div>
-      <div class="card">
+      <div class="card c2">
         <div class="ico">🌍</div>
         <h3>Живые иностранцы</h3>
         <p>Спикеры из США, Британии, Мексики. Настоящий акцент, живые реакции, мемы.</p>
       </div>
-      <div class="card">
+      <div class="card c3">
         <div class="ico">💬</div>
         <h3>Speaking > теория</h3>
         <p>Можно знать кучу слов и молчать. Здесь ты просто начинаешь говорить.</p>
       </div>
-      <div class="card">
+      <div class="card c4">
         <div class="ico">🔥</div>
         <h3>Без cringe</h3>
         <p>Никто не разбирает ошибки на публику. Можно шутить, ошибаться и идти дальше.</p>
       </div>
-      <div class="card">
+      <div class="card c5">
         <div class="ico">🧠</div>
         <h3>Темы, которые заходят</h3>
         <p>Travel, tech, фильмы, мемы. Не «расскажите о своём хобби» из учебника.</p>
       </div>
-      <div class="card">
+      <div class="card c6">
         <div class="ico">⚡</div>
         <h3>Просто зашёл и говоришь</h3>
         <p>Zoom-ссылка → speaking комната. Без лишних приложений и настроек.</p>
@@ -351,19 +367,19 @@ footer {
     <h2 class="section-title">Speaking комнаты</h2>
     <p class="section-sub">Выбирай вайб. Лесик проводит по всем.</p>
     <div class="grid-3">
-      <div class="card">
+      <div class="card c1">
         <div class="room-tag">01</div>
         <div class="ico">🌍</div>
         <h3>Travel & Stories</h3>
         <p>Истории, поездки, «а вот однажды…». Легко заговорить даже если обычно молчишь.</p>
       </div>
-      <div class="card">
+      <div class="card c2">
         <div class="room-tag">02</div>
         <div class="ico">🤖</div>
         <h3>Tech & Future</h3>
         <p>ИИ, гаджеты, «а что если». Для тех, кто любит спорить и фантазировать.</p>
       </div>
-      <div class="card">
+      <div class="card c3">
         <div class="room-tag">03</div>
         <div class="ico">🎬</div>
         <h3>Movies, Memes & Life</h3>
@@ -379,21 +395,21 @@ footer {
     <p class="section-sub">Лесик знакомит тебя с ними лично.</p>
     <div class="grid-3">
       <div class="card speaker">
-        <div class="speaker-av">👨‍🎤</div>
+        <div class="speaker-av s1">👨‍🎤</div>
         <h3>Alex</h3>
         <div class="from">🇺🇸 California</div>
         <p>Спокойный, с юмором. Куча историй. Хороший старт.</p>
         <div class="tags"><span>Travel</span><span>Stories</span><span>Chill</span></div>
       </div>
       <div class="card speaker">
-        <div class="speaker-av">👩‍💻</div>
+        <div class="speaker-av s2">👩‍💻</div>
         <h3>Emma</h3>
         <div class="from">🇬🇧 London</div>
         <p>Быстрая, с британским сарказмом. Tech и сериалы — её зона.</p>
         <div class="tags"><span>Tech</span><span>Series</span><span>British</span></div>
       </div>
       <div class="card speaker">
-        <div class="speaker-av">👨‍🍳</div>
+        <div class="speaker-av s3">👨‍🍳</div>
         <h3>Carlos</h3>
         <div class="from">🇲🇽 Mexico City</div>
         <p>Энергия 200%. Еда, жизнь, «давай ещё». С ним молчать сложно.</p>
@@ -435,7 +451,7 @@ footer {
           <span class="spot hot">2 места</span>
         </div>
       </div>
-      <a href="https://zoom.us/j/9876543210" target="_blank" class="btn btn-accent">Записаться</a>
+      <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">Записаться</a>
     </div>
     <div class="event">
       <div>
@@ -446,7 +462,7 @@ footer {
           <span class="spot">4 места</span>
         </div>
       </div>
-      <a href="https://zoom.us/j/1122334455" target="_blank" class="btn btn-accent">Записаться</a>
+      <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a>
     </div>
     <div class="event">
       <div>
@@ -457,7 +473,7 @@ footer {
           <span class="spot">3 места</span>
         </div>
       </div>
-      <a href="https://zoom.us/j/5544332211" target="_blank" class="btn btn-accent">Записаться</a>
+      <a href="https://zoom.us/j/5544332211" target="_blank" class="btn">Записаться</a>
     </div>
   </div>
 </section>
@@ -489,7 +505,7 @@ footer {
           <li>Мем-пак от Лесика</li>
           <li>Разные комнаты</li>
         </ul>
-        <a href="#meets" class="btn btn-accent" style="width:100%;justify-content:center">Взять</a>
+        <a href="#meets" class="btn" style="width:100%;justify-content:center">Взять</a>
       </div>
       <div class="price-card">
         <h3>8 созвонов</h3>
@@ -516,7 +532,7 @@ footer {
 <section class="cta container">
   <h2>Выбери комнату. Зайди. Говори.</h2>
   <p>Лесик уже в speaking комнате.</p>
-  <a href="#meets" class="btn btn-accent">Записаться</a>
+  <a href="#meets" class="btn">Записаться</a>
 </section>
 
 <footer>
