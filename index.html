@@ -25,7 +25,7 @@
   --shadow: 0 12px 40px rgba(106,69,227,0.12);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
@@ -43,20 +43,24 @@ h1, h2, h3,
 }
 .paw {
   position: absolute; opacity: 0; user-select: none; will-change: transform, opacity;
+  filter: drop-shadow(0 1px 2px rgba(43,27,94,0.15));
 }
 @keyframes pawDrift1 {
   0%   { transform: translate(0,0) rotate(0) scale(0.85); opacity: 0; }
-  8%   { opacity: 0.18; }
+  6%   { opacity: 0.55; }
+  70%  { opacity: 0.45; }
   100% { transform: translate(50px,-110vh) rotate(340deg) scale(1.1); opacity: 0; }
 }
 @keyframes pawDrift2 {
   0%   { transform: translate(0,0) rotate(25deg) scale(1); opacity: 0; }
-  10%  { opacity: 0.16; }
+  8%   { opacity: 0.5; }
+  70%  { opacity: 0.4; }
   100% { transform: translate(-55px,-108vh) rotate(-200deg) scale(0.75); opacity: 0; }
 }
 @keyframes pawDrift3 {
   0%   { transform: translate(0,0) rotate(-15deg) scale(0.9); opacity: 0; }
-  12%  { opacity: 0.2; }
+  7%   { opacity: 0.6; }
+  70%  { opacity: 0.48; }
   100% { transform: translate(70px,-115vh) rotate(180deg) scale(1.2); opacity: 0; }
 }
 .container { width: 92%; max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
@@ -89,11 +93,28 @@ nav {
 .logo-text { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
 .logo-text span { color: var(--purple); }
 .logo-sub { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-.nav-links { display: flex; gap: 20px; }
+.nav-links { display: flex; gap: 8px; align-items: center; }
 .nav-links a {
   color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px;
+  padding: 8px 12px; border-radius: 12px;
+  position: relative;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
-.nav-links a:hover { color: var(--purple); }
+.nav-links a::after {
+  content: '';
+  position: absolute; left: 12px; right: 12px; bottom: 4px;
+  height: 2px; border-radius: 2px;
+  background: var(--orange);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 0.25s ease;
+}
+.nav-links a:hover {
+  color: var(--purple-deep);
+  background: rgba(106,69,227,0.08);
+  transform: translateY(-1px);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:active { transform: translateY(0) scale(0.98); }
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 12px 22px; border-radius: 16px;
@@ -208,7 +229,8 @@ nav {
   50% { transform: translateY(-8px) rotate(12deg); }
 }
 
-section { padding: 60px 0; }
+section { padding: 60px 0; scroll-margin-top: 80px; }
+section.hero { scroll-margin-top: 0; }
 .section-title {
   font-size: clamp(24px, 3.4vw, 32px);
   font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px;
@@ -649,7 +671,7 @@ footer {
 (function(){
   const el = document.getElementById('paws');
   const anims = ['pawDrift1','pawDrift2','pawDrift3'];
-  const colors = ['rgba(106,69,227,0.4)','rgba(255,122,0,0.4)','rgba(43,27,94,0.3)'];
+  const colors = ['rgba(106,69,227,0.75)','rgba(255,122,0,0.8)','rgba(43,27,94,0.65)'];
   for(let i=0;i<36;i++){
     const p = document.createElement('div');
     p.className = 'paw';
