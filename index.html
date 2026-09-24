@@ -563,7 +563,8 @@ nav.scrolled {
 }
 @keyframes tagIn {
   from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: none; }
+  to { opacity: 1; transform: none;
+  }
 }
 .lesik-block {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -911,7 +912,8 @@ nav.scrolled {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        io.unobserve(e.target);
+      } else {
+        e.target.classList.remove('visible');
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
