@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика пользования — Lesichi</title>
+<link rel="icon" href="image/site/icon2.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,217,184,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  max-width: 1080px;
+  width: 92%;
+  margin: 0 auto;
+  gap: 12px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text);
+  flex-shrink: 0;
+}
+.logo-mark { width: 42px; height: 42px; }
+.logo-mark img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
+.logo-name-img { height: 44px; width: auto; display: block; object-fit: contain; }
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 8px;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+.nav-links a:hover {
+  color: var(--purple-deep);
+  background: rgba(106,69,227,0.08);
+  transform: translateY(-1px);
+}
+.nav-links a.active {
+  color: var(--purple-deep);
+  background: rgba(106,69,227,0.12);
+}
+.btn {
+  display: inline-flex; align-items: center;
+  padding: 12px 22px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-deep));
+  color: #fff !important;
+  font-weight: 700; font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(106,69,227,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+  border: none;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(106,69,227,0.45);
+  color: #fff !important;
+}
+@media (max-width: 700px) {
+  .nav-links a { font-size: 13px; padding: 6px 8px; }
+}
+:root {
+  --purple-deep: #2B1B5E;
+  --purple: #6A45E3;
+  --purple-pale: #F6F4FF;
+  --orange: #FF7A00;
+  --bg: #FFD9B8;
+  --card: #FFFFFF;
+  --text: #2B1B5E;
+  --muted: #5C4B8A;
+  --line: rgba(43,27,94,0.12);
+  --shadow: 0 12px 40px rgba(106,69,227,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+h1, h2, .btn { font-family: 'Baloo 2', 'Inter', system-ui, sans-serif; }
+.container { width: 92%; max-width: 880px; margin: 0 auto; }
+main { flex: 1; padding: 40px 0 60px; }
+.page-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 8px; }
+.page-sub { color: var(--muted); font-size: 16px; margin-bottom: 28px; max-width: 560px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 24px; box-shadow: var(--shadow); margin-bottom: 16px;
+}
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 15px; }
+.policy-list { padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+.policy-list li { margin-bottom: 8px; }
+.muted { color: var(--muted); font-size: 14px; }
+footer {
+  border-top: 1px solid var(--line); padding: 20px 0; text-align: center; background: var(--purple-pale);
+}
+.footer-logo { font-weight: 800; font-size: 18px; margin-bottom: 6px; font-family: 'Baloo 2', sans-serif; }
+.footer-logo img { width: 26px; height: 26px; vertical-align: middle; margin-right: 4px; border-radius: 6px; }
+.footer-logo .fn { height: 24px; width: auto; vertical-align: middle; }
+.footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 10px 0; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
+.footer-links a:hover { color: var(--purple); }
+.footer-copy { font-size: 11px; color: #9B8EC4; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="image/site/icon2.png" alt="Lesichi"></div>
+      <img class="logo-name-img" src="image/site/name.png" alt="Lesichi">
+    </a>
+    <div class="nav-links">
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+    </div>
+    <a href="index.html#meets" class="btn">Записаться</a>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <h1 class="page-title">Политика пользования</h1>
+    <p class="page-sub">Базовая версия. Позже уточним юридические формулировки.</p>
+    <div class="card">
+      <h2>1. О сервисе</h2>
+      <p>Lesichi — онлайн speaking club. Мы организуем групповые разговорные созвоны с иностранными спикерами.</p>
+    </div>
+    <div class="card">
+      <h2>2. Запись и участие</h2>
+      <ul class="policy-list">
+        <li>Запись на созвон означает согласие с форматом: группа до 6 человек, ~60 минут, Zoom.</li>
+        <li>Нужно вести себя уважительно к спикеру и участникам.</li>
+        <li>Мы можем отказать в участии при грубых нарушениях атмосферы клуба.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>3. Оплата и переносы</h2>
+      <ul class="policy-list">
+        <li>Первый ознакомительный созвон может быть бесплатным (по актуальной акции на сайте).</li>
+        <li>Условия переноса и возврата уточняются при оплате пакета — текст обновим.</li>
+        <li>Если созвон отменяет сторона клуба — предложим перенос или компенсацию занятия.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>4. Контент и связь</h2>
+      <ul class="policy-list">
+        <li>Материалы сайта (тексты, персонаж Лесик, оформление) принадлежат проекту Lesichi.</li>
+        <li>По вопросам: Telegram @lesichi, почта hello@lesichi.club (заглушки до запуска).</li>
+      </ul>
+    </div>
+    <p class="muted">Последнее обновление: сентябрь 2026. Это не финальная юридическая редакция.</p>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <img src="image/site/icon2.png" alt="">
+      <img class="fn" src="image/site/name.png" alt="Lesichi">
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Главная</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+      <a href="policy.html">Политика</a>
+      <a href="index.html#contacts">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
+  </div>
+</footer>
+</body>
+</html>
