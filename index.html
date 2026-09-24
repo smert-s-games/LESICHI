@@ -48,21 +48,21 @@ h1, h2, h3,
 }
 @keyframes pawDrift1 {
   0%   { transform: translate(0,0) rotate(0) scale(0.85); opacity: 0; }
-  8%   { opacity: 0.14; }
-  70%  { opacity: 0.1; }
-  100% { transform: translate(50px,-110vh) rotate(340deg) scale(1.1); opacity: 0; }
+  5%   { opacity: 0.16; }
+  88%  { opacity: 0.14; }
+  100% { transform: translate(50px,-115vh) rotate(340deg) scale(1.1); opacity: 0; }
 }
 @keyframes pawDrift2 {
   0%   { transform: translate(0,0) rotate(25deg) scale(1); opacity: 0; }
-  10%  { opacity: 0.12; }
-  70%  { opacity: 0.09; }
-  100% { transform: translate(-55px,-108vh) rotate(-200deg) scale(0.75); opacity: 0; }
+  6%   { opacity: 0.14; }
+  90%  { opacity: 0.12; }
+  100% { transform: translate(-55px,-112vh) rotate(-200deg) scale(0.75); opacity: 0; }
 }
 @keyframes pawDrift3 {
   0%   { transform: translate(0,0) rotate(-15deg) scale(0.9); opacity: 0; }
-  9%   { opacity: 0.15; }
-  70%  { opacity: 0.11; }
-  100% { transform: translate(70px,-115vh) rotate(180deg) scale(1.2); opacity: 0; }
+  5%   { opacity: 0.17; }
+  89%  { opacity: 0.15; }
+  100% { transform: translate(70px,-118vh) rotate(180deg) scale(1.2); opacity: 0; }
 }
 .container { width: 92%; max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
 nav {
@@ -170,7 +170,7 @@ nav {
   text-align: center;
   box-shadow: none;
   overflow: visible;
-  min-height: 280px;
+  min-height: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,8 +179,8 @@ nav {
 }
 .logo-stage::before { display: none; content: none; }
 .logo-stage img.hero-fox-img {
-  width: min(340px, 92%); height: auto; position: relative; z-index: 2;
-  filter: drop-shadow(0 12px 28px rgba(0,0,0,0.18));
+  width: min(460px, 100%); height: auto; position: relative; z-index: 2;
+  filter: drop-shadow(0 14px 32px rgba(0,0,0,0.2));
   animation: foxBounce 2.8s ease-in-out infinite;
 }
 @keyframes foxBounce {
@@ -221,7 +221,6 @@ section.hero { scroll-margin-top: 0; }
   border-radius: 18px;
   padding: 22px;
   box-shadow: var(--shadow);
-  transition: border-color 0.2s, transform 0.2s;
 }
 .card:hover { border-color: rgba(106,69,227,0.35); transform: translateY(-3px); }
 .card .ico { margin-bottom: 10px; }
