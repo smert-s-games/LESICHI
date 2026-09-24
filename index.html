@@ -400,6 +400,50 @@ footer {
   .promo { text-align: center; justify-content: center; }
   .sticker-row { justify-content: center; }
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.4s; }
+.card.reveal.visible:hover,
+.price-card.reveal.visible:hover,
+.event.reveal.visible:hover {
+  transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1; transform: none; transition: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -428,7 +472,7 @@ footer {
 </nav>
 
 <section class="hero container">
-  <div>
+  <div class="reveal">
     <div class="tag">SPEAKING CLUB</div>
     <h1>Перехитри<br>языковой барьер</h1>
     <p>Говори с иностранцами в маленьких группах. Без учебников и без скуки.</p>
@@ -438,42 +482,42 @@ footer {
       <a href="#speakers" class="btn btn-ghost">Смотреть спикеров</a>
     </div>
   </div>
-  <div class="logo-stage">
+  <div class="logo-stage reveal-right">
     <img class="hero-fox-img" src="image/site/naming_and_lis.png" alt="Lesichi Speaking Club">
   </div>
 </section>
 
 <section id="why">
   <div class="container">
-    <h2 class="section-title">Почему люди остаются</h2>
-    <p class="section-sub">Не потому что «надо учить английский». Потому что здесь реально получается говорить.</p>
+    <h2 class="section-title reveal">Почему люди остаются</h2>
+    <p class="section-sub reveal reveal-delay-1">Не потому что «надо учить английский». Потому что здесь реально получается говорить.</p>
     <div class="grid-3">
-      <div class="card c1">
+      <div class="card c1 reveal">
         <div class="ico"><img src="image/mini%20icon/people.png" alt=""></div>
         <h3>Максимум 6 в группе</h3>
         <p>Ты не слушаешь час подряд. Ты говоришь. Каждый созвон — реальная практика, а не очередь в Zoom.</p>
       </div>
-      <div class="card c2">
+      <div class="card c2 reveal reveal-delay-1">
         <div class="ico"><img src="image/mini%20icon/internet_globus.png" alt=""></div>
         <h3>Живые иностранцы</h3>
         <p>Не запись и не чат-бот. Люди из США, Британии, Мексики. Живой акцент, реакции, мемы.</p>
       </div>
-      <div class="card c3">
+      <div class="card c3 reveal reveal-delay-2">
         <div class="ico"><img src="image/mini%20icon/comment.png" alt=""></div>
         <h3>Говоришь, а не готовишься</h3>
         <p>Можно год учить грамматику и молчать. Здесь ты заходишь и сразу начинаешь говорить.</p>
       </div>
-      <div class="card c4">
+      <div class="card c4 reveal reveal-delay-3">
         <div class="ico"><img src="image/mini%20icon/heart.png" alt=""></div>
         <h3>Без cringe и давления</h3>
         <p>Никто не ставит оценки и не разбирает ошибки на всех. Можно шутить, ошибаться и продолжать.</p>
       </div>
-      <div class="card c5">
+      <div class="card c5 reveal reveal-delay-4">
         <div class="ico"><img src="image/mini%20icon/star.png" alt=""></div>
         <h3>Темы, от которых не скучно</h3>
         <p>Travel, tech, фильмы, мемы. Не «расскажите о хобби». Разговоры, которые хочется продолжать.</p>
       </div>
-      <div class="card c6">
+      <div class="card c6 reveal reveal-delay-5">
         <div class="ico"><img src="image/mini%20icon/lightning_purple.png" alt=""></div>
         <h3>Зашёл — и уже в разговоре</h3>
         <p>Одна Zoom-ссылка. Без приложений, без настроек. Просто говоришь.</p>
@@ -484,22 +528,22 @@ footer {
 
 <section id="rooms" class="rooms">
   <div class="container">
-    <h2 class="section-title">Speaking комнаты</h2>
-    <p class="section-sub">Выбирай вайб. Лесик проводит по всем.</p>
+    <h2 class="section-title reveal">Speaking комнаты</h2>
+    <p class="section-sub reveal reveal-delay-1">Выбирай вайб. Лесик проводит по всем.</p>
     <div class="grid-3">
-      <div class="card c1">
+      <div class="card c1 reveal">
         <div class="room-tag">01</div>
         <div class="ico room-ico"><img src="image/mini%20icon/airplane.png" alt=""></div>
         <h3>Travel & Stories</h3>
         <p>Истории, поездки, «а вот однажды…». Легко заговорить даже если обычно молчишь.</p>
       </div>
-      <div class="card c2">
+      <div class="card c2 reveal reveal-delay-1">
         <div class="room-tag">02</div>
         <div class="ico room-ico"><img src="image/mini%20icon/laptop.png" alt=""></div>
         <h3>Tech & Future</h3>
         <p>ИИ, гаджеты, стартапы. Для тех, кому нравится говорить про технологии.</p>
       </div>
-      <div class="card c3">
+      <div class="card c3 reveal reveal-delay-2">
         <div class="room-tag">03</div>
         <div class="ico room-ico"><img src="image/mini%20icon/headphones.png" alt=""></div>
         <h3>Movies & Memes</h3>
@@ -511,24 +555,24 @@ footer {
 
 <section id="speakers" class="speakers-section">
   <div class="container">
-    <h2 class="section-title">Спикеры</h2>
-    <p class="section-sub">Лесик знакомит тебя с ними лично.</p>
+    <h2 class="section-title reveal">Спикеры</h2>
+    <p class="section-sub reveal reveal-delay-1">Лесик знакомит тебя с ними лично.</p>
     <div class="grid-3">
-      <div class="card speaker">
+      <div class="card speaker reveal">
         <div class="speaker-av s1">👨‍🎤</div>
         <h3>Alex</h3>
         <div class="from">🇺🇸 California</div>
         <p>Спокойный, с юмором. Любит рассказывать про поездки.</p>
         <div class="tags"><span>Travel</span><span>Stories</span></div>
       </div>
-      <div class="card speaker">
+      <div class="card speaker reveal reveal-delay-1">
         <div class="speaker-av s2">👩‍💻</div>
         <h3>Emma</h3>
         <div class="from">🇬🇧 London</div>
         <p>Быстрая, с британским сарказмом. Tech и жизнь.</p>
         <div class="tags"><span>Tech</span><span>British</span></div>
       </div>
-      <div class="card speaker">
+      <div class="card speaker reveal reveal-delay-2">
         <div class="speaker-av s3">👨‍🍳</div>
         <h3>Carlos</h3>
         <div class="from">🇲🇽 Mexico City</div>
@@ -541,7 +585,7 @@ footer {
 
 <section id="lesik">
   <div class="container">
-    <div class="lesik-block">
+    <div class="lesik-block reveal-scale">
       <div class="lesik-emoji"><img src="image/lis/lis_sit.png" alt="Лесик"></div>
       <div>
         <h2>Лесик — голос клуба</h2>
@@ -568,9 +612,9 @@ footer {
 
 <section id="meets">
   <div class="container">
-    <h2 class="section-title">Ближайшие созвоны</h2>
-    <p class="section-sub">Мест мало. Группы до 6.</p>
-    <div class="event">
+    <h2 class="section-title reveal">Ближайшие созвоны</h2>
+    <p class="section-sub reveal reveal-delay-1">Мест мало. Группы до 6.</p>
+    <div class="event reveal">
       <div>
         <h3>🌍 Travel Stories — Alex</h3>
         <div class="event-meta">
@@ -579,7 +623,7 @@ footer {
       </div>
       <a href="https://zoom.us/j/9876543210" target="_blank" class="btn">Записаться</a>
     </div>
-    <div class="event">
+    <div class="event reveal reveal-delay-1">
       <div>
         <h3>🤖 Future Tech — Emma</h3>
         <div class="event-meta">
@@ -588,7 +632,7 @@ footer {
       </div>
       <a href="https://zoom.us/j/1122334455" target="_blank" class="btn">Записаться</a>
     </div>
-    <div class="event">
+    <div class="event reveal reveal-delay-2">
       <div>
         <h3>🎬 Movies & Memes — Carlos</h3>
         <div class="event-meta">
@@ -602,10 +646,10 @@ footer {
 
 <section id="pricing">
   <div class="container">
-    <h2 class="section-title">Цены</h2>
-    <p class="section-sub">Бери сколько нужно. Без лишних подписок.</p>
+    <h2 class="section-title reveal">Цены</h2>
+    <p class="section-sub reveal reveal-delay-1">Бери сколько нужно. Без лишних подписок.</p>
     <div class="prices">
-      <div class="price-card">
+      <div class="price-card reveal">
         <h3>Разовый</h3>
         <div class="price-num">15 <span>BYN</span></div>
         <div class="price-desc">Просто попробовать</div>
@@ -616,7 +660,7 @@ footer {
         </ul>
         <a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a>
       </div>
-      <div class="price-card hot">
+      <div class="price-card hot reveal reveal-delay-1">
         <div class="badge">Оптимально</div>
         <h3>4 созвона</h3>
         <div class="price-num">50 <span>BYN</span></div>
@@ -629,7 +673,7 @@ footer {
         </ul>
         <a href="#meets" class="btn" style="width:100%;justify-content:center">Взять</a>
       </div>
-      <div class="price-card">
+      <div class="price-card reveal reveal-delay-2">
         <h3>8 созвонов</h3>
         <div class="price-num">90 <span>BYN</span></div>
         <div class="price-desc">Максимум практики</div>
@@ -641,7 +685,7 @@ footer {
         <a href="#meets" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a>
       </div>
     </div>
-    <div class="promo">
+    <div class="promo reveal">
       <div>
         <h3>Первый созвон — free</h3>
         <p>Или приведи друга — оба по −20%</p>
@@ -653,10 +697,10 @@ footer {
 
 <section class="cta container">
   <div class="cta-rest">
-    <div class="cta-fox">
+    <div class="cta-fox reveal-left">
       <img src="image/lis/lis_lie.png" alt="Лесик отдыхает">
     </div>
-    <div class="cta-copy">
+    <div class="cta-copy reveal-right">
       <h2>Иногда страшно начать</h2>
       <p>Лесик тоже так лежал. Потом зашёл на созвон — и заговорил. Без оценок, без давления, в компании до 6 человек.</p>
       <p class="cta-soft">Перерыв важен. Но голос не просыпается сам — ему нужен первый созвон.</p>
@@ -697,6 +741,23 @@ footer {
     p.style.color = colors[i % colors.length];
     el.appendChild(p);
   }
+})();
+
+(function(){
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
 })();
 </script>
 </body>
