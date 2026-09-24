@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lesichi — Speaking Club</title>
-<link rel="icon" href="image/site/icon2.png" type="image/png">
+<link rel="icon" href="image/site/icon3.png" type="image/png">
 <meta name="description" content="Speaking club в группах до 6 человек с иностранцами. Перехитри языковой барьер.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -89,6 +89,19 @@ nav {
 }
 .logo-mark::after { display: none; }
 .logo-mark img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
+.logo-name-img {
+  height: 36px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.footer-name-img {
+  height: 26px;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 4px;
+  object-fit: contain;
+}
 .logo-text { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
 .logo-text span { color: var(--purple); }
 .logo-sub { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
@@ -384,6 +397,9 @@ footer {
   width: 28px; height: 28px; vertical-align: middle;
   margin-right: 6px; border-radius: 6px;
 }
+.footer-logo img.footer-name-img {
+  width: auto; height: 26px; margin-right: 0; border-radius: 0;
+}
 .footer-tag { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
 .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
 .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; }
@@ -453,11 +469,8 @@ footer {
 <nav>
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <div class="logo-mark"><img src="image/site/icon2.png" alt="Lesichi"></div>
-      <div>
-        <div class="logo-text">Le<span>sichi</span></div>
-        <div class="logo-sub">Speaking Club</div>
-      </div>
+      <div class="logo-mark"><img src="image/site/icon3.png" alt="Lesichi"></div>
+      <img class="logo-name-img" src="image/site/name.png" alt="Lesichi">
     </a>
     <div class="nav-links">
       <a href="#why">Зачем</a>
@@ -538,7 +551,6 @@ footer {
         <p>Истории, поездки, «а вот однажды…». Легко заговорить даже если обычно молчишь.</p>
       </div>
       <div class="card c2 reveal reveal-delay-1">
-        <div class="room-tag">02</div>
         <div class="ico room-ico"><img src="image/mini%20icon/laptop.png" alt=""></div>
         <h3>Tech & Future</h3>
         <p>ИИ, гаджеты, стартапы. Для тех, кому нравится говорить про технологии.</p>
@@ -711,7 +723,7 @@ footer {
 
 <footer>
   <div class="container">
-    <div class="footer-logo"><img src="image/site/icon2.png" alt=""> Lesichi</div>
+    <div class="footer-logo"><img src="image/site/icon3.png" alt=""><img class="footer-name-img" src="image/site/name.png" alt="Lesichi"></div>
     <div class="footer-tag">Speaking Club · groups of 6 · real foreigners</div>
     <div class="footer-links">
       <a href="#why">Зачем</a>
