@@ -189,6 +189,7 @@ nav {
   align-items: center;
   justify-content: center;
   color: var(--text);
+  will-change: transform;
 }
 .logo-stage::before { display: none; content: none; }
 .logo-stage img.hero-fox-img {
@@ -451,19 +452,164 @@ footer {
 .reveal-delay-4 { transition-delay: 0.32s; }
 .reveal-delay-5 { transition-delay: 0.4s; }
 .card.reveal.visible:hover,
-.price-card.reveal.visible:hover,
-.event.reveal.visible:hover {
+.price-card.reveal.visible:hover {
   transform: translateY(-3px);
+}
+.event.reveal.visible:hover {
+  transform: translateX(4px);
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left, .reveal-right, .reveal-scale {
     opacity: 1; transform: none; transition: none;
   }
+  .btn-orange, .sticker-row img, .price-card.hot .badge, .spot.hot, .promo::before {
+    animation: none !important;
+  }
+}
+
+/* Extra motion */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--orange), var(--purple));
+  z-index: 200; pointer-events: none;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px rgba(255,122,0,0.45);
+}
+nav.scrolled {
+  box-shadow: 0 8px 28px rgba(43,27,94,0.12);
+}
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute; top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+  transform: skewX(-18deg);
+}
+.btn:hover::after {
+  animation: btnShine 0.7s ease;
+}
+@keyframes btnShine {
+  from { left: -120%; }
+  to { left: 140%; }
+}
+.btn-orange {
+  animation: softPulse 2.8s ease-in-out infinite;
+}
+@keyframes softPulse {
+  0%, 100% { box-shadow: 0 6px 20px rgba(255,122,0,0.35); }
+  50% { box-shadow: 0 8px 28px rgba(255,122,0,0.55); }
+}
+.chip {
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.chip:hover {
+  transform: scale(1.08) rotate(-2deg);
+  background: rgba(255,255,255,0.28);
+}
+.sticker-row img {
+  animation: stickerFloat 3.5s ease-in-out infinite;
+}
+.sticker-row img:nth-child(2) { animation-delay: 0.4s; }
+.sticker-row img:nth-child(3) { animation-delay: 0.8s; }
+.sticker-row img:nth-child(4) { animation-delay: 1.2s; }
+.sticker-row img:nth-child(5) { animation-delay: 1.6s; }
+@keyframes stickerFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+.sticker-row img:hover {
+  animation: none;
+  transform: scale(1.12) rotate(-4deg) !important;
+}
+.price-card.hot .badge {
+  animation: badgePop 2s ease-in-out infinite;
+}
+@keyframes badgePop {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.06); }
+}
+.spot.hot {
+  animation: hotBlink 1.6s ease-in-out infinite;
+}
+@keyframes hotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.card {
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.card:hover {
+  box-shadow: 0 16px 40px rgba(106,69,227,0.18);
+}
+.ico img, .room-ico img {
+  transition: transform 0.3s ease;
+}
+.card:hover .ico img,
+.card:hover .room-ico img {
+  transform: scale(1.12) rotate(-6deg);
+}
+.speaker-av {
+  transition: transform 0.3s ease;
+}
+.card.speaker:hover .speaker-av {
+  transform: scale(1.08);
+}
+.tag {
+  animation: tagIn 0.8s ease both;
+}
+@keyframes tagIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+.lesik-block {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.lesik-block.reveal-scale.visible:hover {
+  transform: scale(1.01);
+  box-shadow: 0 20px 50px rgba(43,27,94,0.35);
+}
+.event {
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.event:hover {
+  transform: translateX(4px);
+  box-shadow: 0 12px 32px rgba(106,69,227,0.14);
+}
+.promo {
+  position: relative;
+  overflow: hidden;
+}
+.promo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: promoShine 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes promoShine {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.logo-name-img {
+  transition: transform 0.25s ease;
+}
+.logo:hover .logo-name-img {
+  transform: scale(1.04);
+}
+.logo-mark { transition: transform 0.3s ease; }
+.logo:hover .logo-mark {
+  transform: rotate(-8deg) scale(1.05);
 }
 </style>
 </head>
 <body>
 
+<div class="scroll-progress" id="scrollProgress"></div>
 <div class="paws" id="paws"></div>
 
 <nav>
@@ -770,6 +916,25 @@ footer {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(el => io.observe(el));
+})();
+
+(function(){
+  const bar = document.getElementById('scrollProgress');
+  const nav = document.querySelector('nav');
+  function onScroll(){
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    if (bar) bar.style.width = p + '%';
+    if (nav) nav.classList.toggle('scrolled', h.scrollTop > 20);
+    const stage = document.querySelector('.logo-stage');
+    if (stage) {
+      const y = Math.min(h.scrollTop * 0.08, 28);
+      stage.style.transform = 'translateY(' + y + 'px)';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 </body>
