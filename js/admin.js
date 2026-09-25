@@ -33,9 +33,30 @@
     panel.innerHTML = "Загрузка…";
     if (current === "sessions") {
       var rows = await sb.from("sessions").select("*").order("starts_at", { ascending: false });
-      panel.innerHTML = sessionForm() + table(rows.data, ["title", "speaker_name", "starts_at", "status", "max_participants"], function (r) {
-        return '<button class="btn" data-del="' + r.id + '">Удалить</button>';
+      var booked = await sb.from("bookings").select("session_id,status,profiles(full_name,email,telegram)").eq("status", "booked");
+      var by = {};
+      (booked.data || []).forEach(function (b) {
+        if (!by[b.session_id]) by[b.session_id] = [];
+        by[b.session_id].push(b);
       });
+      var list = (rows.data || []).map(function (r) {
+        var people = by[r.id] || [];
+        var who = people.length ? people.map(function (p) {
+          var pr = p.profiles || {};
+          var name = pr.full_name || pr.email || "Без имени";
+          return "<div>" + esc(name) +
+            (pr.email && pr.full_name ? " · " + esc(pr.email) : "") +
+            (pr.telegram ? " · " + esc(pr.telegram) : "") + "</div>";
+        }).join("") : "<div class='muted'>Никто не записан</div>";
+        return '<div class="card"><strong>' + esc(r.title) + "</strong>" +
+          '<div class="muted">' + esc(new Date(r.starts_at).toLocaleString("ru-RU")) +
+          " · " + esc(r.speaker_name || "без спикера") +
+          " · " + people.length + "/" + esc(r.max_participants) + " · " + esc(r.status) + "</div>" +
+          who +
+          '<p style="margin-top:8px"><button class="btn" data-del="' + r.id + '">Удалить</button></p></div>';
+      }).join("");
+      if (booked.error) list = "<p class='err'>" + esc(booked.error.message) + "</p>" + list;
+      panel.innerHTML = sessionForm() + (list || "<p>Созвонов нет</p>");
       panel.querySelector("#add-session").onsubmit = addSession;
       panel.querySelectorAll("[data-del]").forEach(function (b) {
         b.onclick = function () { remove("sessions", b.dataset.del); };
