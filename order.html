@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформление заказа — Lesichi</title>
+<link rel="icon" href="image/site/icon2.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-pale:#F6F4FF;--orange:#FF7A00;--bg:#FFD9B8;--card:#FFFFFF;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,0.12);--shadow:0 12px 40px rgba(106,69,227,0.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{padding-top:84px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh}
+h1,h2,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(255,217,184,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:92%;max-width:1080px;margin:0 auto;padding:12px 0;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:42px;height:42px}.logo-mark img{width:100%;height:100%;object-fit:contain;border-radius:12px}
+.logo-name-img{height:44px;width:auto}
+.nav-links{display:flex;gap:8px;justify-content:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:12px}
+.nav-links a:hover{color:var(--text);background:rgba(106,69,227,0.08)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:16px;background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(106,69,227,0.35)}
+.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00);box-shadow:0 6px 20px rgba(255,122,0,0.35)}
+.container{width:92%;max-width:880px;margin:0 auto;padding-bottom:60px}
+.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}
+.page-sub{color:var(--muted);margin-bottom:22px}
+.layout{display:grid;grid-template-columns:1fr .85fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font:inherit;color:var(--text);background:#fff}
+.summary h2{font-size:22px;margin-bottom:6px}
+.price{font-family:'Baloo 2',sans-serif;font-size:40px;font-weight:800;color:var(--purple-deep);margin:8px 0}
+.price span{font-size:16px}
+.muted{color:var(--muted);font-size:14px}
+.msg{margin-top:12px;font-size:14px}
+#done{text-align:center;padding:36px 20px}
+#done h2{font-size:28px;margin:8px 0}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="image/site/icon2.png" alt="Lesichi"></div>
+      <img class="logo-name-img" src="image/site/name.png" alt="Lesichi">
+    </a>
+    <div class="nav-links">
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+    </div>
+    <a href="index.html#pricing" class="btn">К ценам</a>
+  </div>
+</nav>
+<main class="container">
+  <h1 class="page-title">Оформление заказа</h1>
+  <p class="page-sub">Пакет занятий Lesichi. Оплата появится на следующем шаге, заявка уже сохранится.</p>
+  <div class="layout" id="order">
+    <form class="card" id="form">
+      <h2>Контакты</h2>
+      <label for="name">Имя</label>
+      <input id="name" required autocomplete="name">
+      <label for="email">Email</label>
+      <input id="email" type="email" required autocomplete="email">
+      <label for="tg">Telegram</label>
+      <input id="tg" placeholder="@username">
+      <p class="msg" id="msg"></p>
+      <p style="margin-top:16px"><button class="btn btn-orange" type="submit">Оформить заказ</button></p>
+    </form>
+    <aside class="card summary">
+      <p class="muted">Выбранный пакет</p>
+      <h2 id="pack-title">4 созвона</h2>
+      <div class="price" id="pack-price">50 <span>BYN</span></div>
+      <p class="muted" id="pack-meta">4 созвона по 60 минут · группа до 6</p>
+    </aside>
+  </div>
+  <div class="card" id="done" hidden>
+    <h2>Заказ принят</h2>
+    <p class="muted" id="done-text"></p>
+    <p style="margin-top:18px"><a class="btn" href="cabinet.html">В кабинет</a></p>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>
