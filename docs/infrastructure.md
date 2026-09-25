@@ -62,5 +62,12 @@ insert into public.admin_users (user_id) values ('uuid-пользователя'
 - Оплату, Telegram-бота, CRM UI
 - Переписывание всего сайта на React
 
-## Следующий этап после инфраструктуры
-Личный кабинет + auth на сайте (регистрация / вход / профиль).
+## Кабинет
+Страница `cabinet.html` уже ходит в Supabase: регистрация, вход, профиль, баланс, запись и отмена.
+
+1. Выполнить `supabase/schema.sql` (он идемпотентный: политики пересоздаются, созвоны сеются только если таблица пустая).
+2. Вписать URL и anon key в `js/config.js`.
+3. Authentication → URL Configuration: Site URL и Redirect — адрес `cabinet.html` на GitHub Pages.
+4. Для мгновенного входа без письма: Authentication → Providers → Email → выключить Confirm email.
+
+Новый пользователь получает 1 бесплатное занятие (`source = welcome`). Запись и отмена идут через функции `book_session` и `cancel_booking`.

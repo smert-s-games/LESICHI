@@ -23,6 +23,19 @@ a.btn-orange,.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00)!impo
 @media(max-width:700px){.nav-inner{grid-template-columns:auto 1fr auto!important;gap:6px}.nav-links a{font-size:13px;padding:6px 8px}a.btn,.btn{padding:10px 14px!important;font-size:13px!important}}
 :root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-pale:#F6F4FF;--orange:#FF7A00;--bg:#FFD9B8;--card:#FFFFFF;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,0.12);--shadow:0 12px 40px rgba(106,69,227,0.12)}
 *{margin:0;padding:0;box-sizing:border-box}body{padding-top:72px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}h1,h2,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}.container{width:92%;max-width:880px;margin:0 auto}main{position:relative;z-index:1;flex:1;padding:40px 0 60px}.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}.page-sub{color:var(--muted);font-size:16px;margin-bottom:28px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}.stub{border:2px dashed rgba(106,69,227,0.35);background:var(--purple-pale);text-align:center;padding:36px 24px}.stub .big{font-size:40px;margin-bottom:10px}.stub h2{font-size:22px;margin-bottom:10px}.stub p{color:var(--muted);font-size:15px}.muted{color:var(--muted);font-size:14px}footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale)}.footer-logo{font-weight:800;font-size:18px;margin-bottom:6px;font-family:'Baloo 2',sans-serif}.footer-logo img{width:26px;height:26px;vertical-align:middle;margin-right:4px;border-radius:6px}.footer-logo .fn{height:24px;width:auto;vertical-align:middle}.footer-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-links a:hover{color:var(--purple)}.footer-copy{font-size:11px;color:#9B8EC4}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font:inherit;color:var(--text);background:#fff}
+.tabs{display:flex;gap:8px;margin-bottom:8px}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--text)}
+.tabs button.on{background:var(--purple);color:#fff;border-color:transparent}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.stat{font-family:'Baloo 2',sans-serif;font-size:36px;font-weight:800;color:var(--purple)}
+.btn.ghost{background:#fff!important;color:var(--purple-deep)!important;box-shadow:none!important;border:1px solid var(--line)!important}
+.head-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}.row{flex-direction:column;align-items:flex-start}}
 .paws{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .paw{position:absolute;user-select:none;will-change:transform,opacity;opacity:.26}
 @keyframes pawFloat1{0%{transform:translate(0,0) rotate(0) scale(.9)}50%{transform:translate(40px,-35vh) rotate(160deg) scale(1.05)}100%{transform:translate(-25px,-70vh) rotate(320deg) scale(.95)}}
@@ -49,16 +62,70 @@ a.btn-orange,.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00)!impo
 <main>
   <div class="container">
     <h1 class="page-title">Личный кабинет</h1>
-    <p class="page-sub">Раздел в разработке.</p>
-    <div class="card stub">
-      <div class="big">🔐</div>
-      <h2>Скоро здесь будет кабинет</h2>
-      <p>Запись на созвоны, история занятий и пакеты — появится позже.</p>
-      <p class="muted" style="margin-top:12px">Пока записывайтесь с главной или напишите в Telegram.</p>
-      <p style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-orange" href="index.html#meets">К расписанию</a>
-        <a class="btn" href="https://t.me/lesichi" target="_blank" rel="noopener">Telegram</a>
-      </p>
+    <p class="page-sub">Профиль, баланс занятий и запись на созвоны.</p>
+
+    <div id="setup" class="card" hidden>
+      <h2>Нужна база Supabase</h2>
+      <p class="muted" style="margin-top:8px">Создай проект на supabase.com, выполни <strong>supabase/schema.sql</strong> в SQL Editor и впиши URL и anon key в <strong>js/config.js</strong>. В Auth выключи подтверждение почты, если хочешь входить сразу. Site URL: адрес этой страницы.</p>
+    </div>
+
+    <div id="auth" class="card" hidden>
+      <div class="tabs">
+        <button type="button" id="tab-login" class="on">Вход</button>
+        <button type="button" id="tab-reg">Регистрация</button>
+      </div>
+      <form id="auth-form">
+        <input type="hidden" id="auth-mode" value="login">
+        <div id="reg-extra" hidden>
+          <label for="reg-name">Имя</label>
+          <input id="reg-name" autocomplete="name" placeholder="Как к тебе обращаться">
+        </div>
+        <label for="email">Email</label>
+        <input id="email" type="email" required autocomplete="email">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" required minlength="6" autocomplete="current-password">
+        <p id="auth-msg" class="muted" style="margin-top:10px"></p>
+        <p style="margin-top:16px"><button class="btn" id="auth-submit" type="submit">Войти</button></p>
+      </form>
+    </div>
+
+    <div id="app" class="stack" hidden>
+      <div class="head-row">
+        <div>
+          <h2 id="who">Привет</h2>
+          <p class="muted">Занятий на балансе</p>
+          <div class="stat" id="balance">0</div>
+        </div>
+        <button class="btn ghost" id="logout" type="button">Выйти</button>
+      </div>
+      <p id="app-msg" class="muted"></p>
+      <div class="grid-2">
+        <form id="profile-form" class="card">
+          <h2>Профиль</h2>
+          <label for="f-name">Имя</label>
+          <input id="f-name" required>
+          <label for="f-tg">Telegram</label>
+          <input id="f-tg" placeholder="@username">
+          <label for="f-level">Уровень</label>
+          <select id="f-level">
+            <option value="unknown">Пока не знаю</option>
+            <option value="beginner">Начинающий</option>
+            <option value="intermediate">Средний</option>
+            <option value="advanced">Уверенный</option>
+          </select>
+          <label for="f-tz">Часовой пояс</label>
+          <input id="f-tz" value="Europe/Minsk">
+          <p style="margin-top:16px"><button class="btn" type="submit">Сохранить</button></p>
+        </form>
+        <div class="card">
+          <h2>Мои записи</h2>
+          <div id="bookings"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Ближайшие созвоны</h2>
+        <div id="sessions"></div>
+      </div>
     </div>
   </div>
 </main>
@@ -90,5 +157,8 @@ a.btn-orange,.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00)!impo
   }
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/cabinet.js"></script>
 </body>
 </html>
