@@ -22,7 +22,7 @@
 
   function mapError(err) {
     var m = (err && err.message) || "Что-то пошло не так";
-    if (m.indexOf("no seats") !== -1) return "Мест больше нет";
+    if (m === "timeout") return "Сервер не ответил. Нажми ещё раз.";
     if (m.indexOf("already booked") !== -1) return "Ты уже записан на этот созвон";
     if (m.indexOf("no sessions left") !== -1) return "Закончились занятия в пакете";
     if (m.indexOf("already started") !== -1) return "Созвон уже начался, отменить нельзя";
@@ -50,89 +50,113 @@
     return cfg.url && cfg.anonKey && window.supabase;
   }
 
+  var loadGen = 0;
+
+  function withTimeout(promise, ms) {
+    return new Promise(function (resolve, reject) {
+      var timer = setTimeout(function () { reject(new Error("timeout")); }, ms);
+      promise.then(function (v) { clearTimeout(timer); resolve(v); }, function (e) { clearTimeout(timer); reject(e); });
+    });
+  }
+
   async function loadApp() {
+    var gen = ++loadGen;
     setMsg(appMsg, "Загружаю…", false);
-    var uid = user.id;
-    var profileRes = await sb.from("profiles").select("*").eq("id", uid).maybeSingle();
-    var profile = profileRes.data || {
-      full_name: "",
-      telegram: "",
-      level: "unknown",
-      timezone: "Europe/Minsk",
-      email: user.email
-    };
-    document.getElementById("f-name").value = profile.full_name || "";
-    document.getElementById("f-tg").value = profile.telegram || "";
-    document.getElementById("f-level").value = profile.level || "unknown";
-    document.getElementById("f-tz").value = profile.timezone || "Europe/Minsk";
-    document.getElementById("who").textContent = profile.full_name || user.email;
+    try {
+      var uid = user.id;
+      var profileRes = await withTimeout(sb.from("profiles").select("*").eq("id", uid).maybeSingle(), 12000);
+      if (gen !== loadGen) return;
+      if (profileRes.error) throw profileRes.error;
+      var profile = profileRes.data || {
+        full_name: "",
+        telegram: "",
+        level: "unknown",
+        timezone: "Europe/Minsk",
+        email: user.email
+      };
+      document.getElementById("f-name").value = profile.full_name || "";
+      document.getElementById("f-tg").value = profile.telegram || "";
+      document.getElementById("f-level").value = profile.level || "unknown";
+      document.getElementById("f-tz").value = profile.timezone || "Europe/Minsk";
+      document.getElementById("who").textContent = profile.full_name || user.email;
 
-    var packs = await sb.from("user_packages").select("sessions_left, sessions_total, source").eq("user_id", uid);
-    var left = 0;
-    (packs.data || []).forEach(function (p) { left += p.sessions_left || 0; });
-    document.getElementById("balance").textContent = String(left);
-    var admin = await sb.from("admin_users").select("user_id").eq("user_id", uid).maybeSingle();
-    var link = document.getElementById("admin-link");
-    if (link && admin.data) link.hidden = false;
+      var packs = await withTimeout(sb.from("user_packages").select("sessions_left, sessions_total, source").eq("user_id", uid), 12000);
+      if (gen !== loadGen) return;
+      if (packs.error) throw packs.error;
+      var left = 0;
+      (packs.data || []).forEach(function (p) { left += p.sessions_left || 0; });
+      document.getElementById("balance").textContent = String(left);
+      var admin = await withTimeout(sb.from("admin_users").select("user_id").eq("user_id", uid).maybeSingle(), 12000);
+      var link = document.getElementById("admin-link");
+      if (link && admin.data) link.hidden = false;
 
-    var nowIso = new Date().toISOString();
-    var sessions = await sb.from("sessions_with_seats")
-      .select("id, title, room, speaker_name, starts_at, duration_min, seats_left, status, zoom_url")
-      .gte("starts_at", nowIso)
-      .in("status", ["open", "full"])
-      .order("starts_at", { ascending: true });
+      var nowIso = new Date().toISOString();
+      var sessions = await withTimeout(sb.from("sessions_with_seats")
+        .select("id, title, room, speaker_name, starts_at, duration_min, seats_left, status, zoom_url")
+        .gte("starts_at", nowIso)
+        .in("status", ["open", "full"])
+        .order("starts_at", { ascending: true }), 12000);
+      if (gen !== loadGen) return;
+      if (sessions.error) throw sessions.error;
 
-    var mine = await sb.from("bookings")
-      .select("id, status, session_id, sessions(title, speaker_name, starts_at, zoom_url)")
-      .eq("user_id", uid)
-      .eq("status", "booked")
-      .order("created_at", { ascending: false });
+      var mine = await withTimeout(sb.from("bookings")
+        .select("id, status, session_id, sessions(title, speaker_name, starts_at, zoom_url)")
+        .eq("user_id", uid)
+        .eq("status", "booked")
+        .order("created_at", { ascending: false }), 12000);
+      if (gen !== loadGen) return;
+      if (mine.error) throw mine.error;
 
-    var bookedIds = {};
-    (mine.data || []).forEach(function (b) { bookedIds[b.session_id] = true; });
+      var bookedIds = {};
+      (mine.data || []).forEach(function (b) { bookedIds[b.session_id] = true; });
 
-    var list = document.getElementById("sessions");
-    list.innerHTML = "";
-    (sessions.data || []).forEach(function (s) {
-      var row = document.createElement("div");
-      row.className = "row";
-      var seats = s.seats_left == null ? "" : " · мест " + s.seats_left;
-      var btn = document.createElement("button");
-      btn.className = "btn btn-orange";
-      btn.type = "button";
-      btn.textContent = bookedIds[s.id] ? "Уже записан" : (s.seats_left > 0 ? "Записаться" : "Мест нет");
-      btn.disabled = !!bookedIds[s.id] || !(s.seats_left > 0);
-      btn.addEventListener("click", function () { book(s.id); });
-      row.innerHTML = "<div><strong>" + escapeHtml(s.title) + "</strong><div class='muted'>" +
-        escapeHtml(fmt(s.starts_at, profile.timezone)) + " · " + escapeHtml(s.speaker_name || "") + seats + "</div></div>";
-      row.appendChild(btn);
-      list.appendChild(row);
-    });
-    if (!list.children.length) {
-      list.innerHTML = "<p class='muted'>Ближайших созвонов пока нет.</p>";
+      var list = document.getElementById("sessions");
+      list.innerHTML = "";
+      (sessions.data || []).forEach(function (s) {
+        var row = document.createElement("div");
+        row.className = "row";
+        var seats = s.seats_left == null ? "" : " · мест " + s.seats_left;
+        var btn = document.createElement("button");
+        btn.className = "btn btn-orange";
+        btn.type = "button";
+        btn.textContent = bookedIds[s.id] ? "Уже записан" : (s.seats_left > 0 ? "Записаться" : "Мест нет");
+        btn.disabled = !!bookedIds[s.id] || !(s.seats_left > 0);
+        btn.addEventListener("click", function () { book(s.id, btn); });
+        row.innerHTML = "<div><strong>" + escapeHtml(s.title) + "</strong><div class='muted'>" +
+          escapeHtml(fmt(s.starts_at, profile.timezone)) + " · " + escapeHtml(s.speaker_name || "") + seats + "</div></div>";
+        row.appendChild(btn);
+        list.appendChild(row);
+      });
+      if (!list.children.length) {
+        list.innerHTML = "<p class='muted'>Ближайших созвонов пока нет.</p>";
+      }
+
+      var my = document.getElementById("bookings");
+      my.innerHTML = "";
+      (mine.data || []).forEach(function (b) {
+        var s = b.sessions || {};
+        var row = document.createElement("div");
+        row.className = "row";
+        var zoom = s.zoom_url ? "<a href='" + escapeHtml(s.zoom_url) + "' target='_blank' rel='noopener'>Zoom</a>" : "";
+        row.innerHTML = "<div><strong>" + escapeHtml(s.title || "Созвон") + "</strong><div class='muted'>" +
+          escapeHtml(fmt(s.starts_at, profile.timezone)) + " " + zoom + "</div></div>";
+        var btn = document.createElement("button");
+        btn.className = "btn ghost";
+        btn.type = "button";
+        btn.textContent = "Отменить";
+        btn.addEventListener("click", function () { cancel(b.id, btn); });
+        row.appendChild(btn);
+        my.appendChild(row);
+      });
+      if (!my.children.length) {
+        my.innerHTML = "<p class='muted'>Записей пока нет. Первый созвон уже на балансе.</p>";
+      }
+      if (gen === loadGen) setMsg(appMsg, "", false);
+    } catch (e) {
+      if (gen === loadGen) setMsg(appMsg, mapError(e), true);
+      return false;
     }
-
-    var my = document.getElementById("bookings");
-    my.innerHTML = "";
-    (mine.data || []).forEach(function (b) {
-      var s = b.sessions || {};
-      var row = document.createElement("div");
-      row.className = "row";
-      var zoom = s.zoom_url ? "<a href='" + escapeHtml(s.zoom_url) + "' target='_blank' rel='noopener'>Zoom</a>" : "";
-      row.innerHTML = "<div><strong>" + escapeHtml(s.title || "Созвон") + "</strong><div class='muted'>" +
-        escapeHtml(fmt(s.starts_at, profile.timezone)) + " " + zoom + "</div></div>";
-      var btn = document.createElement("button");
-      btn.className = "btn ghost";
-      btn.type = "button";
-      btn.textContent = "Отменить";
-      btn.addEventListener("click", function () { cancel(b.id); });
-      row.appendChild(btn);
-      my.appendChild(row);
-    });
-    if (!my.children.length) {
-      my.innerHTML = "<p class='muted'>Записей пока нет. Первый созвон уже на балансе.</p>";
-    }
-    setMsg(appMsg, "", false);
+    return true;
   }
 
   function escapeHtml(v) {
@@ -140,20 +164,30 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  async function book(id) {
-    setMsg(appMsg, "", false);
-    var res = await sb.rpc("book_session", { p_session_id: id });
-    if (res.error) setMsg(appMsg, mapError(res.error), true);
-    else setMsg(appMsg, "Ты в группе. Место списано с пакета.", false);
-    await loadApp();
+  async function book(id, btn) {
+    if (btn) { btn.disabled = true; btn.textContent = "Записываю…"; }
+    try {
+      var res = await withTimeout(sb.rpc("book_session", { p_session_id: id }), 12000);
+      var ok = await loadApp();
+      if (res.error) setMsg(appMsg, mapError(res.error), true);
+      else if (ok) setMsg(appMsg, "Ты в группе. Место списано с пакета.", false);
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = "Записаться"; }
+      setMsg(appMsg, mapError(e), true);
+    }
   }
 
-  async function cancel(id) {
-    setMsg(appMsg, "", false);
-    var res = await sb.rpc("cancel_booking", { p_booking_id: id });
-    if (res.error) setMsg(appMsg, mapError(res.error), true);
-    else setMsg(appMsg, "Запись отменена, занятие вернулось на баланс.", false);
-    await loadApp();
+  async function cancel(id, btn) {
+    if (btn) { btn.disabled = true; btn.textContent = "Отменяю…"; }
+    try {
+      var res = await withTimeout(sb.rpc("cancel_booking", { p_booking_id: id }), 12000);
+      var ok = await loadApp();
+      if (res.error) setMsg(appMsg, mapError(res.error), true);
+      else if (ok) setMsg(appMsg, "Запись отменена, занятие вернулось на баланс.", false);
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = "Отменить"; }
+      setMsg(appMsg, mapError(e), true);
+    }
   }
 
   function setTab(mode) {
