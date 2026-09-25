@@ -37,6 +37,9 @@ input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
 .head-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .stack{display:flex;flex-direction:column;gap:14px}
 [hidden]{display:none !important}
+.page-hero{display:grid;grid-template-columns:1fr 140px;gap:12px;align-items:center}
+.page-hero img{width:140px;height:auto;filter:drop-shadow(0 10px 18px rgba(43,27,94,.16))}
+@media(max-width:700px){.page-hero{grid-template-columns:1fr}.page-hero img{width:110px}}
 @media(max-width:700px){.grid-2{grid-template-columns:1fr}.row{flex-direction:column;align-items:flex-start}}
 .paws{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .paw{position:absolute;user-select:none;will-change:transform,opacity;opacity:.26}
@@ -63,8 +66,13 @@ input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
 </nav>
 <main>
   <div class="container">
-    <h1 class="page-title">Личный кабинет</h1>
-    <p class="page-sub">Профиль, баланс занятий и запись на созвоны.</p>
+    <div class="page-hero">
+      <div>
+        <h1 class="page-title">Личный кабинет</h1>
+        <p class="page-sub">Профиль, баланс занятий и запись на созвоны.</p>
+      </div>
+      <img src="image/stickers/happy.png" alt="">
+    </div>
 
     <div id="setup" class="card" hidden>
       <h2>Нужна база Supabase</h2>

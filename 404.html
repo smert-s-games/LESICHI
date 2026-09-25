@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Страница не найдена — Lesichi</title>
+<link rel="icon" id="favicon" href="image/site/icon2.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#6A45E3;--deep:#2B1B5E;--bg:#FFD9B8;--card:#fff;--muted:#5C4B8A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--deep);display:flex;align-items:center;justify-content:center;padding:24px 16px;overflow-x:hidden}
+h1,h2,a.btn{font-family:'Baloo 2',sans-serif}
+.paws{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paw{position:absolute;opacity:.22;user-select:none}
+@keyframes floaty{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
+.stage{position:relative;z-index:1;width:min(720px,100%);text-align:center}
+.code{font-family:'Baloo 2',sans-serif;font-size:clamp(64px,12vw,104px);line-height:.9;font-weight:800;color:#6A45E3}
+.scene{position:relative;height:230px;margin:4px auto 6px}
+.fox{position:absolute;left:50%;bottom:0;width:min(240px,58vw);transform:translateX(-54%);border-radius:32px;box-shadow:0 18px 40px rgba(43,27,94,.22);background:linear-gradient(180deg,#3a246e,#1c1238)}
+.sticker{position:absolute;width:108px;height:auto;filter:drop-shadow(0 10px 16px rgba(43,27,94,.16));animation:floaty 3.4s ease-in-out infinite}
+.sticker.q{width:132px;right:6%;top:8px;animation-delay:-.4s}
+.sticker.z{width:96px;left:4%;bottom:18px;animation-delay:-1.2s}
+.sticker.go{width:100px;right:0;bottom:8px;animation-delay:-2s}
+h2{font-size:clamp(26px,4vw,36px);margin:8px 0 8px}
+p{color:var(--muted);font-size:16px;margin-bottom:22px}
+a.btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:16px;background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 8px 22px rgba(106,69,227,.35)}
+a.btn:hover{transform:translateY(-2px)}
+@media(max-width:640px){
+  .scene{height:240px}
+  .sticker.q{width:96px;right:0;top:0}
+  .sticker.z,.sticker.go{width:78px}
+}
+</style>
+</head>
+<body>
+<div class="paws" id="paws"></div>
+<main class="stage">
+  <div class="scene">
+    <img class="fox" data-src="image/lis/lis_back.png" alt="Лесик ушёл">
+    <img class="sticker q" data-src="image/stickers/qwestion.png" alt="">
+    <img class="sticker z" data-src="image/stickers/sleep.png" alt="">
+    <img class="sticker go" data-src="image/stickers/on_my_way.png" alt="">
+  </div>
+  <div class="code">404</div>
+  <h2>Лесик свернул не туда</h2>
+  <p>Такой страницы нет. Вернись на главную — созвоны на месте.</p>
+  <a class="btn" data-href="index.html" href="index.html">На главную</a>
+</main>
+<script>
+(function () {
+  var root = location.hostname.indexOf("github.io") !== -1 ? "/LESICHI/" : "";
+  document.querySelectorAll("[data-src]").forEach(function (img) {
+    img.src = root + img.getAttribute("data-src");
+  });
+  document.querySelectorAll("[data-href]").forEach(function (a) {
+    a.href = root + a.getAttribute("data-href");
+  });
+  var icon = document.getElementById("favicon");
+  if (icon && root) icon.href = root + "image/site/icon2.png";
+  var el = document.getElementById("paws");
+  var anims = ["pawFloat1", "pawFloat2", "pawFloat3"];
+  if (!document.getElementById("paw-anim")) {
+    var css = document.createElement("style");
+    css.id = "paw-anim";
+    css.textContent = "@keyframes pawFloat1{0%{transform:translate(0,0)}50%{transform:translate(30px,-20vh)}100%{transform:translate(-20px,-40vh)}}@keyframes pawFloat2{0%{transform:translate(0,0)}50%{transform:translate(-36px,-18vh)}100%{transform:translate(18px,-42vh)}}@keyframes pawFloat3{0%{transform:translate(0,0)}50%{transform:translate(24px,-24vh)}100%{transform:translate(-16px,-46vh)}}";
+    document.head.appendChild(css);
+  }
+  for (var i = 0; i < 18; i++) {
+    var p = document.createElement("div");
+    p.className = "paw";
+    p.textContent = "🐾";
+    p.style.left = (Math.random() * 100) + "%";
+    p.style.top = (Math.random() * 100) + "%";
+    p.style.fontSize = (16 + Math.random() * 22) + "px";
+    p.style.color = "rgba(255,122,0,.55)";
+    var dur = 16 + Math.random() * 12;
+    p.style.animation = anims[i % 3] + " " + dur + "s linear " + (-Math.random() * dur) + "s infinite";
+    el.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>

@@ -33,6 +33,10 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
 .summary h2{font-size:22px;margin-bottom:6px}
 .price{font-family:'Baloo 2',sans-serif;font-size:40px;font-weight:800;color:var(--purple-deep);margin:8px 0}
 .price span{font-size:16px}
+.page-hero{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:center}
+.page-hero img{width:150px;height:auto;filter:drop-shadow(0 10px 18px rgba(43,27,94,.16))}
+.summary-art{width:120px;height:auto;display:block;margin-top:14px}
+@media(max-width:800px){.page-hero{grid-template-columns:1fr}.page-hero img{width:120px}}
 .muted{color:var(--muted);font-size:14px}
 .msg{margin-top:12px;font-size:14px}
 #done{text-align:center;padding:36px 20px}
@@ -56,8 +60,13 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
   </div>
 </nav>
 <main class="container">
-  <h1 class="page-title">Оформление заказа</h1>
-  <p class="page-sub">Оплата имитируется: занятия сразу появятся в кабинете.</p>
+  <div class="page-hero">
+    <div>
+      <h1 class="page-title">Оформление заказа</h1>
+      <p class="page-sub">Оплата имитируется: занятия сразу появятся в кабинете.</p>
+    </div>
+    <img src="image/stickers/lets_go.png" alt="">
+  </div>
   <div class="card" id="gate"><p class="muted">Проверяю вход…</p></div>
   <div class="layout" id="order" hidden>
     <form class="card" id="form">
@@ -76,6 +85,7 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
       <h2 id="pack-title">4 созвона</h2>
       <div class="price" id="pack-price">50 <span>BYN</span></div>
       <p class="muted" id="pack-meta">4 созвона по 60 минут · группа до 6</p>
+      <img class="summary-art" src="image/stickers/coffe_time.png" alt="">
     </aside>
   </div>
   <div class="card" id="done" hidden>

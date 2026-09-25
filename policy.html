@@ -21,7 +21,13 @@ a.btn,.btn{display:inline-flex!important;align-items:center;justify-self:end!imp
 a.btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(106,69,227,0.45)!important;color:#fff!important}
 @media(max-width:700px){.nav-inner{grid-template-columns:auto 1fr auto!important;gap:6px}.nav-links a{font-size:13px;padding:6px 8px}a.btn,.btn{padding:10px 14px!important;font-size:13px!important}}
 :root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-pale:#F6F4FF;--orange:#FF7A00;--bg:#FFD9B8;--card:#FFFFFF;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,0.12);--shadow:0 12px 40px rgba(106,69,227,0.12)}
-*{margin:0;padding:0;box-sizing:border-box}body{padding-top:72px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}h1,h2,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}.container{width:92%;max-width:880px;margin:0 auto}main{position:relative;z-index:1;flex:1;padding:40px 0 60px}.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}.page-sub{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:560px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px}.card h2{font-size:18px;font-weight:800;margin-bottom:10px}.card p{color:var(--muted);font-size:15px}.policy-list{padding-left:18px;color:var(--muted);font-size:14.5px}.policy-list li{margin-bottom:8px}.muted{color:var(--muted);font-size:14px}footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale)}.footer-logo{font-weight:800;font-size:18px;margin-bottom:6px;font-family:'Baloo 2',sans-serif}.footer-logo img{width:26px;height:26px;vertical-align:middle;margin-right:4px;border-radius:6px}.footer-logo .fn{height:24px;width:auto;vertical-align:middle}.footer-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-links a:hover{color:var(--purple)}.footer-copy{font-size:11px;color:#9B8EC4}
+*{margin:0;padding:0;box-sizing:border-box}body{padding-top:72px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}h1,h2,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}.container{width:92%;max-width:880px;margin:0 auto}main{position:relative;z-index:1;flex:1;padding:40px 0 60px}.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}.page-sub{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:560px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px}.card h2{font-size:18px;font-weight:800;margin-bottom:10px}.card p{color:var(--muted);font-size:15px}.policy-list{padding-left:18px;color:var(--muted);font-size:14.5px}.policy-list li{margin-bottom:8px}.muted{color:var(--muted);font-size:14px}
+.page-hero{display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:end}
+.page-hero img{width:150px;height:auto}
+.policy-art{display:flex;gap:10px;flex-wrap:wrap;margin:-8px 0 20px}
+.policy-art img{width:84px;height:auto;filter:drop-shadow(0 8px 14px rgba(43,27,94,.14))}
+@media(max-width:700px){.page-hero{grid-template-columns:1fr}.page-hero img{width:120px}}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale)}.footer-logo{font-weight:800;font-size:18px;margin-bottom:6px;font-family:'Baloo 2',sans-serif}.footer-logo img{width:26px;height:26px;vertical-align:middle;margin-right:4px;border-radius:6px}.footer-logo .fn{height:24px;width:auto;vertical-align:middle}.footer-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-links a:hover{color:var(--purple)}.footer-copy{font-size:11px;color:#9B8EC4}
 .paws{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .paw{position:absolute;user-select:none;will-change:transform,opacity;opacity:.26}
 @keyframes pawFloat1{0%{transform:translate(0,0) rotate(0) scale(.9)}50%{transform:translate(40px,-35vh) rotate(160deg) scale(1.05)}100%{transform:translate(-25px,-70vh) rotate(320deg) scale(.95)}}
@@ -47,8 +53,18 @@ a.btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(106
 </nav>
 <main>
   <div class="container">
-    <h1 class="page-title">Политика пользования</h1>
-    <p class="page-sub">Базовая версия. Позже уточним юридические формулировки.</p>
+    <div class="page-hero">
+      <div>
+        <h1 class="page-title">Политика пользования</h1>
+        <p class="page-sub">Базовая версия. Позже уточним юридические формулировки.</p>
+      </div>
+      <img src="image/lis/lis_sit.png" alt="Лесик">
+    </div>
+    <div class="policy-art">
+      <img src="image/stickers/working.png" alt="">
+      <img src="image/stickers/just_chill.png" alt="">
+      <img src="image/mini%20icon/wifi.png" alt="">
+    </div>
     <div class="card"><h2>1. О сервисе</h2><p>Lesichi — онлайн speaking club. Групповые разговорные созвоны с иностранными спикерами.</p></div>
     <div class="card"><h2>2. Запись и участие</h2><ul class="policy-list"><li>Группа до 6 человек, ~60 минут, Zoom.</li><li>Уважение к спикеру и участникам.</li><li>При грубых нарушениях можем отказать в участии.</li></ul></div>
     <div class="card"><h2>3. Оплата и переносы</h2><ul class="policy-list"><li>Первый созвон может быть бесплатным по акции.</li><li>Условия переноса уточняются при оплате.</li></ul></div>

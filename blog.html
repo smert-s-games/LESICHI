@@ -21,7 +21,12 @@ a.btn,.btn{display:inline-flex!important;align-items:center;justify-self:end!imp
 a.btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(106,69,227,0.45)!important;color:#fff!important}
 @media(max-width:700px){.nav-inner{grid-template-columns:auto 1fr auto!important;gap:6px}.nav-links a{font-size:13px;padding:6px 8px}a.btn,.btn{padding:10px 14px!important;font-size:13px!important}}
 :root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-pale:#F6F4FF;--orange:#FF7A00;--bg:#FFD9B8;--card:#FFFFFF;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,0.12);--shadow:0 12px 40px rgba(106,69,227,0.12)}
-*{margin:0;padding:0;box-sizing:border-box}body{padding-top:72px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}h1,h2,h3,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}.container{width:92%;max-width:880px;margin:0 auto}main{position:relative;z-index:1;flex:1;padding:40px 0 60px}.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}.page-sub{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:560px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px}.blog-item h3{font-size:18px;font-weight:800;margin-bottom:6px}.blog-item .meta{font-size:12px;color:var(--purple);font-weight:600;margin-bottom:8px}.blog-item p{color:var(--muted);font-size:15px}footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale)}.footer-logo{font-weight:800;font-size:18px;margin-bottom:6px;font-family:'Baloo 2',sans-serif}.footer-logo img{width:26px;height:26px;vertical-align:middle;margin-right:4px;border-radius:6px}.footer-logo .fn{height:24px;width:auto;vertical-align:middle}.footer-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-links a:hover{color:var(--purple)}.footer-copy{font-size:11px;color:#9B8EC4}
+*{margin:0;padding:0;box-sizing:border-box}body{padding-top:72px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}h1,h2,h3,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}.container{width:92%;max-width:880px;margin:0 auto}main{position:relative;z-index:1;flex:1;padding:40px 0 60px}.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}.page-sub{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:560px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px}.blog-item h3{font-size:18px;font-weight:800;margin-bottom:6px}.blog-item .meta{font-size:12px;color:var(--purple);font-weight:600;margin-bottom:8px}.blog-item p{color:var(--muted);font-size:15px}
+.page-hero{display:grid;grid-template-columns:1fr 180px;gap:16px;align-items:center;margin-bottom:8px}
+.page-hero img{width:180px;height:auto;filter:drop-shadow(0 12px 22px rgba(43,27,94,.18))}
+.blog-item{display:grid;grid-template-columns:1fr 110px;gap:12px;align-items:center}
+.blog-item img{width:110px;height:auto}
+@media(max-width:700px){.page-hero,.blog-item{grid-template-columns:1fr}.page-hero img,.blog-item img{width:120px}}footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale)}.footer-logo{font-weight:800;font-size:18px;margin-bottom:6px;font-family:'Baloo 2',sans-serif}.footer-logo img{width:26px;height:26px;vertical-align:middle;margin-right:4px;border-radius:6px}.footer-logo .fn{height:24px;width:auto;vertical-align:middle}.footer-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-links a:hover{color:var(--purple)}.footer-copy{font-size:11px;color:#9B8EC4}
 .paws{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .paw{position:absolute;user-select:none;will-change:transform,opacity;opacity:.26}
 @keyframes pawFloat1{0%{transform:translate(0,0) rotate(0) scale(.9)}50%{transform:translate(40px,-35vh) rotate(160deg) scale(1.05)}100%{transform:translate(-25px,-70vh) rotate(320deg) scale(.95)}}
@@ -47,11 +52,16 @@ a.btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(106
 </nav>
 <main>
   <div class="container">
-    <h1 class="page-title">Блог</h1>
-    <p class="page-sub">Заметки про разговорную практику. Пока заглушки — скоро появятся нормальные посты.</p>
-    <article class="card blog-item"><div class="meta">Скоро</div><h3>Как начать говорить, если страшно</h3><p>Черновик: про первый созвон и маленькие группы.</p></article>
-    <article class="card blog-item"><div class="meta">Скоро</div><h3>Почему 6 человек — это важно</h3><p>Черновик: сколько реально успеваешь сказать.</p></article>
-    <article class="card blog-item"><div class="meta">Скоро</div><h3>Комнаты Lesichi: Travel, Tech, Memes</h3><p>Черновик: какую тему выбрать для первого раза.</p></article>
+    <div class="page-hero">
+      <div>
+        <h1 class="page-title">Блог</h1>
+        <p class="page-sub">Заметки про разговорную практику. Пока заглушки — скоро появятся нормальные посты.</p>
+      </div>
+      <img src="image/stickers/write_me.png" alt="">
+    </div>
+    <article class="card blog-item"><div><div class="meta">Скоро</div><h3>Как начать говорить, если страшно</h3><p>Черновик: про первый созвон и маленькие группы.</p></div><img src="image/stickers/qwestion.png" alt=""></article>
+    <article class="card blog-item"><div><div class="meta">Скоро</div><h3>Почему 6 человек — это важно</h3><p>Черновик: сколько реально успеваешь сказать.</p></div><img src="image/stickers/small_steps.png" alt=""></article>
+    <article class="card blog-item"><div><div class="meta">Скоро</div><h3>Комнаты Lesichi: Travel, Tech, Memes</h3><p>Черновик: какую тему выбрать для первого раза.</p></div><img src="image/stickers/wow.png" alt=""></article>
   </div>
 </main>
 <footer>
