@@ -27,34 +27,49 @@
       }).join("");
     });
 
-  sb.from("sessions").select("speaker_name,room").not("speaker_name", "is", null)
+  sb.from("speakers").select("name,origin,bio,topic").eq("is_active", true)
     .then(function (res) {
-      var box = document.getElementById("speaker-list");
-      if (!box || !res.data) return;
+      if (res.error) return fillSpeakersFromSessions();
+      var people = (res.data || []).map(function (p) {
+        return { name: p.name, room: p.origin || p.topic || "", bio: p.bio || "" };
+      });
+      if (!people.length) return fillSpeakersFromSessions();
+      showSpeakers(people);
+    });
+
+  function showSpeakers(people) {
+    var box = document.getElementById("speaker-list");
+    if (!box || !people.length) return;
+    for (var i = people.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = people[i];
+      people[i] = people[j];
+      people[j] = tmp;
+    }
+    var tones = ["s1", "s2", "s3"];
+    box.innerHTML = people.slice(0, 3).map(function (p, i) {
+      var letter = esc(p.name.charAt(0).toUpperCase());
+      var room = p.room ? '<div class="from">' + esc(p.room) + "</div>" : "";
+      var bio = p.bio ? "<p>" + esc(p.bio) + "</p>" : "";
+      return '<div class="card speaker reveal visible"><div class="speaker-av ' + tones[i % 3] + '">' + letter +
+        "</div><h3>" + esc(p.name) + "</h3>" + room + bio + "</div>";
+    }).join("");
+  }
+
+  function fillSpeakersFromSessions() {
+    sb.from("sessions").select("speaker_name,room").not("speaker_name", "is", null).then(function (res) {
+      if (!res.data) return;
       var seen = {};
       var people = [];
       res.data.forEach(function (row) {
         var name = (row.speaker_name || "").trim();
         if (!name || seen[name.toLowerCase()]) return;
         seen[name.toLowerCase()] = true;
-        people.push({ name: name, room: row.room || "" });
+        people.push({ name: name, room: row.room || "", bio: "" });
       });
-      for (var i = people.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = people[i];
-        people[i] = people[j];
-        people[j] = tmp;
-      }
-      people = people.slice(0, 3);
-      if (!people.length) return;
-      var tones = ["s1", "s2", "s3"];
-      box.innerHTML = people.map(function (p, i) {
-        var letter = esc(p.name.charAt(0).toUpperCase());
-        var room = p.room ? '<div class="from">' + esc(p.room) + "</div>" : "";
-        return '<div class="card speaker reveal visible"><div class="speaker-av ' + tones[i % 3] + '">' + letter +
-          "</div><h3>" + esc(p.name) + "</h3>" + room + "</div>";
-      }).join("");
+      showSpeakers(people);
     });
+  }
 
   sb.from("packages").select("code,title,sessions_count,price_byn").eq("is_active", true).order("price_byn")
     .then(function (res) {

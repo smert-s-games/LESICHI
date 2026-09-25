@@ -477,3 +477,33 @@ left join (
 ) b on b.session_id = s.id;
 
 grant select on public.sessions_with_seats to anon, authenticated;
+
+-- Speakers (also in supabase/speakers.sql for an already-created project)
+create table if not exists public.speakers (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  origin text,
+  bio text,
+  topic text,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+alter table public.sessions
+  add column if not exists speaker_id uuid references public.speakers (id) on delete set null;
+
+alter table public.speakers enable row level security;
+
+drop policy if exists "speakers_select_public" on public.speakers;
+create policy "speakers_select_public"
+  on public.speakers for select
+  using (is_active or public.is_admin());
+
+drop policy if exists "speakers_admin_write" on public.speakers;
+create policy "speakers_admin_write"
+  on public.speakers for all
+  using (public.is_admin())
+  with check (public.is_admin());
+
+grant select on public.speakers to anon, authenticated;
+grant insert, update, delete on public.speakers to authenticated;

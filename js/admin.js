@@ -3,6 +3,7 @@
   var sb = cfg.url && window.supabase ? window.supabase.createClient(cfg.url, cfg.anonKey) : null;
   var tabs = [
     ["sessions", "Созвоны"],
+    ["speakers", "Спикеры"],
     ["packages", "Цены"],
     ["bookings", "Записи"],
     ["people", "Люди"],
@@ -38,6 +39,29 @@
       panel.querySelector("#add-session").onsubmit = addSession;
       panel.querySelectorAll("[data-del]").forEach(function (b) {
         b.onclick = function () { remove("sessions", b.dataset.del); };
+      });
+    } else if (current === "speakers") {
+      var speakers = await sb.from("speakers").select("*").order("name");
+      if (speakers.error) {
+        panel.innerHTML = "<p class='err'>Таблица speakers ещё не создана. Выполни supabase/speakers.sql в SQL Editor.</p>";
+        return;
+      }
+      panel.innerHTML = speakerForm() + (speakers.data || []).map(function (p) {
+        return '<form class="card rowform" data-id="' + p.id + '">' +
+          '<input name="name" value="' + esc(p.name) + '" required>' +
+          '<input name="origin" value="' + esc(p.origin) + '" placeholder="Откуда">' +
+          '<input name="topic" value="' + esc(p.topic) + '" placeholder="Тема">' +
+          '<input name="bio" value="' + esc(p.bio) + '" placeholder="Коротко">' +
+          '<label><input name="is_active" type="checkbox"' + (p.is_active ? " checked" : "") + '> на сайте</label>' +
+          '<button class="btn primary" type="submit">Сохранить</button>' +
+          '<button class="btn" type="button" data-del="' + p.id + '">Удалить</button></form>';
+      }).join("") || "<p class='muted'>Спикеров пока нет</p>";
+      panel.querySelector("#add-speaker").onsubmit = addSpeaker;
+      panel.querySelectorAll("form[data-id]").forEach(function (f) {
+        f.onsubmit = function (e) { e.preventDefault(); saveSpeaker(f); };
+      });
+      panel.querySelectorAll("[data-del]").forEach(function (b) {
+        b.onclick = function () { remove("speakers", b.dataset.del); };
       });
     } else if (current === "packages") {
       var packs = await sb.from("packages").select("*").order("price_byn");
@@ -119,6 +143,29 @@
 
   function sessionForm() {
     return '<form class="card rowform" id="add-session"><input name="title" placeholder="Название" required><input name="room" placeholder="Комната"><input name="speaker_name" placeholder="Спикер"><input name="starts_at" type="datetime-local" required><input name="duration_min" type="number" value="60" style="width:80px"><input name="max_participants" type="number" value="6" style="width:70px"><input name="zoom_url" placeholder="Zoom"><button class="btn primary" type="submit">Добавить созвон</button></form>';
+  }
+
+  function speakerForm() {
+    return '<form class="card rowform" id="add-speaker"><input name="name" placeholder="Имя" required><input name="origin" placeholder="Откуда"><input name="topic" placeholder="Тема"><input name="bio" placeholder="Коротко"><button class="btn primary" type="submit">Добавить спикера</button></form>';
+  }
+
+  function speakerFields(f) {
+    return {
+      name: f.name.value.trim(),
+      origin: f.origin.value.trim(),
+      topic: f.topic.value.trim(),
+      bio: f.bio.value.trim(),
+      is_active: f.is_active ? f.is_active.checked : true
+    };
+  }
+
+  async function addSpeaker(e) {
+    e.preventDefault();
+    done(await sb.from("speakers").insert(speakerFields(e.target)));
+  }
+
+  async function saveSpeaker(f) {
+    done(await sb.from("speakers").update(speakerFields(f)).eq("id", f.dataset.id));
   }
 
   async function addSession(e) {
