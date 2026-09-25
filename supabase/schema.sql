@@ -400,7 +400,30 @@ create policy "leads_admin_all"
 
 create policy "admin_users_select_admin"
   on public.admin_users for select
-  using (public.is_admin());
+  using (user_id = auth.uid() or public.is_admin());
+
+drop policy if exists "admin_users_select_own" on public.admin_users;
+
+create or replace function public.claim_first_admin()
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if auth.uid() is null then
+    return false;
+  end if;
+  if exists (select 1 from public.admin_users) then
+    return exists (select 1 from public.admin_users where user_id = auth.uid());
+  end if;
+  insert into public.admin_users (user_id) values (auth.uid());
+  return true;
+end;
+$$;
+
+revoke all on function public.claim_first_admin() from public;
+grant execute on function public.claim_first_admin() to authenticated;
 
 drop policy if exists "profiles_update_admin" on public.profiles;
 create policy "profiles_update_admin"

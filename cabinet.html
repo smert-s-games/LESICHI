@@ -33,7 +33,8 @@ input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
 .row:last-child{border-bottom:none}
 .stat{font-family:'Baloo 2',sans-serif;font-size:36px;font-weight:800;color:var(--purple)}
 .btn.ghost{background:#fff!important;color:var(--purple-deep)!important;box-shadow:none!important;border:1px solid var(--line)!important}
-.head-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.head-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .stack{display:flex;flex-direction:column;gap:14px}
 [hidden]{display:none !important}
 @media(max-width:700px){.grid-2{grid-template-columns:1fr}.row{flex-direction:column;align-items:flex-start}}
@@ -97,8 +98,10 @@ input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
           <p class="muted">Занятий на балансе</p>
           <div class="stat" id="balance">0</div>
         </div>
-        <a class="btn ghost" id="admin-link" href="admin.html" hidden>Админка</a>
-        <button class="btn ghost" id="logout" type="button">Выйти</button>
+        <div class="head-actions">
+          <a class="btn ghost" id="admin-link" href="admin.html">Админка</a>
+          <button class="btn ghost" id="logout" type="button">Выйти</button>
+        </div>
       </div>
       <p id="app-msg" class="muted"></p>
       <div class="grid-2">
@@ -134,7 +137,7 @@ input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid va
 <footer>
   <div class="container">
     <div class="footer-logo"><img src="image/site/icon2.png" alt=""><img class="fn" src="image/site/name.png" alt="Lesichi"></div>
-    <div class="footer-links"><a href="index.html">Главная</a><a href="about.html">О нас</a><a href="blog.html">Блог</a><a href="cabinet.html">Кабинет</a><a href="policy.html">Политика</a><a href="index.html#contacts">Контакты</a></div>
+    <div class="footer-links"><a href="index.html">Главная</a><a href="about.html">О нас</a><a href="blog.html">Блог</a><a href="cabinet.html">Кабинет</a><a href="admin.html">Админка</a><a href="policy.html">Политика</a><a href="index.html#contacts">Контакты</a></div>
     <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
   </div>
 </footer>

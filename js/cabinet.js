@@ -71,8 +71,13 @@
     var left = 0;
     (packs.data || []).forEach(function (p) { left += p.sessions_left || 0; });
     document.getElementById("balance").textContent = String(left);
+    try { await sb.rpc("claim_first_admin"); } catch (e) {}
     var admin = await sb.from("admin_users").select("user_id").eq("user_id", uid).maybeSingle();
-    if (admin.data) document.getElementById("admin-link").hidden = false;
+    var link = document.getElementById("admin-link");
+    if (link) {
+      link.hidden = false;
+      if (!admin.data) link.title = "Нужно один раз выполнить supabase/admin.sql";
+    }
 
     var nowIso = new Date().toISOString();
     var sessions = await sb.from("sessions_with_seats")
