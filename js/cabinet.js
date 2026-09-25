@@ -189,6 +189,11 @@
       return;
     }
     user = res.data.user || (res.data.session && res.data.session.user);
+    var next = new URLSearchParams(location.search).get("next") || "";
+    if (next.indexOf("order.html?pack=") === 0) {
+      location.href = next;
+      return;
+    }
     show("app");
     loadApp();
   });
@@ -224,6 +229,11 @@
     var session = await sb.auth.getSession();
     user = session.data && session.data.session && session.data.session.user;
     if (user) {
+      var next = new URLSearchParams(location.search).get("next") || "";
+      if (next.indexOf("order.html?pack=") === 0) {
+        location.href = next;
+        return;
+      }
       show("app");
       loadApp();
     } else {

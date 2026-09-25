@@ -402,6 +402,34 @@ create policy "admin_users_select_admin"
   on public.admin_users for select
   using (public.is_admin());
 
+create or replace function public.purchase_package(p_code text)
+returns int
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_user uuid := auth.uid();
+  v_pkg public.packages%rowtype;
+begin
+  if v_user is null then
+    raise exception 'not authenticated';
+  end if;
+  select * into v_pkg from public.packages where code = p_code and is_active;
+  if v_pkg.id is null then
+    raise exception 'unknown package';
+  end if;
+  insert into public.payments (user_id, package_id, amount_byn, status, provider, paid_at)
+  values (v_user, v_pkg.id, v_pkg.price_byn, 'paid', 'simulated', now());
+  insert into public.user_packages (user_id, package_id, sessions_total, sessions_left, source)
+  values (v_user, v_pkg.id, v_pkg.sessions_count, v_pkg.sessions_count, 'simulated');
+  return v_pkg.sessions_count;
+end;
+$$;
+
+revoke all on function public.purchase_package(text) from public;
+grant execute on function public.purchase_package(text) to authenticated;
+
 create or replace view public.sessions_with_seats as
 select
   s.*,
