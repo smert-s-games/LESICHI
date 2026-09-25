@@ -175,6 +175,7 @@ declare
   v_pkg uuid;
   v_seats int;
   v_booking uuid;
+  v_existing public.bookings%rowtype;
 begin
   if v_user is null then
     raise exception 'not authenticated';
@@ -188,17 +189,19 @@ begin
   )
   into v_seats
   from public.sessions s
-  where s.id = p_session_id and s.status = 'open'
+  where s.id = p_session_id and s.status in ('open', 'full')
   for update;
 
   if v_seats is null or v_seats < 1 then
     raise exception 'no seats';
   end if;
 
-  if exists (
-    select 1 from public.bookings
-    where session_id = p_session_id and user_id = v_user and status = 'booked'
-  ) then
+  select * into v_existing
+  from public.bookings
+  where session_id = p_session_id and user_id = v_user
+  for update;
+
+  if v_existing.id is not null and v_existing.status = 'booked' then
     raise exception 'already booked';
   end if;
 
@@ -215,21 +218,30 @@ begin
     raise exception 'no sessions left';
   end if;
 
-  insert into public.bookings (session_id, user_id, user_package_id, status)
-  values (p_session_id, v_user, v_pkg, 'booked')
-  returning id into v_booking;
+  if v_existing.id is not null then
+    update public.bookings
+    set status = 'booked', user_package_id = v_pkg
+    where id = v_existing.id
+    returning id into v_booking;
+  else
+    insert into public.bookings (session_id, user_id, user_package_id, status)
+    values (p_session_id, v_user, v_pkg, 'booked')
+    returning id into v_booking;
+  end if;
 
   update public.user_packages
   set sessions_left = sessions_left - 1
   where id = v_pkg;
 
   update public.sessions s
-  set status = 'full'
-  where s.id = p_session_id
-    and s.max_participants <= (
+  set status = case
+    when s.max_participants <= (
       select count(*) from public.bookings b
       where b.session_id = p_session_id and b.status = 'booked'
-    );
+    ) then 'full'
+    else 'open'
+  end
+  where s.id = p_session_id;
 
   return v_booking;
 end;
