@@ -174,7 +174,14 @@
     var user = session.data && session.data.session && session.data.session.user;
     if (!user) { location.replace("cabinet.html?next=admin.html"); return; }
     var admin = await sb.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
-    if (!admin.data) { deny(); return; }
+    if (admin.error || !admin.data) {
+      try { await sb.rpc("claim_first_admin"); } catch (e) {}
+      admin = await sb.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
+    }
+    if (!admin.data) {
+      deny(user, admin.error);
+      return;
+    }
     document.getElementById("app").hidden = false;
     var box = document.getElementById("tabs");
     box.innerHTML = tabs.map(function (t) {
@@ -190,8 +197,16 @@
     render();
   }
 
-  function deny() {
-    document.getElementById("denied").hidden = false;
+  function deny(user, err) {
+    var box = document.getElementById("denied");
+    box.hidden = false;
+    if (!user) return;
+    var extra = document.createElement("p");
+    extra.className = "muted";
+    extra.style.marginTop = "12px";
+    extra.textContent = "Сейчас вход: " + (user.email || "") + ". Твой id: " + user.id + ". В SQL Editor выполни: insert into public.admin_users (user_id) values ('" + user.id + "');";
+    if (err && err.message) extra.textContent += " Ошибка: " + err.message;
+    box.appendChild(extra);
   }
 
   boot();
