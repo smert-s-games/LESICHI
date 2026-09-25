@@ -193,13 +193,15 @@ footer{border-top:1px solid var(--line);padding:20px 0;text-align:center;backgro
 </div></div></div></section>
 <section id="meets"><div class="container">
 <h2 class="section-title reveal">Ближайшие созвоны</h2>
-<div class="event reveal"><div><h3>🌍 Travel Stories — Alex</h3><div class="event-meta"><span>Пт, 19:00</span><span class="spot hot">2 места</span></div></div><a href="#meets" class="btn">Записаться</a></div>
-<div class="event reveal"><div><h3>🤖 Future Tech — Emma</h3><div class="event-meta"><span>Сб, 18:00</span><span class="spot">3 места</span></div></div><a href="#meets" class="btn">Записаться</a></div>
-<div class="event reveal"><div><h3>🎬 Movies & Memes — Carlos</h3><div class="event-meta"><span>Вс, 17:00</span><span class="spot">3 места</span></div></div><a href="#meets" class="btn">Записаться</a></div>
+<div id="meet-list">
+<div class="event reveal"><div><h3>🌍 Travel Stories — Alex</h3><div class="event-meta"><span>Пт, 19:00</span><span class="spot hot">2 места</span></div></div><a href="cabinet.html" class="btn">Записаться</a></div>
+<div class="event reveal"><div><h3>🤖 Future Tech — Emma</h3><div class="event-meta"><span>Сб, 18:00</span><span class="spot">3 места</span></div></div><a href="cabinet.html" class="btn">Записаться</a></div>
+<div class="event reveal"><div><h3>🎬 Movies & Memes — Carlos</h3><div class="event-meta"><span>Вс, 17:00</span><span class="spot">3 места</span></div></div><a href="cabinet.html" class="btn">Записаться</a></div>
+</div>
 </div></section>
 <section id="pricing"><div class="container">
 <h2 class="section-title reveal">Цены</h2>
-<div class="prices">
+<div class="prices" id="price-list">
 <div class="price-card reveal"><h3>Разовый</h3><div class="price-num">15 <span>BYN</span></div><div class="price-desc">Попробовать</div><a href="order.html?pack=single" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a></div>
 <div class="price-card hot reveal"><div class="badge">Оптимально</div><h3>4 созвона</h3><div class="price-num">50 <span>BYN</span></div><div class="price-desc">Нормальный объём</div><a href="order.html?pack=pack4" class="btn" style="width:100%;justify-content:center">Взять</a></div>
 <div class="price-card reveal"><h3>8 созвонов</h3><div class="price-num">90 <span>BYN</span></div><div class="price-desc">Максимум практики</div><a href="order.html?pack=pack8" class="btn btn-ghost" style="width:100%;justify-content:center">Выбрать</a></div>
@@ -262,5 +264,8 @@ footer{border-top:1px solid var(--line);padding:20px 0;text-align:center;backgro
 (function(){document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');});});})();
 (function(){const links=Array.from(document.querySelectorAll('.side-link'));if(!links.length)return;const sections=links.map(a=>document.getElementById(a.dataset.section)).filter(Boolean);function update(){const mid=window.innerHeight*0.38;let best=null,bestDist=Infinity;const dists=[];sections.forEach((sec,i)=>{const r=sec.getBoundingClientRect();const d=Math.abs(r.top+r.height*0.35-mid);dists.push({i,d,visible:r.bottom>80&&r.top<window.innerHeight});if(d<bestDist){bestDist=d;best=i;}});links.forEach((link,i)=>{link.classList.remove('is-active','is-near');const info=dists.find(x=>x.i===i);if(!info)return;const t=Math.max(0,1-info.d/(window.innerHeight*0.7));if(i===best&&info.visible){link.classList.add('is-active');link.style.transform='';link.style.opacity='';}else{if(t>0.45)link.classList.add('is-near');link.style.transform='scale('+(0.86+t*0.32).toFixed(3)+')';link.style.opacity=(0.35+t*0.65).toFixed(3);}});}window.addEventListener('scroll',update,{passive:true});update();})();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

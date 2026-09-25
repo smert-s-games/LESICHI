@@ -402,6 +402,17 @@ create policy "admin_users_select_admin"
   on public.admin_users for select
   using (public.is_admin());
 
+drop policy if exists "profiles_update_admin" on public.profiles;
+create policy "profiles_update_admin"
+  on public.profiles for update
+  using (public.is_admin())
+  with check (public.is_admin());
+
+drop policy if exists "payments_admin_insert" on public.payments;
+create policy "payments_admin_insert"
+  on public.payments for insert
+  with check (public.is_admin());
+
 create or replace function public.purchase_package(p_code text)
 returns int
 language plpgsql

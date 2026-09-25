@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админка — Lesichi</title>
+<link rel="icon" href="image/site/icon2.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#6A45E3;--deep:#2B1B5E;--bg:#FFD9B8;--card:#fff;--muted:#5C4B8A;--line:rgba(43,27,94,.12)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--deep);padding:24px 4% 60px}
+h1,h2,button{font-family:'Baloo 2',sans-serif}h1{font-size:32px;margin-bottom:6px}
+a{color:var(--purple);font-weight:700;text-decoration:none}
+.muted{color:var(--muted);font-size:14px;margin-bottom:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.tabs button,.btn{border:none;border-radius:12px;padding:8px 14px;background:#fff;font-weight:700;cursor:pointer;color:var(--deep)}
+.tabs button.on,.btn.primary{background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+input,select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font:inherit;margin:4px 4px 4px 0}
+.rowform{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+[hidden]{display:none !important}
+.err{color:#B42318}
+</style>
+</head>
+<body>
+<p><a href="index.html">На сайт</a> · <a href="cabinet.html">Кабинет</a></p>
+<h1>Админка</h1>
+<p class="muted" id="hint">Созвоны, цены, записи, люди, заявки и оплаты.</p>
+<div id="denied" class="card" hidden>
+  <p>Эта страница только для администраторов. Войди в кабинет тем аккаунтом, чей id добавлен в таблицу <strong>admin_users</strong>.</p>
+  <p style="margin-top:10px"><a class="btn primary" href="cabinet.html?next=admin.html" style="display:inline-block;padding:10px 16px;border-radius:12px;color:#fff">Войти</a></p>
+</div>
+<div id="app" hidden>
+  <div class="tabs" id="tabs"></div>
+  <div id="panel"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

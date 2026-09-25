@@ -71,6 +71,8 @@
     var left = 0;
     (packs.data || []).forEach(function (p) { left += p.sessions_left || 0; });
     document.getElementById("balance").textContent = String(left);
+    var admin = await sb.from("admin_users").select("user_id").eq("user_id", uid).maybeSingle();
+    if (admin.data) document.getElementById("admin-link").hidden = false;
 
     var nowIso = new Date().toISOString();
     var sessions = await sb.from("sessions_with_seats")
@@ -190,7 +192,7 @@
     }
     user = res.data.user || (res.data.session && res.data.session.user);
     var next = new URLSearchParams(location.search).get("next") || "";
-    if (next.indexOf("order.html?pack=") === 0) {
+    if (next.indexOf("order.html?pack=") === 0 || next === "admin.html") {
       location.href = next;
       return;
     }
@@ -230,7 +232,7 @@
     user = session.data && session.data.session && session.data.session.user;
     if (user) {
       var next = new URLSearchParams(location.search).get("next") || "";
-      if (next.indexOf("order.html?pack=") === 0) {
+      if (next.indexOf("order.html?pack=") === 0 || next === "admin.html") {
         location.href = next;
         return;
       }
