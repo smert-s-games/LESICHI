@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#FFD9B8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Страница не найдена — Lesichi</title>
 <link rel="icon" id="favicon" href="image/site/icon2.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +26,7 @@ h1,h2,a.btn{font-family:'Baloo 2',sans-serif}
 .sticker.q{width:132px;right:6%;top:8px;animation-delay:-.4s}
 .sticker.z{width:96px;left:4%;bottom:18px;animation-delay:-1.2s}
 .sticker.go{width:100px;right:0;bottom:8px;animation-delay:-2s}
-h2{font-size:clamp(26px,4vw,36px);margin:8px 0 8px}
+h1,h2{font-size:clamp(26px,4vw,36px);margin:8px 0 8px}
 p{color:var(--muted);font-size:16px;margin-bottom:22px}
 a.btn{display:inline-flex;align-items:center;padding:12px 22px;border-radius:16px;background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 8px 22px rgba(106,69,227,.35)}
 a.btn:hover{transform:translateY(-2px)}
@@ -32,18 +36,29 @@ a.btn:hover{transform:translateY(-2px)}
   .sticker.z,.sticker.go{width:78px}
 }
 </style>
+<style id="a11y-perf">
+.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
+.skip-link:focus{top:12px}
+main:focus{outline:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
+.btn:focus-visible{outline-color:#2B1B5E}
+:where(img[width][height]){height:auto}
+.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.paws{display:none!important}}
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main">К содержимому</a>
 <div class="paws" id="paws"></div>
-<main class="stage">
+<main id="main" tabindex="-1" class="stage">
   <div class="scene">
-    <img class="fox" data-src="image/lis/lis_back.png" alt="Лесик ушёл">
-    <img class="sticker q" data-src="image/stickers/qwestion.png" alt="">
-    <img class="sticker z" data-src="image/stickers/sleep.png" alt="">
-    <img class="sticker go" data-src="image/stickers/on_my_way.png" alt="">
+    <img width="269" height="436" class="fox" data-src="image/lis/lis_back.webp" alt="Лесик ушёл">
+    <img loading="lazy" decoding="async" width="198" height="215" class="sticker q" data-src="image/stickers/qwestion.webp" alt="">
+    <img loading="lazy" decoding="async" width="252" height="215" class="sticker z" data-src="image/stickers/sleep.webp" alt="">
+    <img loading="lazy" decoding="async" width="194" height="215" class="sticker go" data-src="image/stickers/on_my_way.webp" alt="">
   </div>
   <div class="code">404</div>
-  <h2>Лесик свернул не туда</h2>
+  <h1>Лесик свернул не туда</h1>
   <p>Такой страницы нет. Вернись на главную — созвоны на месте.</p>
   <a class="btn" data-href="index.html" href="index.html">На главную</a>
 </main>

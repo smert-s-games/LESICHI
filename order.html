@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFD9B8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Оформление заказа — Lesichi</title>
 <link rel="icon" href="image/site/icon2.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,13 +56,24 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
 #done{text-align:center;padding:36px 20px}
 #done h2{font-size:28px;margin:8px 0}
 </style>
+<style id="a11y-perf">
+.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
+.skip-link:focus{top:12px}
+main:focus{outline:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
+.btn:focus-visible{outline-color:#2B1B5E}
+:where(img[width][height]){height:auto}
+.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.paws{display:none!important}}
+</style>
 </head>
 <body>
-<nav>
+<a class="skip-link" href="#main">К содержимому</a>
+<nav aria-label="Основное меню">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <div class="logo-mark"><img src="image/site/icon2.png" alt="Lesichi"></div>
-      <img class="logo-name-img" src="image/site/name.png" alt="Lesichi">
+      <div class="logo-mark"><img width="199" height="208" src="image/site/icon2.webp" alt=""></div>
+      <img width="618" height="220" class="logo-name-img" src="image/site/name.webp" alt="Lesichi">
     </a>
     <div class="nav-links">
       <a href="about.html">О нас</a>
@@ -69,13 +83,13 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
     <a href="index.html#pricing" class="btn">К ценам</a>
   </div>
 </nav>
-<main class="container">
+<main id="main" tabindex="-1" class="container">
   <div class="page-hero">
     <div>
       <h1 class="page-title">Оформление заказа</h1>
       <p class="page-sub">Оформи заказ — мы пришлём реквизиты, а занятия появятся в кабинете после подтверждения оплаты.</p>
     </div>
-    <img src="image/stickers/lets_go.png" alt="">
+    <img width="255" height="256" src="image/stickers/lets_go.webp" alt="">
   </div>
   <div class="card" id="gate"><p class="muted">Проверяю вход…</p></div>
   <div class="layout" id="order" hidden>
@@ -95,7 +109,7 @@ input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--lin
       <h2 id="pack-title">4 созвона</h2>
       <div class="price" id="pack-price">50 <span>BYN</span></div>
       <p class="muted" id="pack-meta">4 созвона по 60 минут · группа до 6</p>
-      <img class="summary-art" src="image/stickers/coffe_time.png" alt="">
+      <img loading="lazy" decoding="async" width="224" height="215" class="summary-art" src="image/stickers/coffe_time.webp" alt="">
     </aside>
   </div>
   <div class="card" id="done" hidden>
