@@ -29,21 +29,19 @@
 4. Redirect URLs: добавить production URL GitHub Pages / домен
 
 ## Шаг 4. Секреты (локально)
-Создать файл `.env.local` (в git **не** коммитить):
+Сайт статический, поэтому ключи в сборку не подставляются: публичные URL и publishable (anon) key лежат в `js/config.js`.
+`service_role` key нигде в репозитории не хранить. Если он понадобится для админ-скриптов или edge functions, держи его
+в `.env.local` (в git не коммитится, правило есть в `.gitignore`):
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-SUPABASE_SERVICE_ROLE_KEY=eyJ...   # только для админ-скриптов / edge functions
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
-
-В репозитории уже есть `.gitignore` правило для `.env*`.
 
 ## Шаг 5. Роли
 - `authenticated` — ученик (видит себя, свои записи)
 - `service_role` / запись в `admin_users` — админ
 
-Админа добавить вручную после первого входа:
+Функции `claim_first_admin` больше нет (по ней первый вызвавший мог стать админом). Админа добавлять только вручную после его первого входа:
 
 ```sql
 insert into public.admin_users (user_id) values ('uuid-пользователя');
@@ -65,9 +63,14 @@ insert into public.admin_users (user_id) values ('uuid-пользователя'
 ## Кабинет
 Страница `cabinet.html` уже ходит в Supabase: регистрация, вход, профиль, баланс, запись и отмена.
 
-1. Выполнить `supabase/schema.sql` (он идемпотентный: политики пересоздаются, созвоны сеются только если таблица пустая).
+1. Выполнить по очереди в SQL Editor: `supabase/schema.sql`, `rebook.sql`, `admin.sql`, `speakers.sql`, затем **`hardening.sql`** (безопасность и исправления логики; идемпотентный, перед первым запуском сделай бэкап).
 2. Вписать URL и anon key в `js/config.js`.
 3. Authentication → URL Configuration: Site URL и Redirect — адрес `cabinet.html` на GitHub Pages.
-4. Для мгновенного входа без письма: Authentication → Providers → Email → выключить Confirm email.
+4. Authentication → Providers → Email → **включить Confirm email**. Без этого бесплатное занятие можно получать, регистрируя любые выдуманные адреса.
 
-Новый пользователь получает 1 бесплатное занятие (`source = welcome`). Запись и отмена идут через функции `book_session` и `cancel_booking`.
+### Как это устроено после `hardening.sql`
+- **Запись и отмена** — только через функции `book_session` и `cancel_booking`. Прямые `insert/update` в `bookings` пользователю запрещены. Отмена возможна не позднее чем за 2 часа до начала (интервал меняется в `cancel_booking`).
+- **Бесплатное занятие** выдаёт `claim_welcome_session()`: один раз на нормализованный email (точки и `+tag` в gmail не считаются) и только после подтверждения почты. Кабинет вызывает её при загрузке.
+- **Zoom-ссылки** лежат в таблице `session_links`: их видят админ и пользователи, записанные на этот созвон. Публичный view `sessions_with_seats` ссылок не содержит.
+- **Покупка**: `create_order(code)` создаёт платёж `pending`. Когда админ ставит ему статус `paid` (вкладка «Оплаты»), триггер один раз добавляет занятия; `refunded`/`failed` их снимает. Подключая настоящий эквайринг, ставь статус `paid` из вебхука (edge function с `service_role`), а не с клиента.
+- **Админские операции**: `admin_delete_session` (возвращает занятия записанным и удаляет созвон) и `admin_set_booking_status` (возврат/списание занятия и пересчёт мест).

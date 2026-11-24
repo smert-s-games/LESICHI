@@ -25,7 +25,11 @@
     if (m.indexOf("duplicate key") !== -1 || m.indexOf("bookings_session_id_user_id") !== -1) return "Эта запись уже была. Обнови страницу и попробуй ещё раз.";
     if (m.indexOf("already booked") !== -1) return "Ты уже записан на этот созвон";
     if (m.indexOf("no sessions left") !== -1) return "Закончились занятия в пакете";
-    if (m.indexOf("already started") !== -1) return "Созвон уже начался, отменить нельзя";
+    if (m.indexOf("already started") !== -1) return "Созвон уже начался";
+    if (m.indexOf("too late to cancel") !== -1) return "Отмена возможна не позднее чем за 2 часа до начала";
+    if (m.indexOf("no seats") !== -1) return "Мест на этот созвон уже нет";
+    if (m.indexOf("session unavailable") !== -1) return "Этот созвон недоступен";
+    if (m.indexOf("email not confirmed") !== -1) return "Подтверди почту, чтобы получить бесплатное занятие";
     if (m.indexOf("Invalid login") !== -1) return "Неверная почта или пароль";
     if (m.indexOf("User already registered") !== -1) return "Такой email уже зарегистрирован";
     return m;
@@ -80,6 +84,14 @@
       document.getElementById("f-tz").value = profile.timezone || "Europe/Minsk";
       document.getElementById("who").textContent = profile.full_name || user.email;
 
+      // Бесплатное занятие: один раз на почту и только после подтверждения email
+      var welcomeHint = "";
+      try {
+        var wl = await withTimeout(sb.rpc("claim_welcome_session"), 12000);
+        if (gen !== loadGen) return;
+        if (wl.error) welcomeHint = mapError(wl.error);
+      } catch (e) { /* не критично, баланс загрузится ниже */ }
+
       var packs = await withTimeout(sb.from("user_packages").select("sessions_left, sessions_total, source").eq("user_id", uid), 12000);
       if (gen !== loadGen) return;
       if (packs.error) throw packs.error;
@@ -92,7 +104,7 @@
 
       var nowIso = new Date().toISOString();
       var sessions = await withTimeout(sb.from("sessions_with_seats")
-        .select("id, title, room, speaker_name, starts_at, duration_min, seats_left, status, zoom_url")
+        .select("id, title, room, speaker_name, starts_at, duration_min, seats_left, status")
         .gte("starts_at", nowIso)
         .in("status", ["open", "full"])
         .order("starts_at", { ascending: true }), 12000);
@@ -100,7 +112,7 @@
       if (sessions.error) throw sessions.error;
 
       var mine = await withTimeout(sb.from("bookings")
-        .select("id, status, session_id, sessions(title, speaker_name, starts_at, zoom_url)")
+        .select("id, status, session_id, sessions(title, speaker_name, starts_at)")
         .eq("user_id", uid)
         .eq("status", "booked")
         .order("created_at", { ascending: false }), 12000);
@@ -109,6 +121,12 @@
 
       var bookedIds = {};
       (mine.data || []).forEach(function (b) { bookedIds[b.session_id] = true; });
+
+      // Zoom-ссылки отдаются только тем, кто записан (RLS на session_links)
+      var links = {};
+      var linkRes = await withTimeout(sb.from("session_links").select("session_id, zoom_url"), 12000);
+      if (gen !== loadGen) return;
+      (linkRes.data || []).forEach(function (l) { links[l.session_id] = l.zoom_url; });
 
       var list = document.getElementById("sessions");
       list.innerHTML = "";
@@ -137,19 +155,26 @@
         var s = b.sessions || {};
         var row = document.createElement("div");
         row.className = "row";
-        var zoom = s.zoom_url ? "<a href='" + escapeHtml(s.zoom_url) + "' target='_blank' rel='noopener'>Zoom</a>" : "";
+        var zoomUrl = links[b.session_id];
+        var zoom = (zoomUrl && /^https?:\/\//i.test(zoomUrl)) ? "<a href='" + escapeHtml(zoomUrl) + "' target='_blank' rel='noopener'>Zoom</a>" : "";
         row.innerHTML = "<div><strong>" + escapeHtml(s.title || "Созвон") + "</strong><div class='muted'>" +
           escapeHtml(fmt(s.starts_at, profile.timezone)) + " " + zoom + "</div></div>";
         var btn = document.createElement("button");
         btn.className = "btn ghost";
         btn.type = "button";
         btn.textContent = "Отменить";
+        btn.title = "Отмена возможна не позднее чем за 2 часа до начала";
         btn.addEventListener("click", function () { cancel(b.id, btn); });
         row.appendChild(btn);
         my.appendChild(row);
       });
       if (!my.children.length) {
-        my.innerHTML = "<p class='muted'>Записей пока нет. Первый созвон уже на балансе.</p>";
+        my.innerHTML = "<p class='muted'>Записей пока нет." + (welcomeHint ? " " + escapeHtml(welcomeHint) + "." : "") + "</p>";
+      } else {
+        var note = document.createElement("p");
+        note.className = "muted";
+        note.textContent = "Отмена — не позднее чем за 2 часа до начала, занятие вернётся на баланс.";
+        my.appendChild(note);
       }
       if (gen === loadGen) setMsg(appMsg, "", false);
     } catch (e) {

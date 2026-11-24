@@ -1,16 +1,7 @@
 (function () {
-  var packs = {
-    single: { code: "single", title: "Разовый", sessions: 1, price: 15 },
-    pack4: { code: "pack4", title: "4 созвона", sessions: 4, price: 50 },
-    pack8: { code: "pack8", title: "8 созвонов", sessions: 8, price: 90 }
-  };
   var key = new URLSearchParams(location.search).get("pack") || "pack4";
-  var pack = packs[key] || packs.pack4;
-  var here = "order.html?pack=" + encodeURIComponent(pack.code);
-
-  document.getElementById("pack-title").textContent = pack.title;
-  document.getElementById("pack-price").innerHTML = pack.price + " <span>BYN</span>";
-  document.getElementById("pack-meta").textContent = pack.sessions + " созвон(а) по 60 минут · группа до 6";
+  var here = "order.html?pack=" + encodeURIComponent(key);
+  var pack = null;
 
   var cfg = window.LESICHI_SUPABASE || {};
   var sb = (cfg.url && cfg.anonKey && window.supabase)
@@ -19,6 +10,13 @@
 
   function toLogin() {
     location.replace("cabinet.html?next=" + encodeURIComponent(here));
+  }
+
+  function plural(n) {
+    var m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return "созвон";
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "созвона";
+    return "созвонов";
   }
 
   async function boot() {
@@ -32,32 +30,67 @@
       toLogin();
       return;
     }
+
+    // Цена и состав берутся из базы, чтобы совпадать с тем, что спишет сервер
+    var packRes = await sb.from("packages")
+      .select("code,title,sessions_count,price_byn")
+      .eq("code", key).eq("is_active", true).maybeSingle();
+    pack = packRes.data;
+    var gate = document.getElementById("gate");
+    if (!pack) {
+      gate.innerHTML = "<p class='muted'>Такого пакета нет или он сейчас недоступен. <a href='index.html#pricing'>К ценам</a></p>";
+      return;
+    }
+    document.getElementById("pack-title").textContent = pack.title;
+    document.getElementById("pack-price").innerHTML = Number(pack.price_byn) + " <span>BYN</span>";
+    document.getElementById("pack-meta").textContent =
+      pack.sessions_count + " " + plural(pack.sessions_count) + " по 60 минут · группа до 6";
+
     var profile = await sb.from("profiles").select("full_name,email,telegram").eq("id", user.id).maybeSingle();
     var p = profile.data || {};
     document.getElementById("name").value = p.full_name || "";
-    document.getElementById("email").value = p.email || user.email || "";
+    var email = document.getElementById("email");
+    email.value = p.email || user.email || "";
+    email.readOnly = true;
     document.getElementById("tg").value = p.telegram || "";
-    document.getElementById("gate").hidden = true;
+    gate.hidden = true;
     document.getElementById("order").hidden = false;
   }
 
   document.getElementById("form").addEventListener("submit", async function (e) {
     e.preventDefault();
+    if (!pack) return;
     var msg = document.getElementById("msg");
+    var btn = e.target.querySelector("button[type=submit]");
     msg.style.color = "#2B1B5E";
-    msg.textContent = "Проводим оплату…";
-    var res = await sb.rpc("purchase_package", { p_code: pack.code });
+    msg.textContent = "Оформляю заказ…";
+    btn.disabled = true;
+
+    var session = await sb.auth.getSession();
+    var user = session.data && session.data.session && session.data.session.user;
+    if (!user) { toLogin(); return; }
+
+    // Сохраняем контакты, чтобы мы могли связаться по оплате
+    await sb.from("profiles").update({
+      full_name: document.getElementById("name").value.trim(),
+      telegram: document.getElementById("tg").value.trim()
+    }).eq("id", user.id);
+
+    var res = await sb.rpc("create_order", { p_code: pack.code });
     if (res.error) {
+      btn.disabled = false;
       msg.style.color = "#B42318";
-      msg.textContent = res.error.message.indexOf("purchase_package") !== -1
-        ? "Функция покупки ещё не создана в базе. Нужно один раз выполнить её в SQL Editor."
+      msg.textContent = res.error.message.indexOf("too many pending") !== -1
+        ? "У тебя уже есть несколько неоплаченных заказов. Дождись подтверждения или напиши нам."
         : res.error.message;
       return;
     }
     document.getElementById("order").hidden = true;
     document.getElementById("done").hidden = false;
     document.getElementById("done-text").textContent =
-      "Имитация оплаты прошла. На баланс добавлено занятий: " + (res.data || pack.sessions) + ".";
+      "Заказ «" + pack.title + "» на " + Number(pack.price_byn) + " BYN создан. " +
+      "Мы свяжемся с тобой в Telegram или по почте и пришлём реквизиты. " +
+      "Занятия появятся в кабинете сразу после подтверждения оплаты.";
   });
 
   boot();

@@ -1,5 +1,8 @@
 -- Lesichi MVP schema
--- Run once in Supabase SQL Editor
+-- Run once in Supabase SQL Editor.
+-- IMPORTANT: after this file (and rebook.sql, admin.sql, speakers.sql) run supabase/hardening.sql:
+-- it replaces insecure parts of this file (bookings/payments policies, purchase_package,
+-- zoom_url on sessions, claim_first_admin, welcome package trigger).
 
 create extension if not exists "pgcrypto";
 

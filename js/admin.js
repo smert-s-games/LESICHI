@@ -13,7 +13,7 @@
   var current = "sessions";
 
   function esc(v) {
-    return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
   function when(iso) {
     if (!iso) return "";
@@ -34,6 +34,9 @@
     if (current === "sessions") {
       var rows = await sb.from("sessions").select("*").order("starts_at", { ascending: false });
       var booked = await sb.from("bookings").select("session_id,status,profiles(full_name,email,telegram)").eq("status", "booked");
+      var linkRes = await sb.from("session_links").select("session_id,zoom_url");
+      var zoomBy = {};
+      (linkRes.data || []).forEach(function (l) { zoomBy[l.session_id] = l.zoom_url; });
       var by = {};
       (booked.data || []).forEach(function (b) {
         if (!by[b.session_id]) by[b.session_id] = [];
@@ -53,13 +56,18 @@
           " · " + esc(r.speaker_name || "без спикера") +
           " · " + people.length + "/" + esc(r.max_participants) + " · " + esc(r.status) + "</div>" +
           who +
-          '<p style="margin-top:8px"><button class="btn" data-del="' + r.id + '">Удалить</button></p></div>';
+          '<form class="rowform" data-zoom="' + esc(r.id) + '" style="margin-top:8px"><input name="zoom_url" placeholder="Zoom-ссылка" value="' + esc(zoomBy[r.id] || "") + '" style="min-width:260px">' +
+          '<button class="btn" type="submit">Сохранить ссылку</button>' +
+          '<button class="btn" type="button" data-del="' + esc(r.id) + '">Удалить</button></form></div>';
       }).join("");
       if (booked.error) list = "<p class='err'>" + esc(booked.error.message) + "</p>" + list;
       panel.innerHTML = sessionForm() + (list || "<p>Созвонов нет</p>");
       panel.querySelector("#add-session").onsubmit = addSession;
+      panel.querySelectorAll("form[data-zoom]").forEach(function (f) {
+        f.onsubmit = function (e) { e.preventDefault(); saveZoom(f.dataset.zoom, f.zoom_url.value); };
+      });
       panel.querySelectorAll("[data-del]").forEach(function (b) {
-        b.onclick = function () { remove("sessions", b.dataset.del); };
+        b.onclick = function () { removeSession(b.dataset.del); };
       });
     } else if (current === "speakers") {
       var speakers = await sb.from("speakers").select("*").order("name");
@@ -109,7 +117,7 @@
             }).join("") + "</select></td></tr>";
         }).join("") + "</table></div>";
       panel.querySelectorAll("[data-book]").forEach(function (sel) {
-        sel.onchange = function () { sb.from("bookings").update({ status: sel.value }).eq("id", sel.dataset.book).then(done); };
+        sel.onchange = function () { sb.rpc("admin_set_booking_status", { p_booking_id: sel.dataset.book, p_status: sel.value }).then(done); };
       });
     } else if (current === "people") {
       var people = await sb.from("profiles").select("id,full_name,email,telegram,level").order("created_at", { ascending: false });
@@ -134,19 +142,18 @@
         sel.onchange = function () { sb.from("leads").update({ status: sel.value }).eq("id", sel.dataset.lead).then(done); };
       });
     } else if (current === "payments") {
-      var pay = await sb.from("payments").select("id,amount_byn,status,provider,created_at,profiles(email)").order("created_at", { ascending: false });
-      panel.innerHTML = "<div class='card'><table><tr><th>Кто</th><th>Сумма</th><th>Статус</th><th>Когда</th></tr>" +
+      var pay = await sb.from("payments").select("id,amount_byn,status,provider,created_at,profiles(email),packages(title)").order("created_at", { ascending: false });
+      panel.innerHTML = "<p class='muted'>Статус paid автоматически добавляет занятия пользователю (один раз). refunded и failed — снимают их.</p>" +
+        "<div class='card'><table><tr><th>Кто</th><th>Пакет</th><th>Сумма</th><th>Статус</th><th>Когда</th></tr>" +
         (pay.data || []).map(function (r) {
-          return "<tr><td>" + esc(r.profiles && r.profiles.email) + "</td><td>" + esc(r.amount_byn) + " BYN</td><td><select data-pay='" + r.id + "'>" +
+          return "<tr><td>" + esc(r.profiles && r.profiles.email) + "</td><td>" + esc(r.packages && r.packages.title) + "</td><td>" + esc(r.amount_byn) + " BYN</td><td><select data-pay='" + esc(r.id) + "'>" +
             ["pending", "paid", "failed", "refunded"].map(function (s) {
               return "<option" + (s === r.status ? " selected" : "") + ">" + s + "</option>";
             }).join("") + "</select></td><td>" + esc(new Date(r.created_at).toLocaleString("ru-RU")) + "</td></tr>";
         }).join("") + "</table></div>";
       panel.querySelectorAll("[data-pay]").forEach(function (sel) {
         sel.onchange = function () {
-          var patch = { status: sel.value };
-          if (sel.value === "paid") patch.paid_at = new Date().toISOString();
-          sb.from("payments").update(patch).eq("id", sel.dataset.pay).then(done);
+          sb.from("payments").update({ status: sel.value }).eq("id", sel.dataset.pay).then(done);
         };
       });
     }
@@ -198,10 +205,27 @@
       speaker_name: f.speaker_name.value,
       starts_at: new Date(f.starts_at.value).toISOString(),
       duration_min: Number(f.duration_min.value) || 60,
-      max_participants: Number(f.max_participants.value) || 6,
-      zoom_url: f.zoom_url.value
-    });
+      max_participants: Number(f.max_participants.value) || 6
+    }).select("id").single();
+    if (!res.error && f.zoom_url.value.trim()) {
+      res = await sb.from("session_links").insert({ session_id: res.data.id, zoom_url: f.zoom_url.value.trim() });
+    }
     done(res);
+  }
+
+  async function saveZoom(sessionId, url) {
+    url = (url || "").trim();
+    if (url && !/^https?:\/\//i.test(url)) { msg("Ссылка должна начинаться с http:// или https://", true); return; }
+    if (!url) done(await sb.from("session_links").delete().eq("session_id", sessionId));
+    else done(await sb.from("session_links").upsert({ session_id: sessionId, zoom_url: url, updated_at: new Date().toISOString() }));
+  }
+
+  async function removeSession(id) {
+    if (!confirm("Удалить созвон? Все записанные получат занятие обратно на баланс.")) return;
+    var res = await sb.rpc("admin_delete_session", { p_session_id: id });
+    if (res.error) { msg(res.error.message, true); return; }
+    await render();
+    msg("Удалено. Возвращено занятий: " + res.data);
   }
 
   async function savePack(f) {
