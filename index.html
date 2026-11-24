@@ -324,7 +324,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 (function(){document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');});});})();
 (function(){const links=Array.from(document.querySelectorAll('.side-link'));if(!links.length)return;const sections=links.map(a=>document.getElementById(a.dataset.section)).filter(Boolean);function update(){const mid=window.innerHeight*0.38;let best=null,bestDist=Infinity;const dists=[];sections.forEach((sec,i)=>{const r=sec.getBoundingClientRect();const d=Math.abs(r.top+r.height*0.35-mid);dists.push({i,d,visible:r.bottom>80&&r.top<window.innerHeight});if(d<bestDist){bestDist=d;best=i;}});links.forEach((link,i)=>{link.classList.remove('is-active','is-near');const info=dists.find(x=>x.i===i);if(!info)return;const t=Math.max(0,1-info.d/(window.innerHeight*0.7));if(i===best&&info.visible){link.classList.add('is-active');link.style.transform='';link.style.opacity='';}else{if(t>0.45)link.classList.add('is-near');link.style.transform='scale('+(0.86+t*0.32).toFixed(3)+')';link.style.opacity=(0.35+t*0.65).toFixed(3);}});}window.addEventListener('scroll',update,{passive:true});update();})();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
 <script src="js/config.js"></script>
 <script src="js/home.js"></script>
 </body>

@@ -19,7 +19,39 @@
     return "созвонов";
   }
 
+  function friendly(err) {
+    var m = (err && err.message) || "";
+    if (!m || /failed to fetch|networkerror|network request failed|load failed|fetch failed|timeout/i.test(m)) {
+      return "Сервис временно недоступен. Попробуй ещё раз через несколько минут.";
+    }
+    return m;
+  }
+
+  function showGateError(text) {
+    var gate = document.getElementById("gate");
+    gate.hidden = false;
+    gate.innerHTML = "";
+    var p = document.createElement("p");
+    p.className = "muted";
+    p.textContent = text || "Сервис временно недоступен. Попробуй ещё раз через несколько минут. ";
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn";
+    b.textContent = "Обновить";
+    b.addEventListener("click", function () { location.reload(); });
+    gate.appendChild(p);
+    gate.appendChild(b);
+  }
+
   async function boot() {
+    try {
+      await bootInner();
+    } catch (e) {
+      showGateError();
+    }
+  }
+
+  async function bootInner() {
     if (!sb) {
       toLogin();
       return;
@@ -35,6 +67,7 @@
     var packRes = await sb.from("packages")
       .select("code,title,sessions_count,price_byn")
       .eq("code", key).eq("is_active", true).maybeSingle();
+    if (packRes.error) { showGateError(); return; }
     pack = packRes.data;
     var gate = document.getElementById("gate");
     if (!pack) {
@@ -76,13 +109,18 @@
       telegram: document.getElementById("tg").value.trim()
     }).eq("id", user.id);
 
-    var res = await sb.rpc("create_order", { p_code: pack.code });
+    var res;
+    try {
+      res = await sb.rpc("create_order", { p_code: pack.code });
+    } catch (err) {
+      res = { error: err };
+    }
     if (res.error) {
       btn.disabled = false;
       msg.style.color = "#B42318";
       msg.textContent = res.error.message.indexOf("too many pending") !== -1
         ? "У тебя уже есть несколько неоплаченных заказов. Дождись подтверждения или напиши нам."
-        : res.error.message;
+        : friendly(res.error);
       return;
     }
     document.getElementById("order").hidden = true;

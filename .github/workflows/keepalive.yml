@@ -1,0 +1,38 @@
+# Keeps the free Supabase project from being paused for inactivity.
+# Runs twice a week (max gap ~4 days; Supabase pauses free projects after 7 days without activity)
+# and can be started manually: Actions -> "Keep Supabase awake" -> Run workflow.
+# Note: GitHub disables scheduled workflows in a repo with no activity for 60 days;
+# any push/commit (or re-enabling the workflow in the Actions tab) restarts the schedule.
+name: Keep Supabase awake
+
+on:
+  schedule:
+    - cron: "17 6 * * 1,4"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Read public Supabase settings from js/config.js
+        run: |
+          url=$(grep -oP 'url:\s*"\K[^"]+' js/config.js)
+          key=$(grep -oP 'anonKey:\s*"\K[^"]+' js/config.js)
+          if [ -z "$url" ] || [ -z "$key" ]; then echo "Could not read url/anonKey from js/config.js"; exit 1; fi
+          echo "SUPABASE_URL=$url" >> "$GITHUB_ENV"
+          echo "SUPABASE_KEY=$key" >> "$GITHUB_ENV"
+
+      - name: Query the database (counts as project activity)
+        run: |
+          code=$(curl -sS -o body.json -w '%{http_code}' --retry 3 --retry-delay 20 --retry-all-errors --max-time 30 \
+            -H "apikey: $SUPABASE_KEY" \
+            "$SUPABASE_URL/rest/v1/packages?select=code&limit=1")
+          echo "HTTP $code"
+          cat body.json; echo
+          test "$code" = "200"

@@ -1,0 +1,223 @@
+diff --git a/.github/workflows/keepalive.yml b/.github/workflows/keepalive.yml
+new file mode 100644
+index 0000000..8275fe7
+--- /dev/null
++++ b/.github/workflows/keepalive.yml
+@@ -0,0 +1,38 @@
++# Keeps the free Supabase project from being paused for inactivity.
++# Runs twice a week (max gap ~4 days; Supabase pauses free projects after 7 days without activity)
++# and can be started manually: Actions -> "Keep Supabase awake" -> Run workflow.
++# Note: GitHub disables scheduled workflows in a repo with no activity for 60 days;
++# any push/commit (or re-enabling the workflow in the Actions tab) restarts the schedule.
++name: Keep Supabase awake
++
++on:
++  schedule:
++    - cron: "17 6 * * 1,4"
++  workflow_dispatch:
++
++permissions:
++  contents: read
++
++jobs:
++  ping:
++    runs-on: ubuntu-latest
++    timeout-minutes: 5
++    steps:
++      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
++
++      - name: Read public Supabase settings from js/config.js
++        run: |
++          url=$(grep -oP 'url:\s*"\K[^"]+' js/config.js)
++          key=$(grep -oP 'anonKey:\s*"\K[^"]+' js/config.js)
++          if [ -z "$url" ] || [ -z "$key" ]; then echo "Could not read url/anonKey from js/config.js"; exit 1; fi
++          echo "SUPABASE_URL=$url" >> "$GITHUB_ENV"
++          echo "SUPABASE_KEY=$key" >> "$GITHUB_ENV"
++
++      - name: Query the database (counts as project activity)
++        run: |
++          code=$(curl -sS -o body.json -w '%{http_code}' --retry 3 --retry-delay 20 --retry-all-errors --max-time 30 \
++            -H "apikey: $SUPABASE_KEY" \
++            "$SUPABASE_URL/rest/v1/packages?select=code&limit=1")
++          echo "HTTP $code"
++          cat body.json; echo
++          test "$code" = "200"
+diff --git a/admin.html b/admin.html
+index 478b000..6472fcc 100644
+--- a/admin.html
++++ b/admin.html
+@@ -49,7 +49,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
+   <div class="tabs" id="tabs"></div>
+   <div id="panel"></div>
+ </div>
+-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
++<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
+ <script src="js/config.js"></script>
+ <script src="js/admin.js"></script>
+ </body>
+diff --git a/cabinet.html b/cabinet.html
+index 90a4ff3..fd4de97 100644
+--- a/cabinet.html
++++ b/cabinet.html
+@@ -197,7 +197,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
+   }
+ })();
+ </script>
+-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
++<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
+ <script src="js/config.js"></script>
+ <script src="js/cabinet.js"></script>
+ </body>
+diff --git a/docs/infrastructure.md b/docs/infrastructure.md
+index f9982eb..6e542e3 100644
+--- a/docs/infrastructure.md
++++ b/docs/infrastructure.md
+@@ -74,3 +74,14 @@ insert into public.admin_users (user_id) values ('uuid-пользователя'
+ - **Zoom-ссылки** лежат в таблице `session_links`: их видят админ и пользователи, записанные на этот созвон. Публичный view `sessions_with_seats` ссылок не содержит.
+ - **Покупка**: `create_order(code)` создаёт платёж `pending`. Когда админ ставит ему статус `paid` (вкладка «Оплаты»), триггер один раз добавляет занятия; `refunded`/`failed` их снимает. Подключая настоящий эквайринг, ставь статус `paid` из вебхука (edge function с `service_role`), а не с клиента.
+ - **Админские операции**: `admin_delete_session` (возвращает занятия записанным и удаляет созвон) и `admin_set_booking_status` (возврат/списание занятия и пересчёт мест).
++
++## Защита от паузы Supabase (free-план)
++
++Free-проекты Supabase приостанавливаются после недели без активности: сайт при этом перестаёт входить, записывать и показывать созвоны.
++Workflow `.github/workflows/keepalive.yml` дважды в неделю (пн и чт) делает лёгкий запрос к базе (`packages`, читается анонимно), URL и публичный ключ берёт из `js/config.js`.
++
++- После первого пуша запусти его вручную один раз: GitHub → Actions → **Keep Supabase awake** → Run workflow. Зелёная галочка означает, что запрос прошёл.
++- Если workflow упадёт (база недоступна или ключ сменили), GitHub пришлёт письмо.
++- GitHub отключает расписание в репозитории без активности 60 дней. Любой коммит или кнопка Enable workflow в разделе Actions его возвращает.
++- Если проект всё же уснул: Supabase Dashboard → проект → Restore project (несколько минут).
++- Версия `supabase-js` закреплена в HTML (`@supabase/supabase-js@2.119.0`). Обновляй осознанно, проверяя вход, запись и заказ.
+diff --git a/index.html b/index.html
+index b9d92a9..42e2de4 100644
+--- a/index.html
++++ b/index.html
+@@ -324,7 +324,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
+ (function(){document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');});});})();
+ (function(){const links=Array.from(document.querySelectorAll('.side-link'));if(!links.length)return;const sections=links.map(a=>document.getElementById(a.dataset.section)).filter(Boolean);function update(){const mid=window.innerHeight*0.38;let best=null,bestDist=Infinity;const dists=[];sections.forEach((sec,i)=>{const r=sec.getBoundingClientRect();const d=Math.abs(r.top+r.height*0.35-mid);dists.push({i,d,visible:r.bottom>80&&r.top<window.innerHeight});if(d<bestDist){bestDist=d;best=i;}});links.forEach((link,i)=>{link.classList.remove('is-active','is-near');const info=dists.find(x=>x.i===i);if(!info)return;const t=Math.max(0,1-info.d/(window.innerHeight*0.7));if(i===best&&info.visible){link.classList.add('is-active');link.style.transform='';link.style.opacity='';}else{if(t>0.45)link.classList.add('is-near');link.style.transform='scale('+(0.86+t*0.32).toFixed(3)+')';link.style.opacity=(0.35+t*0.65).toFixed(3);}});}window.addEventListener('scroll',update,{passive:true});update();})();
+ </script>
+-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
++<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
+ <script src="js/config.js"></script>
+ <script src="js/home.js"></script>
+ </body>
+diff --git a/js/admin.js b/js/admin.js
+index 380a363..6ad58c9 100644
+--- a/js/admin.js
++++ b/js/admin.js
+@@ -266,6 +266,7 @@
+     var user = session.data && session.data.session && session.data.session.user;
+     if (!user) { location.replace("cabinet.html?next=admin.html"); return; }
+     var admin = await sb.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
++    if (admin.error) { msg("Сервис временно недоступен. Обнови страницу через несколько минут.", true); return; }
+     if (!admin.data) { deny(); return; }
+     document.getElementById("app").hidden = false;
+     var box = document.getElementById("tabs");
+@@ -288,5 +289,7 @@
+     document.getElementById("denied").hidden = false;
+   }
+ 
+-  boot();
++  boot().catch(function () {
++    msg("Сервис временно недоступен. Обнови страницу через несколько минут.", true);
++  });
+ })();
+diff --git a/js/cabinet.js b/js/cabinet.js
+index 0b9e6e8..0a6770f 100644
+--- a/js/cabinet.js
++++ b/js/cabinet.js
+@@ -22,6 +22,9 @@
+ 
+   function mapError(err) {
+     var m = (err && err.message) || "Что-то пошло не так";
++    if (/failed to fetch|networkerror|network request failed|load failed|fetch failed|timeout/i.test(m)) {
++      return "Сервис временно недоступен. Попробуй ещё раз через несколько минут.";
++    }
+     if (m.indexOf("duplicate key") !== -1 || m.indexOf("bookings_session_id_user_id") !== -1) return "Эта запись уже была. Обнови страницу и попробуй ещё раз.";
+     if (m.indexOf("already booked") !== -1) return "Ты уже записан на этот созвон";
+     if (m.indexOf("no sessions left") !== -1) return "Закончились занятия в пакете";
+diff --git a/js/order.js b/js/order.js
+index 9e26ff2..f3e1bd4 100644
+--- a/js/order.js
++++ b/js/order.js
+@@ -19,7 +19,39 @@
+     return "созвонов";
+   }
+ 
++  function friendly(err) {
++    var m = (err && err.message) || "";
++    if (!m || /failed to fetch|networkerror|network request failed|load failed|fetch failed|timeout/i.test(m)) {
++      return "Сервис временно недоступен. Попробуй ещё раз через несколько минут.";
++    }
++    return m;
++  }
++
++  function showGateError(text) {
++    var gate = document.getElementById("gate");
++    gate.hidden = false;
++    gate.innerHTML = "";
++    var p = document.createElement("p");
++    p.className = "muted";
++    p.textContent = text || "Сервис временно недоступен. Попробуй ещё раз через несколько минут. ";
++    var b = document.createElement("button");
++    b.type = "button";
++    b.className = "btn";
++    b.textContent = "Обновить";
++    b.addEventListener("click", function () { location.reload(); });
++    gate.appendChild(p);
++    gate.appendChild(b);
++  }
++
+   async function boot() {
++    try {
++      await bootInner();
++    } catch (e) {
++      showGateError();
++    }
++  }
++
++  async function bootInner() {
+     if (!sb) {
+       toLogin();
+       return;
+@@ -35,6 +67,7 @@
+     var packRes = await sb.from("packages")
+       .select("code,title,sessions_count,price_byn")
+       .eq("code", key).eq("is_active", true).maybeSingle();
++    if (packRes.error) { showGateError(); return; }
+     pack = packRes.data;
+     var gate = document.getElementById("gate");
+     if (!pack) {
+@@ -76,13 +109,18 @@
+       telegram: document.getElementById("tg").value.trim()
+     }).eq("id", user.id);
+ 
+-    var res = await sb.rpc("create_order", { p_code: pack.code });
++    var res;
++    try {
++      res = await sb.rpc("create_order", { p_code: pack.code });
++    } catch (err) {
++      res = { error: err };
++    }
+     if (res.error) {
+       btn.disabled = false;
+       msg.style.color = "#B42318";
+       msg.textContent = res.error.message.indexOf("too many pending") !== -1
+         ? "У тебя уже есть несколько неоплаченных заказов. Дождись подтверждения или напиши нам."
+-        : res.error.message;
++        : friendly(res.error);
+       return;
+     }
+     document.getElementById("order").hidden = true;
+diff --git a/order.html b/order.html
+index 4699976..8ed9e5a 100644
+--- a/order.html
++++ b/order.html
+@@ -118,7 +118,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
+     <p style="margin-top:18px"><a class="btn" href="cabinet.html">В кабинет</a></p>
+   </div>
+ </main>
+-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
++<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
+ <script src="js/config.js"></script>
+ <script src="js/order.js"></script>
+ </body>

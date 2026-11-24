@@ -22,6 +22,9 @@
 
   function mapError(err) {
     var m = (err && err.message) || "Что-то пошло не так";
+    if (/failed to fetch|networkerror|network request failed|load failed|fetch failed|timeout/i.test(m)) {
+      return "Сервис временно недоступен. Попробуй ещё раз через несколько минут.";
+    }
     if (m.indexOf("duplicate key") !== -1 || m.indexOf("bookings_session_id_user_id") !== -1) return "Эта запись уже была. Обнови страницу и попробуй ещё раз.";
     if (m.indexOf("already booked") !== -1) return "Ты уже записан на этот созвон";
     if (m.indexOf("no sessions left") !== -1) return "Закончились занятия в пакете";

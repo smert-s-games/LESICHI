@@ -266,6 +266,7 @@
     var user = session.data && session.data.session && session.data.session.user;
     if (!user) { location.replace("cabinet.html?next=admin.html"); return; }
     var admin = await sb.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
+    if (admin.error) { msg("Сервис временно недоступен. Обнови страницу через несколько минут.", true); return; }
     if (!admin.data) { deny(); return; }
     document.getElementById("app").hidden = false;
     var box = document.getElementById("tabs");
@@ -288,5 +289,7 @@
     document.getElementById("denied").hidden = false;
   }
 
-  boot();
+  boot().catch(function () {
+    msg("Сервис временно недоступен. Обнови страницу через несколько минут.", true);
+  });
 })();
