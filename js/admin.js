@@ -170,7 +170,7 @@
   }
 
   function sessionForm() {
-    return '<form class="card rowform" id="add-session"><input name="title" placeholder="Название" required><input name="room" placeholder="Комната"><input name="speaker_name" placeholder="Спикер"><input name="starts_at" type="datetime-local" required><input name="duration_min" type="number" value="60" style="width:80px"><input name="max_participants" type="number" value="6" style="width:70px"><input name="zoom_url" placeholder="Zoom"><button class="btn primary" type="submit">Добавить созвон</button></form>';
+    return '<form class="card rowform" id="add-session"><input name="title" placeholder="Название" required><input name="room" placeholder="Комната"><input name="level" placeholder="Уровень (например B1)"><input name="speaker_name" placeholder="Спикер"><input name="starts_at" type="datetime-local" required><input name="duration_min" type="number" value="60" style="width:80px"><input name="max_participants" type="number" value="6" style="width:70px"><input name="zoom_url" placeholder="Zoom"><button class="btn primary" type="submit">Добавить созвон</button></form>';
   }
 
   function speakerForm() {
@@ -205,6 +205,7 @@
       speaker_name: f.speaker_name.value,
       starts_at: new Date(f.starts_at.value).toISOString(),
       duration_min: Number(f.duration_min.value) || 60,
+      ...(f.level.value.trim() ? { level: f.level.value.trim() } : {}),
       max_participants: Number(f.max_participants.value) || 6
     }).select("id").single();
     if (!res.error && f.zoom_url.value.trim()) {
