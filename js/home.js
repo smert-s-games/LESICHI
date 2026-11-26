@@ -6,26 +6,49 @@
   function esc(v) {
     return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
-  function when(iso) {
-    if (!iso) return "";
-    return new Date(iso).toLocaleString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  var box = document.getElementById("meet-list");
+  var levelFilter = document.getElementById("meet-level");
+  var dateFormat = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: "Europe/Minsk", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+  });
+  var columns = "id,title,speaker_name,starts_at,duration_min,seats_left,status";
+
+  function fetchSchedule(fields) {
+    return sb.from("sessions_with_seats").select(fields)
+      .in("status", ["open", "full"]).gte("starts_at", new Date().toISOString())
+      .order("starts_at", { ascending: true });
   }
 
-  sb.from("sessions_with_seats").select("id,title,speaker_name,room,starts_at,seats_left,status")
-    .eq("status", "open").gte("starts_at", new Date().toISOString())
-    .order("starts_at", { ascending: true }).limit(12)
-    .then(function (res) {
-      var box = document.getElementById("meet-list");
-      var rows = (res.data || []).filter(function (s) { return s.seats_left == null || s.seats_left > 0; }).slice(0, 3);
-      if (!box || !rows.length) return;
-      box.innerHTML = rows.map(function (s) {
-        var hot = s.seats_left != null && s.seats_left <= 2;
-        var who = s.speaker_name ? " · " + esc(s.speaker_name) : "";
-        return '<div class="event reveal visible"><div><h3>' + esc(s.title) + '</h3><div class="event-meta"><span>' +
-          esc(when(s.starts_at)) + who + '</span><span class="spot' + (hot ? " hot" : "") + '">' +
-          esc(s.seats_left == null ? "" : s.seats_left + " мест") + '</span></div></div><a href="cabinet.html" class="btn">Записаться</a></div>';
-      }).join("");
-    });
+  async function showSchedule() {
+    try {
+      var result = await fetchSchedule(columns + ",level");
+      if (result.error && result.error.code === "42703") result = await fetchSchedule(columns);
+      if (result.error) throw result.error;
+      var rows = result.data || [];
+      Array.from(new Set(rows.map(function (s) { return s.level; }).filter(Boolean))).sort()
+        .forEach(function (level) { levelFilter.add(new Option(level, level)); });
+      function render() {
+        var visible = rows.filter(function (s) { return !levelFilter.value || s.level === levelFilter.value; });
+        box.innerHTML = visible.map(function (s) {
+          var start = new Date(s.starts_at);
+          var end = new Date(start.getTime() + s.duration_min * 60000);
+          var details = [dateFormat.formatRange(start, end) + " (Минск, UTC+3)", s.level || "Уровень уточняется", s.speaker_name].filter(Boolean);
+          var available = s.status === "open" && s.seats_left > 0;
+          var action = available
+            ? '<a class="btn" href="cabinet.html?session=' + encodeURIComponent(s.id) + '">Записаться</a>'
+            : '<span>Мест нет</span>';
+          return '<article class="event reveal visible"><div><h3>' + esc(s.title) + '</h3><div class="event-meta">' +
+            esc(details.join(" · ")) + (available ? " · Свободных мест: " + s.seats_left : "") +
+            '</div></div>' + action + '</article>';
+        }).join("") || "<p>Подходящих встреч пока нет.</p>";
+      }
+      levelFilter.addEventListener("change", render);
+      render();
+    } catch (error) {
+      box.textContent = "Расписание не загрузилось. Обнови страницу и попробуй снова.";
+    }
+  }
+  showSchedule();
 
   sb.from("speakers").select("name,origin,bio,topic").eq("is_active", true)
     .then(function (res) {

@@ -2,6 +2,8 @@
   var cfg = window.LESICHI_SUPABASE || {};
   var sb = null;
   var user = null;
+  var selectedSession = new URLSearchParams(location.search).get("session");
+  if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(selectedSession || "")) selectedSession = null;
 
   var setupEl = document.getElementById("setup");
   var authEl = document.getElementById("auth");
@@ -132,6 +134,7 @@
       (linkRes.data || []).forEach(function (l) { links[l.session_id] = l.zoom_url; });
 
       var list = document.getElementById("sessions");
+      var selected = (sessions.data || []).find(function (s) { return s.id === selectedSession; });
       list.innerHTML = "";
       (sessions.data || []).forEach(function (s) {
         var row = document.createElement("div");
@@ -146,9 +149,17 @@
         row.innerHTML = "<div><strong>" + escapeHtml(s.title) + "</strong><div class='muted'>" +
           escapeHtml(fmt(s.starts_at, profile.timezone)) + " · " + escapeHtml(s.speaker_name || "") + seats + "</div></div>";
         row.appendChild(btn);
-        list.appendChild(row);
+        if (s.id === selectedSession) list.prepend(row);
+        else list.appendChild(row);
       });
-      if (!list.children.length) {
+      if (selectedSession) {
+        var selection = document.createElement("p");
+        selection.textContent = selected ? "Выбранная встреча: " + selected.title + ". На балансе: " + left + "."
+          : "Выбранная встреча недоступна для записи. Посмотри другие даты ниже.";
+        list.prepend(selection);
+        list.scrollIntoView({ block: "nearest" });
+      }
+      if (!(sessions.data || []).length && !selectedSession) {
         list.innerHTML = "<p class='muted'>Ближайших созвонов пока нет.</p>";
       }
 
@@ -159,9 +170,19 @@
         var row = document.createElement("div");
         row.className = "row";
         var zoomUrl = links[b.session_id];
-        var zoom = (zoomUrl && /^https?:\/\//i.test(zoomUrl)) ? "<a href='" + escapeHtml(zoomUrl) + "' target='_blank' rel='noopener'>Zoom</a>" : "";
+        var zoom = document.createElement("span");
+        zoom.textContent = linkRes.error ? "Ссылка не загрузилась. Обнови страницу." : "Ссылка появится перед встречей.";
+        if (zoomUrl && /^https:\/\//i.test(zoomUrl)) {
+          var zoomLink = document.createElement("a");
+          zoomLink.href = zoomUrl;
+          zoomLink.target = "_blank";
+          zoomLink.rel = "noopener";
+          zoomLink.textContent = "Открыть Zoom";
+          zoom.replaceChildren(zoomLink);
+        }
         row.innerHTML = "<div><strong>" + escapeHtml(s.title || "Созвон") + "</strong><div class='muted'>" +
-          escapeHtml(fmt(s.starts_at, profile.timezone)) + " " + zoom + "</div></div>";
+          escapeHtml(fmt(s.starts_at, profile.timezone)) + " </div></div>";
+        row.querySelector(".muted").appendChild(zoom);
         var btn = document.createElement("button");
         btn.className = "btn ghost";
         btn.type = "button";
@@ -240,7 +261,10 @@
       res = await sb.auth.signUp({
         email: email,
         password: password,
-        options: { data: { full_name: document.getElementById("reg-name").value.trim() } }
+        options: {
+          data: { full_name: document.getElementById("reg-name").value.trim() },
+          emailRedirectTo: new URL(selectedSession ? "cabinet.html?session=" + selectedSession : "cabinet.html", location.href).href
+        }
       });
     } else {
       res = await sb.auth.signInWithPassword({ email: email, password: password });
