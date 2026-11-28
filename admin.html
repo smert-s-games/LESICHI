@@ -26,8 +26,39 @@ th { background: var(--purple-soft); }
 .crm-facts dt { color: var(--muted); font-size: .8rem; }
 .crm-facts dd { margin: 0; }
 .crm-form { align-items: flex-end; }
-.crm-form > div { display: grid; flex: 1 1 180px; gap: 4px; font-size: .875rem; }
-.crm-form select { width: 100%; }
+.crm-form > div { display: grid; grid-template-columns: minmax(0, 1fr); flex: 1 1 180px; gap: 4px; font-size: .875rem; }
+.crm-form select { width: 100%; min-height: 44px; text-overflow: ellipsis; }
+.crm-select:focus-visible { outline-offset: 2px; }
+.crm-select:disabled { background: var(--purple-pale); color: var(--muted); cursor: default; }
+@supports (appearance: base-select) and selector(::picker(select)) {
+  .crm-select, .crm-select::picker(select) { appearance: base-select; }
+  .crm-select { align-items: center; gap: 8px; cursor: pointer; }
+  .crm-select::picker-icon { flex: none; color: var(--purple); }
+  .crm-select::picker(select) {
+    inline-size: anchor-size(width);
+    max-block-size: min(18rem, 45dvh);
+    margin-block: 5px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--text);
+    box-shadow: 0 10px 28px rgb(36 19 65 / 16%);
+    overflow-y: auto;
+  }
+  .crm-select option {
+    min-height: 40px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+  }
+  .crm-select option:checked { background: var(--purple-soft); font-weight: 700; }
+  .crm-select option:hover, .crm-select option:focus-visible { background: var(--masthead-bg); }
+  .crm-select option:focus-visible { outline: 2px solid var(--purple); outline-offset: -2px; }
+  .crm-select option::checkmark { color: var(--purple); }
+}
 .crm-pages { display: flex; gap: 8px; }
 .err { color: #b42318; }
 </style>

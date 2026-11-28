@@ -255,15 +255,17 @@
       return '<option value="' + value + '"' + (override === value ? " selected" : "") + '>' + clientStages[value] + '</option>';
     }).join("");
     var linkedLead = client.lead_id ? '<option selected value="' + esc(client.lead_id) + '">' + esc(client.lead_contact) + '</option>' : "";
+    var leadDisabled = !client.lead_id && !availableLeads;
+    var emptyLeadLabel = client.lead_id ? "Отвязать заявку" : (availableLeads ? "Выбрать заявку" : "Нет свободных заявок");
     return '<article class="card"><h2>' + esc(client.full_name || client.email || "Без имени") + '</h2>' +
       '<p class="muted">' + esc([client.email, client.telegram, levelLabels[client.level] || client.level].filter(Boolean).join(" · ")) + '</p>' +
       '<dl class="crm-facts"><div><dt>Дата заявки</dt><dd>' + esc(client.lead_created_at ? new Date(client.lead_created_at).toLocaleDateString("ru-RU") : "—") + '</dd></div>' +
       '<div><dt>Последнее пробное</dt><dd>' + esc(trial) + '</dd></div>' +
       '<div><dt>Последний заказ</dt><dd>' + esc(payment) + '</dd></div></dl>' +
       '<form class="rowform crm-form" data-crm-profile="' + profileId + '">' +
-      '<div><label for="lead-' + profileId + '">Заявка</label><select id="lead-' + profileId + '" name="lead_id">' +
-      '<option value="">Без заявки</option>' + linkedLead + availableLeads + '</select></div>' +
-      '<div><label for="stage-' + profileId + '">Этап</label><select id="stage-' + profileId + '" name="stage">' +
+      '<div><label for="lead-' + profileId + '">Заявка</label><select class="crm-select" id="lead-' + profileId + '" name="lead_id"' + (leadDisabled ? ' disabled' : '') + '>' +
+      '<option value="">' + emptyLeadLabel + '</option>' + linkedLead + availableLeads + '</select></div>' +
+      '<div><label for="stage-' + profileId + '">Этап</label><select class="crm-select" id="stage-' + profileId + '" name="stage">' +
       '<option value="">Авто · ' + esc(clientStages[client.suggested_stage]) + '</option>' + stageOptions + '</select></div>' +
       '<button class="btn primary" type="submit">Сохранить</button></form></article>';
   }
