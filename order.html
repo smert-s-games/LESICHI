@@ -4,96 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FFD9B8">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Оформление заказа — Lesichi</title>
 <link rel="icon" href="image/site/icon2.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 <style>
-:root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-pale:#F6F4FF;--orange:#FF7A00;--bg:#FFD9B8;--card:#FFFFFF;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,0.12);--shadow:0 12px 40px rgba(106,69,227,0.12)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{padding-top:84px;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh}
-h1,h2,.btn{font-family:'Baloo 2','Inter',system-ui,sans-serif}
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(255,217,184,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:92%;max-width:1080px;margin:0 auto;padding:12px 0;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-mark{width:42px;height:42px}.logo-mark img{width:100%;height:100%;object-fit:contain;border-radius:12px}
-.logo-name-img{height:44px;width:auto}
-.nav-links{display:flex;gap:8px;justify-content:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:12px}
-.nav-links a:hover{color:var(--text);background:rgba(106,69,227,0.08)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:16px;background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(106,69,227,0.35)}
-.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00);box-shadow:0 6px 20px rgba(255,122,0,0.35)}
-.container{width:92%;max-width:880px;margin:0 auto;padding-bottom:60px}
-.page-title{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:8px}
-.page-sub{color:var(--muted);margin-bottom:22px}
-.layout{display:grid;grid-template-columns:1fr .85fr;gap:16px}
-[hidden]{display:none !important}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
-label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
-input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font:inherit;color:var(--text);background:#fff}
-.summary h2{font-size:22px;margin-bottom:6px}
-.price{font-family:'Baloo 2',sans-serif;font-size:40px;font-weight:800;color:var(--purple-deep);margin:8px 0}
-.price span{font-size:16px}
-.page-hero{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:center}
-.page-hero img{width:150px;height:auto;filter:drop-shadow(0 10px 18px rgba(43,27,94,.16))}
-.summary-art{width:120px;height:auto;display:block;margin-top:14px}
-@media(max-width:800px){
-  body{padding-top:118px!important}
-  .nav-inner{grid-template-columns:1fr auto;grid-template-areas:"logo cta" "links links";row-gap:8px}
-  .logo{grid-area:logo}.nav-links{grid-area:links;display:flex;justify-content:space-between}
-  nav .btn{grid-area:cta;padding:10px 14px;font-size:13px}
-  .logo-mark{width:34px;height:34px}.logo-name-img{height:32px}
-  .page-hero{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .page-hero img{width:120px}
-  .page-sub{margin-left:auto;margin-right:auto}
-  .layout{grid-template-columns:1fr}
-  input,button.btn{font-size:16px}
-}
-.muted{color:var(--muted);font-size:14px}
-.msg{margin-top:12px;font-size:14px}
-#done{text-align:center;padding:36px 20px}
-#done h2{font-size:28px;margin:8px 0}
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 16px; align-items: start; }
+.summary h2 { margin-top: 6px; }
+.price { color: var(--text); font-size: 2.5rem; font-weight: 900; line-height: 1.2; margin-block: 10px; }
+.price span { font-size: 1rem; }
+.msg { margin-top: 12px; }
+#done { text-align: center; }
+#done h2 { margin-bottom: 10px; }
+@media (max-width: 700px) { .layout { grid-template-columns: minmax(0, 1fr); } }
 </style>
-<style id="a11y-perf">
-.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
-.skip-link:focus{top:12px}
-main:focus{outline:none}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
-.btn:focus-visible{outline-color:#2B1B5E}
-:where(img[width][height]){height:auto}
-.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.paws{display:none!important}}
-</style>
+<meta name="theme-color" content="#dfd3f8">
 </head>
-<body>
+<body class="content-page">
 <a class="skip-link" href="#main">К содержимому</a>
-<nav aria-label="Основное меню">
+<nav class="site-nav" aria-label="Основное меню">
   <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <div class="logo-mark"><img width="199" height="208" src="image/site/icon2.webp" alt=""></div>
-      <img width="618" height="220" class="logo-name-img" src="image/site/name.webp" alt="Lesichi">
+    <a href="index.html" class="logo" aria-label="LESICHI — главная">
+      <span class="logo-mark"><img src="image/site/hero-fox-print.webp" alt=""></span>
+      <span>LESICHI</span>
     </a>
     <div class="nav-links">
       <a href="about.html">О нас</a>
       <a href="blog.html">Блог</a>
       <a href="cabinet.html">Кабинет</a>
     </div>
-    <a href="index.html#pricing" class="btn">К ценам</a>
+    <a href="index.html#pricing" class="masthead-button nav-cta">К ценам</a>
   </div>
 </nav>
-<main id="main" tabindex="-1" class="container">
+<main id="main" tabindex="-1" class="container page-main">
   <div class="page-hero">
     <div>
       <h1 class="page-title">Оформление заказа</h1>
       <p class="page-sub">Оформи заказ — мы пришлём реквизиты, а занятия появятся в кабинете после подтверждения оплаты.</p>
     </div>
-    <img width="255" height="256" src="image/stickers/lets_go.webp" alt="">
   </div>
   <div class="card" id="gate"><p class="muted">Проверяю вход…</p></div>
   <div class="layout" id="order" hidden>
-    <form class="card" id="form">
+    <form class="card form-fields" id="form">
       <h2>Контакты</h2>
       <label for="name">Имя</label>
       <input id="name" required autocomplete="name">
@@ -109,7 +63,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <h2 id="pack-title">4 созвона</h2>
       <div class="price" id="pack-price">50 <span>BYN</span></div>
       <p class="muted" id="pack-meta">4 созвона по 60 минут · группа до 6</p>
-      <img loading="lazy" decoding="async" width="224" height="215" class="summary-art" src="image/stickers/coffe_time.webp" alt="">
     </aside>
   </div>
   <div class="card" id="done" hidden>
@@ -118,6 +71,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p style="margin-top:18px"><a class="btn" href="cabinet.html">В кабинет</a></p>
   </div>
 </main>
+<footer>
+  <div class="container">
+    <div class="footer-logo">LESICHI</div>
+    <div class="footer-links">
+      <a href="index.html">Главная</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+      <a href="policy.html">Политика</a>
+      <a href="index.html#contacts">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
+  </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
 <script src="js/config.js"></script>
 <script src="js/order.js"></script>

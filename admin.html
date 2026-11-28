@@ -4,51 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FFD9B8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Админка — Lesichi</title>
 <link rel="icon" href="image/site/icon2.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 <style>
-:root{--purple:#6A45E3;--deep:#2B1B5E;--bg:#FFD9B8;--card:#fff;--muted:#5C4B8A;--line:rgba(43,27,94,.12)}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--deep);padding:24px 4% 60px}
-h1,h2,button{font-family:'Baloo 2',sans-serif}h1{font-size:32px;margin-bottom:6px}
-a{color:var(--purple);font-weight:700;text-decoration:none}
-.muted{color:var(--muted);font-size:14px;margin-bottom:16px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-.tabs button,.btn{border:none;border-radius:12px;padding:8px 14px;background:#fff;font-weight:700;cursor:pointer;color:var(--deep)}
-.tabs button.on,.btn.primary{background:linear-gradient(135deg,#6A45E3,#2B1B5E);color:#fff}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
-input,select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font:inherit;margin:4px 4px 4px 0}
-.rowform{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
-[hidden]{display:none !important}
-.err{color:#B42318}
+#tabs { margin-block: 16px; }
+#panel .card { margin-bottom: 12px; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+th, td { padding: 8px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--purple-soft); }
+.rowform { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.rowform input, .rowform select { flex: 1 1 125px; }
+.rowform input[type="hidden"] { display: none; }
+#panel .btn:not(.primary) { background: var(--purple-soft); color: var(--text); box-shadow: none; }
+.err { color: #b42318; }
 </style>
-<style id="a11y-perf">
-.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
-.skip-link:focus{top:12px}
-main:focus{outline:none}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
-.btn:focus-visible{outline-color:#2B1B5E}
-:where(img[width][height]){height:auto}
-.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.paws{display:none!important}}
-</style>
+<meta name="theme-color" content="#dfd3f8">
 </head>
-<body>
-<p><a href="index.html">На сайт</a> · <a href="cabinet.html">Кабинет</a></p>
-<h1>Админка</h1>
-<p class="muted" id="hint">Созвоны, спикеры, цены, записи, люди, заявки и оплаты.</p>
+<body class="content-page">
+<a class="skip-link" href="#main">К содержимому</a>
+<nav class="site-nav" aria-label="Основное меню">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="LESICHI — главная">
+      <span class="logo-mark"><img src="image/site/hero-fox-print.webp" alt=""></span>
+      <span>LESICHI</span>
+    </a>
+    <div class="nav-links">
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+    </div>
+    <a href="index.html#meets" class="masthead-button nav-cta">Записаться</a>
+  </div>
+</nav>
+<main id="main" tabindex="-1" class="container page-main page-main--wide">
+  <div class="page-hero">
+    <div>
+      <h1 class="page-title">Админка</h1>
+      <p class="page-sub" id="hint">Созвоны, спикеры, цены, записи, люди, заявки и оплаты.</p>
+    </div>
+  </div>
 <div id="denied" class="card" hidden>
   <p>Нет доступа.</p>
-  <p style="margin-top:10px"><a class="btn primary" href="index.html" style="display:inline-block;padding:10px 16px;border-radius:12px;color:#fff">На сайт</a></p>
+  <p style="margin-top:10px"><a class="btn primary" href="index.html">На сайт</a></p>
 </div>
 <div id="app" hidden>
   <div class="tabs" id="tabs"></div>
   <div id="panel"></div>
 </div>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-logo">LESICHI</div>
+    <div class="footer-links">
+      <a href="index.html">Главная</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+      <a href="policy.html">Политика</a>
+      <a href="index.html#contacts">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
+  </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
 <script src="js/config.js"></script>
 <script src="js/admin.js"></script>

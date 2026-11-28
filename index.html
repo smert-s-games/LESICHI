@@ -26,21 +26,14 @@
 <title>Lesichi — speaking club онлайн: говори с иностранцами</title>
 <link rel="icon" href="image/site/icon2.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 <style>
-a.btn,.btn{display:inline-flex!important;align-items:center;justify-self:end!important;padding:12px 22px!important;border-radius:16px!important;background:linear-gradient(135deg,#6A45E3,#2B1B5E)!important;color:#fff!important;font-weight:700!important;font-size:15px!important;text-decoration:none!important;box-shadow:0 6px 20px rgba(106,69,227,0.35)!important;border:none!important;opacity:1!important;filter:none!important;cursor:pointer;position:relative;overflow:hidden}
-a.btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(106,69,227,0.45)!important;background:linear-gradient(135deg,#6A45E3,#2B1B5E)!important;color:#fff!important}
-.btn-orange{background:linear-gradient(135deg,#FF7A00,#E86A00)!important;box-shadow:0 6px 20px rgba(255,122,0,0.35)!important}
-.btn-ghost{background:transparent!important;color:#2B1B5E!important;border:1.5px solid rgba(43,27,94,0.12)!important;box-shadow:none!important}
-:root{--purple-deep:#2B1B5E;--purple:#6A45E3;--purple-soft:#EDE9FE;--purple-pale:#F6F4FF;--orange:#FF7A00;--orange-pale:#FFE4C4;--bg:#f8f3ff;--card:#fff;--text:#2B1B5E;--muted:#5C4B8A;--line:rgba(43,27,94,.12);--shadow:0 12px 40px rgba(106,69,227,.12)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:116px}
-body{font-family:"Golos Text",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;overflow-x:hidden}
-h1,h2,h3,.btn,.section-title,.tag,.price-num,.chip{font-family:"Golos Text",system-ui,sans-serif}
-.container{width:92%;max-width:1080px;margin:0 auto;position:relative;z-index:1}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
 section{padding:44px 0;scroll-margin-top:12px}
 .section-title{font-size:clamp(24px,3.4vw,32px);font-weight:800;margin-bottom:6px}
 .section-sub{color:var(--muted);font-size:15px;margin-bottom:16px;max-width:480px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
 .card .ico{margin-bottom:10px}.card .ico img{width:40px;height:40px;object-fit:contain}
 .card h3{font-size:16px;font-weight:700;margin-bottom:5px}.card p{font-size:13.5px;color:var(--muted)}
 .card.c1{border-top:3px solid var(--orange)}.card.c2{border-top:3px solid var(--purple)}.card.c3{border-top:3px solid #EC4899}.card.c4{border-top:3px solid #F59E0B}.card.c5{border-top:3px solid #06B6D4}.card.c6{border-top:3px solid #8B5CF6}
@@ -53,7 +46,7 @@ section{padding:44px 0;scroll-margin-top:12px}
 .speaker h3{font-size:15px}.speaker .from{font-size:12px;color:var(--purple);font-weight:600;margin:3px 0 7px}.speaker p{font-size:12.5px;color:var(--muted)}
 .tags{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:9px}
 .tags span{background:var(--purple-soft);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;color:var(--purple-deep)}
-.lesik-block{display:grid;grid-template-columns:.5fr 1.5fr;gap:24px;align-items:center;background:linear-gradient(135deg,#6A45E3,#2B1B5E);border-radius:24px;padding:28px;color:#fff}
+.lesik-block{display:grid;grid-template-columns:.5fr 1.5fr;gap:24px;align-items:center;background:var(--purple-deep);border-radius:24px;padding:28px;color:#fff}
 .lesik-emoji{text-align:center}.lesik-emoji img{width:140px;height:auto;max-width:100%}
 .lesik-block h2{font-size:24px;font-weight:800;margin-bottom:8px}.lesik-block p{color:rgba(255,255,255,.88);font-size:14.5px;margin-bottom:7px}
 .sticker-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;padding:5px 0}
@@ -76,7 +69,7 @@ section{padding:44px 0;scroll-margin-top:12px}
 .price-list{list-style:none;text-align:left;margin-bottom:16px}
 .price-list li{font-size:13px;color:var(--muted);padding:3px 0;display:flex;align-items:center;gap:6px}
 .price-list li::before{content:'→';color:var(--purple);font-weight:700}
-.promo{margin-top:22px;background:linear-gradient(135deg,var(--purple),var(--purple-deep));border-radius:18px;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;color:#fff}
+.promo{margin-top:22px;background:var(--purple-deep);border-radius:18px;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;color:#fff}
 .promo h3{font-size:18px;font-weight:800}.promo p{font-size:13px;opacity:.9}
 .promo .btn{background:#fff!important;color:var(--purple-deep)!important;box-shadow:none!important}
 .cta{padding:32px 0 40px;border-top:1px solid var(--line);background:var(--purple-pale);border-radius:24px 24px 0 0;margin-top:12px}
@@ -89,15 +82,10 @@ section{padding:44px 0;scroll-margin-top:12px}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s,padding .25s;padding:0 18px;color:var(--muted);font-size:14.5px}
 .faq-item.open .faq-a{max-height:220px;padding:0 18px 16px}
 .contacts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
-.contact-card{display:block;line-height:0;border-radius:22px;overflow:hidden;transition:transform .2s}
-.contact-card:hover{transform:translateY(-3px)}
-.contact-card img{width:100%;height:auto;display:block}
-footer{border-top:1px solid var(--line);padding:20px 0;text-align:center;background:var(--purple-pale);position:relative;z-index:1}
-.footer-logo{font-weight:800;font-size:20px;color:var(--purple-deep);margin-bottom:5px;font-family:"Golos Text",system-ui,sans-serif}
-
+.contact-card{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:clamp(10px,2.2vw,24px);border:1px solid var(--line);border-radius:16px;background:var(--masthead-bg);color:var(--text);font-weight:800;text-decoration:none}
+.contact-card:hover{background:#d0c0f3}
+.contact-card span{color:var(--purple);font-size:1.2rem}
 .footer-tag{color:var(--muted);font-size:13px;margin-bottom:12px}
-.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
-.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.footer-copy{font-size:11px;color:#9B8EC4}
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--orange),var(--purple));z-index:200;pointer-events:none}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s,transform .65s}.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s,transform .7s}.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s,transform .7s}.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .65s,transform .65s}
 .reveal.visible,.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
@@ -114,19 +102,9 @@ footer{border-top:1px solid var(--line);padding:20px 0;text-align:center;backgro
 }
 @media(max-width:480px){.contacts-grid{grid-template-columns:1fr 1fr;gap:10px}}
 </style>
-<style id="a11y-perf">
-.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
-.skip-link:focus{top:12px}
-main:focus{outline:none}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
-.btn:focus-visible{outline-color:#2B1B5E}
-:where(img[width][height]){height:auto}
-.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
-</style>
 <link rel="stylesheet" href="css/masthead.css">
 </head>
-<body>
+<body class="home-page">
 <a class="skip-link" href="#main">К содержимому</a>
 <div class="scroll-progress" id="scrollProgress"></div>
 <nav class="site-nav" aria-label="Основное меню">
@@ -223,10 +201,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <section id="contacts"><div class="container">
 <h2 class="section-title reveal">Контакты</h2>
 <div class="contacts-grid">
-<a class="contact-card reveal" href="https://t.me/lesichi" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="772" height="311" src="image/site/telegram.webp" alt="Telegram"></a>
-<a class="contact-card reveal" href="https://instagram.com/lesichi" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="770" height="312" src="image/site/instagram.webp" alt="Instagram"></a>
-<a class="contact-card reveal" href="https://www.tiktok.com/@lesichi" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="770" height="301" src="image/site/tiktok.webp" alt="TikTok"></a>
-<a class="contact-card reveal" href="mailto:hello@lesichi.club"><img loading="lazy" decoding="async" width="774" height="301" src="image/site/email.webp" alt="Почта"></a>
+<a class="contact-card reveal" href="https://t.me/lesichi" target="_blank" rel="noopener">Telegram <span aria-hidden="true">↗</span></a>
+<a class="contact-card reveal" href="https://instagram.com/lesichi" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+<a class="contact-card reveal" href="https://www.tiktok.com/@lesichi" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a>
+<a class="contact-card reveal" href="mailto:hello@lesichi.club">Почта <span aria-hidden="true">↗</span></a>
 </div></div></section>
 <section class="cta container"><div class="cta-rest">
 <div class="cta-copy reveal-right"><h2>Иногда страшно начать</h2>
@@ -241,7 +219,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <a href="#why">Зачем</a><a href="#rooms">Комнаты</a><a href="#speakers">Спикеры</a><a href="#lesik">Лесик</a><a href="#meets">Созвоны</a><a href="#pricing">Цены</a><a href="#faq">FAQ</a><a href="#contacts">Контакты</a><a href="about.html">О нас</a><a href="blog.html">Блог</a><a href="cabinet.html">Кабинет</a><a href="policy.html">Политика</a>
 </div>
 <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
-<div class="footer-copy">© Lesichi</div>
 </div></footer>
 <script>
 (function(){const els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');if(!('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('visible'));return;}const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');else e.target.classList.remove('visible');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});els.forEach(el=>io.observe(el));})();

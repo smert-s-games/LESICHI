@@ -4,140 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FFD9B8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Lesichi — Фирменный стиль</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 <style>
-:root {
-  --purple: #6B21A8;
-  --purple-mid: #7C3AED;
-  --purple-deep: #4C1D95;
-  --purple-soft: #EDE9FE;
-  --orange: #FF6B00;
-  --bg: #FAF8FF;
-  --card: #fff;
-  --text: #1E1B2E;
-  --muted: #6B6580;
-  --line: rgba(107,33,168,0.14);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-.wrap { max-width: 900px; margin: 0 auto; padding: 48px 20px 80px; }
-h1 { font-size: 34px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 8px; }
-.lead { color: var(--muted); font-size: 16px; margin-bottom: 36px; }
-h2 { font-size: 20px; font-weight: 900; margin: 36px 0 12px; letter-spacing: -0.02em; color: var(--purple); }
-h3 { font-size: 14px; font-weight: 800; margin: 16px 0 8px; }
-p, li { font-size: 14px; color: var(--muted); }
-ul { padding-left: 18px; margin: 8px 0 14px; }
-li { margin-bottom: 5px; }
-.card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 18px; margin: 10px 0 18px; box-shadow: 0 8px 28px rgba(107,33,168,0.06);
-}
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
-.swatch {
-  border-radius: 12px; padding: 16px 12px; min-height: 84px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  font-size: 12px; font-weight: 700; color: #fff;
-}
-.swatch span { opacity: 0.85; font-weight: 500; font-size: 11px; }
-.tag { display: inline-block; background: var(--purple-soft); color: var(--purple); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin: 2px 4px 2px 0; }
-.do { border-left: 3px solid #16a34a; padding-left: 12px; margin: 8px 0; }
-.dont { border-left: 3px solid #dc2626; padding-left: 12px; margin: 8px 0; }
-.quote { font-size: 18px; font-weight: 800; color: var(--text); margin: 8px 0; }
-.mono { font-family: ui-monospace, monospace; font-size: 12px; background: var(--purple-soft); padding: 2px 6px; border-radius: 4px; }
-.back { display: inline-block; margin-bottom: 20px; color: var(--purple-mid); font-weight: 700; text-decoration: none; font-size: 14px; }
-.hero-brand {
-  background: linear-gradient(135deg, #6B21A8, #4C1D95);
-  border-radius: 16px; padding: 28px; color: #fff; text-align: center; margin-bottom: 24px;
-}
-.hero-brand .fox { font-size: 56px; }
-.hero-brand .name { font-size: 28px; font-weight: 900; }
-.hero-brand .sub { font-size: 11px; letter-spacing: 0.12em; opacity: 0.85; font-weight: 700; }
-@media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+.brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; margin-top: 12px; }
+.swatch { padding: 14px; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; background: var(--swatch); }
+.brand-copy h2 { margin-bottom: 8px; }
+.brand-copy p + p { margin-top: 8px; }
 </style>
-<style id="a11y-perf">
-.skip-link{position:absolute;left:12px;top:-64px;z-index:1000;background:#2B1B5E;color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
-.skip-link:focus{top:12px}
-main:focus{outline:none}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #6A45E3;outline-offset:3px;border-radius:8px}
-.btn:focus-visible{outline-color:#2B1B5E}
-:where(img[width][height]){height:auto}
-.btn.btn-orange,a.btn.btn-orange,a.btn.btn-orange:hover,.btn.btn-orange:hover{color:#2B1B5E!important}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.paws{display:none!important}}
-</style>
+<meta name="theme-color" content="#dfd3f8">
 </head>
-<body>
-<div class="wrap">
-  <a class="back" href="index.html">← На сайт</a>
-
-  <div class="hero-brand">
-    <div class="fox">🦊👑</div>
-    <div class="name">Lesichi</div>
-    <div class="sub">SPEAKING CLUB</div>
+<body class="content-page">
+<a class="skip-link" href="#main">К содержимому</a>
+<nav class="site-nav" aria-label="Основное меню">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="LESICHI — главная">
+      <span class="logo-mark"><img src="image/site/hero-fox-print.webp" alt=""></span>
+      <span>LESICHI</span>
+    </a>
+    <div class="nav-links">
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+    </div>
+    <a href="index.html#meets" class="masthead-button nav-cta">Записаться</a>
   </div>
-
-  <h1>Фирменный стиль</h1>
-  <p class="lead">Фиолетовый + оранжевый + белый. Лесик с короной, наушниками и микрофоном. Позитив, speaking, уверенность.</p>
-
-  <h2>1. Суть</h2>
-  <div class="card">
-    <p class="quote">Перехитри языковой барьер · Говори с уверенностью · Better together</p>
-    <p>Онлайн speaking club: группы до 6, живые иностранцы, Лесик — голос и гид клуба.</p>
+</nav>
+<main id="main" tabindex="-1" class="container page-main">
+  <div class="page-hero">
+    <div>
+      <h1 class="page-title">Фирменный стиль</h1>
+      <p class="page-sub">Лавандовый фон, тёмно-фиолетовая типографика и Лесик с фактурой печатной иллюстрации.</p>
+    </div>
+    <img class="page-hero-art" width="1100" height="1042" src="image/site/hero-fox-print.webp" alt="Лесик в очках и худи">
   </div>
-
-  <h2>2. Цвета (из логопака)</h2>
-  <div class="grid">
-    <div class="swatch" style="background:#6B21A8">Purple<br><span>#6B21A8 · основа</span></div>
-    <div class="swatch" style="background:#7C3AED">Purple mid<br><span>#7C3AED · кнопки</span></div>
-    <div class="swatch" style="background:#4C1D95">Purple deep<br><span>#4C1D95 · градиенты</span></div>
-    <div class="swatch" style="background:#FF6B00">Orange<br><span>#FF6B00 · CTA / лиса</span></div>
-    <div class="swatch" style="background:#EDE9FE;color:#4C1D95">Soft<br><span>#EDE9FE · чипы</span></div>
-    <div class="swatch" style="background:#FAF8FF;color:#1E1B2E;border:1px solid #e5e0f0">BG<br><span>#FAF8FF · фон</span></div>
+  <div class="stack brand-copy">
+    <section class="card">
+      <h2>Суть клуба</h2>
+      <p><strong>Перехитри языковой барьер.</strong> LESICHI — разговорный клуб с живыми встречами в группах до шести человек.</p>
+    </section>
+    <section class="card">
+      <h2>Цвета</h2>
+      <div class="brand-grid">
+        <div class="swatch" style="--swatch:var(--masthead-bg)">Лаванда<br>#DFD3F8</div>
+        <div class="swatch" style="--swatch:var(--text);color:#fff">Тёмный текст<br>#241341</div>
+        <div class="swatch" style="--swatch:var(--purple);color:#fff">Кнопки<br>#623BC9</div>
+        <div class="swatch" style="--swatch:var(--orange)">Акцент<br>#D76B25</div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Логотип и Лесик</h2>
+      <p>Для шапки сайта используем надпись LESICHI и фрагмент иллюстрации лиса. У полной иллюстрации плоские цвета, тёмный контур и фактура печатной краски.</p>
+    </section>
+    <section class="card">
+      <h2>Типографика и тон</h2>
+      <p>Шрифт Golos Text. Крупные плотные заголовки, простые подписи и короткие призывы. Обращаемся на «ты».</p>
+      <p lang="en">Go on, say it! · Lost the word? · Tell us more.</p>
+    </section>
   </div>
-
-  <h2>3. Лесик</h2>
-  <div class="card">
-    <p>Оранжевая лиса, корона, наушники, микрофон, фиолетовая одежда — как на логотипе и стикерах.</p>
-    <ul>
-      <li>Гид и голос клуба, не детский маскот</li>
-      <li>Фразы со стикеров: «Говорим!», «Ты можешь!», «Всё получится!», «Найди свой голос»</li>
-      <li>Вайб: уверенность + поддержка + мемность</li>
-    </ul>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-logo">LESICHI</div>
+    <div class="footer-links">
+      <a href="index.html">Главная</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="cabinet.html">Кабинет</a>
+      <a href="policy.html">Политика</a>
+      <a href="index.html#contacts">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2026 Lesichi Speaking Club</div>
   </div>
-
-  <h2>4. Логотип</h2>
-  <div class="card">
-    <p><span class="tag">👑 Lesichi</span> <span class="tag">SPEAKING CLUB</span></p>
-    <ul>
-      <li>Основной: лиса с короной + wordmark Lesichi</li>
-      <li>App icon / favicon: квадрат с лисой и короной на фиолетовом</li>
-      <li>На тёмном/фиолетовом — белый текст; на светлом — фиолетовый wordmark</li>
-    </ul>
-  </div>
-
-  <h2>5. Типографика и тон</h2>
-  <div class="card">
-    <p>Шрифт: <strong>Inter</strong>, только без засечек. Заголовки 900, короткие.</p>
-    <p>Тон: на «ты», по делу, с лёгкой мемностью. Без сюсюканья.</p>
-    <div class="do">✅ Говори с уверенностью · Присоединяйся · Зашёл — и уже в разговоре</div>
-    <div class="dont">❌ Детский тон, канцелярит, «инновационная методика»</div>
-  </div>
-
-  <h2>6. На сайте</h2>
-  <div class="card">
-    <ul>
-      <li>Hero-блок логотипа — фиолетовый градиент как на бренд-шите</li>
-      <li>CTA: фиолетовые кнопки + оранжевый акцент «Записаться»</li>
-      <li>Лапки на фоне: фиолетовые и оранжевые</li>
-      <li>Стикер-фразы в блоке Лесика</li>
-    </ul>
-    <p style="margin-top:10px"><a href="index.html" style="color:var(--purple-mid);font-weight:700">Открыть сайт →</a></p>
-  </div>
-
-  <p style="margin-top:32px;font-size:12px;color:#a8a29e">Lesichi Brand · 2026 · smert-s-games/LESICHI</p>
-</div>
+</footer>
 </body>
 </html>
