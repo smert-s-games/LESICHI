@@ -8,9 +8,25 @@
     ["bookings", "Записи"],
     ["people", "Люди"],
     ["leads", "Заявки"],
+    ["clients", "CRM"],
     ["payments", "Оплаты"]
   ];
   var current = "sessions";
+  var renderVersion = 0;
+  var clientPage = 0;
+  var clientPageSize = 30;
+  var clientStages = {
+    registered: "Зарегистрирован",
+    new: "Новая заявка",
+    contacted: "Связались",
+    trial_booked: "Записан на пробное",
+    trial_attended: "Посетил пробное",
+    awaiting_payment: "Ожидает оплаты",
+    paid: "Оплатил",
+    active: "Активный клиент",
+    lapsed: "Не продлил",
+    returned: "Вернулся"
+  };
 
   function esc(v) {
     return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -29,9 +45,20 @@
   }
 
   async function render() {
-    var panel = document.getElementById("panel");
-    panel.innerHTML = "Загрузка…";
-    if (current === "sessions") {
+    var version = ++renderVersion;
+    var target = document.getElementById("panel");
+    var panel = document.createElement("div");
+    target.textContent = "Загрузка…";
+    try {
+      await renderTab(panel, current);
+      if (version === renderVersion) target.replaceChildren(...panel.childNodes);
+    } catch (error) {
+      if (version === renderVersion) target.textContent = "Раздел не загрузился. Попробуй открыть его ещё раз.";
+    }
+  }
+
+  async function renderTab(panel, tab) {
+    if (tab === "sessions") {
       var rows = await sb.from("sessions").select("*").order("starts_at", { ascending: false });
       var booked = await sb.from("bookings").select("session_id,status,profiles(full_name,email,telegram)").eq("status", "booked");
       var linkRes = await sb.from("session_links").select("session_id,zoom_url");
@@ -69,7 +96,7 @@
       panel.querySelectorAll("[data-del]").forEach(function (b) {
         b.onclick = function () { removeSession(b.dataset.del); };
       });
-    } else if (current === "speakers") {
+    } else if (tab === "speakers") {
       var speakers = await sb.from("speakers").select("*").order("name");
       if (speakers.error) {
         panel.innerHTML = "<p class='err'>Таблица speakers ещё не создана. Выполни supabase/speakers.sql в SQL Editor.</p>";
@@ -92,7 +119,7 @@
       panel.querySelectorAll("[data-del]").forEach(function (b) {
         b.onclick = function () { remove("speakers", b.dataset.del); };
       });
-    } else if (current === "packages") {
+    } else if (tab === "packages") {
       var packs = await sb.from("packages").select("*").order("price_byn");
       panel.innerHTML = (packs.data || []).map(function (p) {
         return '<form class="card rowform" data-id="' + p.id + '">' +
@@ -105,7 +132,7 @@
       panel.querySelectorAll("form").forEach(function (f) {
         f.onsubmit = function (e) { e.preventDefault(); savePack(f); };
       });
-    } else if (current === "bookings") {
+    } else if (tab === "bookings") {
       var b = await sb.from("bookings").select("id,status,created_at,profiles(full_name,email),sessions(title,starts_at)").order("created_at", { ascending: false });
       panel.innerHTML = "<div class='card'><table><tr><th>Кто</th><th>Созвон</th><th>Статус</th></tr>" +
         (b.data || []).map(function (r) {
@@ -119,7 +146,7 @@
       panel.querySelectorAll("[data-book]").forEach(function (sel) {
         sel.onchange = function () { sb.rpc("admin_set_booking_status", { p_booking_id: sel.dataset.book, p_status: sel.value }).then(done); };
       });
-    } else if (current === "people") {
+    } else if (tab === "people") {
       var people = await sb.from("profiles").select("id,full_name,email,telegram,level").order("created_at", { ascending: false });
       panel.innerHTML = "<div class='card'><table><tr><th>Имя</th><th>Email</th><th>Telegram</th><th>Уровень</th><th></th></tr>" +
         (people.data || []).map(function (p) {
@@ -129,19 +156,27 @@
       panel.querySelectorAll("[data-gift]").forEach(function (btn) {
         btn.onclick = function () { gift(btn.dataset.gift); };
       });
-    } else if (current === "leads") {
+    } else if (tab === "leads") {
       var leads = await sb.from("leads").select("*").order("created_at", { ascending: false });
-      panel.innerHTML = "<div class='card'><table><tr><th>Имя</th><th>Контакт</th><th>Текст</th><th>Статус</th></tr>" +
+      if (leads.error) throw leads.error;
+      panel.innerHTML = '<form class="card rowform" id="add-lead">' +
+        '<input name="lead_name" aria-label="Имя" placeholder="Имя" maxlength="100">' +
+        '<input name="contact" aria-label="Email или Telegram" placeholder="Email или Telegram" maxlength="200" required>' +
+        '<button class="btn primary" type="submit">Добавить заявку</button></form>' +
+        "<div class='card'><table><tr><th>Имя</th><th>Контакт</th><th>Текст</th><th>Статус</th></tr>" +
         (leads.data || []).map(function (r) {
           return "<tr><td>" + esc(r.name) + "</td><td>" + esc(r.contact) + "</td><td>" + esc(r.message) + "</td><td><select data-lead='" + r.id + "'>" +
             ["new", "contacted", "converted", "closed"].map(function (s) {
               return "<option" + (s === r.status ? " selected" : "") + ">" + s + "</option>";
             }).join("") + "</select></td></tr>";
         }).join("") + "</table></div>";
+      panel.querySelector("#add-lead").onsubmit = addLead;
       panel.querySelectorAll("[data-lead]").forEach(function (sel) {
         sel.onchange = function () { sb.from("leads").update({ status: sel.value }).eq("id", sel.dataset.lead).then(done); };
       });
-    } else if (current === "payments") {
+    } else if (tab === "clients") {
+      await renderClients(panel);
+    } else if (tab === "payments") {
       var pay = await sb.from("payments").select("id,amount_byn,status,provider,created_at,profiles(email),packages(title)").order("created_at", { ascending: false });
       panel.innerHTML = "<p class='muted'>Статус paid автоматически добавляет занятия пользователю (один раз). refunded и failed — снимают их.</p>" +
         "<div class='card'><table><tr><th>Кто</th><th>Пакет</th><th>Сумма</th><th>Статус</th><th>Когда</th></tr>" +
@@ -157,7 +192,103 @@
         };
       });
     }
-    if (panel.innerHTML === "Загрузка…") panel.innerHTML = "<p class='err'>Нет доступа или пусто.</p>";
+  }
+
+  async function addLead(event) {
+    event.preventDefault();
+    var form = event.currentTarget;
+    var contact = form.elements.contact.value.trim();
+    if (!contact) { msg("Укажи Email или Telegram.", true); return; }
+    var button = form.querySelector("button");
+    button.disabled = true;
+    try {
+      done(await sb.from("leads").insert({
+        name: form.elements.lead_name.value.trim(),
+        contact: contact,
+        source: "admin"
+      }));
+    } catch (error) {
+      msg("Заявка не сохранилась. Попробуй ещё раз.", true);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function renderClients(panel) {
+    var start = clientPage * clientPageSize;
+    var results = await Promise.all([
+      sb.from("crm_client_overview").select("*")
+        .order("created_at", { ascending: false }).order("profile_id").range(start, start + clientPageSize),
+      sb.from("leads").select("id,name,contact,crm_clients(profile_id)").is("crm_clients", null)
+        .order("created_at", { ascending: false }).limit(100)
+    ]);
+    var clients = results[0];
+    var leads = results[1];
+    if (clients.error) throw clients.error;
+    if (leads.error) throw leads.error;
+
+    var options = leads.data.map(function (lead) {
+      return '<option value="' + esc(lead.id) + '">' + esc([lead.name, lead.contact].filter(Boolean).join(" · ")) + '</option>';
+    }).join("");
+    panel.innerHTML = '<p class="crm-heading muted">Свяжи заявку с аккаунтом по знакомому контакту. Оплаты подтверждаются на вкладке «Оплаты».</p>' +
+      clients.data.slice(0, clientPageSize).map(function (client) { return clientCard(client, options); }).join("") +
+      (clients.data.length ? "" : '<p class="muted">Зарегистрированных клиентов пока нет.</p>') +
+      '<div class="crm-pages">' +
+      (clientPage > 0 ? '<button class="btn ghost" type="button" data-client-page="-1">Назад</button>' : '') +
+      (clients.data.length > clientPageSize ? '<button class="btn ghost" type="button" data-client-page="1">Дальше</button>' : '') + '</div>';
+
+    panel.querySelectorAll("form[data-crm-profile]").forEach(function (form) { form.onsubmit = saveClient; });
+    panel.querySelectorAll("[data-client-page]").forEach(function (button) {
+      button.onclick = function () { clientPage += Number(button.dataset.clientPage); render(); };
+    });
+  }
+
+  function clientCard(client, availableLeads) {
+    var profileId = esc(client.profile_id);
+    var override = client.stage_override;
+    var bookingLabels = { booked: "Записан", attended: "Посетил", no_show: "Не пришёл", cancelled: "Отменено" };
+    var paymentLabels = { pending: "Ожидает оплаты", paid: "Оплачено", failed: "Не прошло", refunded: "Возвращено" };
+    var levelLabels = { unknown: "Не указан", beginner: "Начальный", intermediate: "Средний", advanced: "Уверенный" };
+    var trial = client.trial_status ? [client.trial_title, client.trial_speaker, bookingLabels[client.trial_status]].filter(Boolean).join(" · ") : "—";
+    var payment = client.payment_status ? [client.package_title, client.amount_byn + " BYN", paymentLabels[client.payment_status]].filter(Boolean).join(" · ") : "—";
+    var stageOptions = Object.keys(clientStages).map(function (value) {
+      return '<option value="' + value + '"' + (override === value ? " selected" : "") + '>' + clientStages[value] + '</option>';
+    }).join("");
+    var linkedLead = client.lead_id ? '<option selected value="' + esc(client.lead_id) + '">' + esc(client.lead_contact) + '</option>' : "";
+    return '<article class="card"><h2>' + esc(client.full_name || client.email || "Без имени") + '</h2>' +
+      '<p class="muted">' + esc([client.email, client.telegram, levelLabels[client.level] || client.level].filter(Boolean).join(" · ")) + '</p>' +
+      '<dl class="crm-facts"><div><dt>Дата заявки</dt><dd>' + esc(client.lead_created_at ? new Date(client.lead_created_at).toLocaleDateString("ru-RU") : "—") + '</dd></div>' +
+      '<div><dt>Последнее пробное</dt><dd>' + esc(trial) + '</dd></div>' +
+      '<div><dt>Последний заказ</dt><dd>' + esc(payment) + '</dd></div></dl>' +
+      '<form class="rowform crm-form" data-crm-profile="' + profileId + '">' +
+      '<div><label for="lead-' + profileId + '">Заявка</label><select id="lead-' + profileId + '" name="lead_id">' +
+      '<option value="">Без заявки</option>' + linkedLead + availableLeads + '</select></div>' +
+      '<div><label for="stage-' + profileId + '">Этап</label><select id="stage-' + profileId + '" name="stage">' +
+      '<option value="">Авто · ' + esc(clientStages[client.suggested_stage]) + '</option>' + stageOptions + '</select></div>' +
+      '<button class="btn primary" type="submit">Сохранить</button></form></article>';
+  }
+
+  async function saveClient(event) {
+    event.preventDefault();
+    var form = event.currentTarget;
+    var button = form.querySelector("button");
+    button.disabled = true;
+    try {
+      var result = await sb.from("crm_clients").upsert({
+        profile_id: form.dataset.crmProfile,
+        lead_id: form.elements.lead_id.value || null,
+        stage: form.elements.stage.value || null
+      }, { onConflict: "profile_id" });
+      if (result.error && result.error.code === "23505") {
+        msg("Эту заявку уже связали с другим аккаунтом. Обнови список.", true);
+      } else {
+        done(result);
+      }
+    } catch (error) {
+      msg("Изменения не сохранились. Попробуй ещё раз.", true);
+    } finally {
+      button.disabled = false;
+    }
   }
 
   function table(rows, cols, extra) {
